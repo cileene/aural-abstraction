@@ -1,0 +1,138 @@
+############################################
+# OS / System
+############################################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+Thumbs.db
+
+############################################
+# JetBrains (Rider / IntelliJ)
+############################################
+.idea/
+*.iml
+*.ipr
+*.iws
+
+############################################
+# Unity (Unity 6 / 2023+)
+############################################
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+[Uu]ser[Ss]ettings/
+
+# Asset Store cache
+AssetStoreTools/
+
+# Visual Studio / Rider Unity artifacts
+.vs/
+*.csproj
+*.sln
+*.pidb
+*.mdb
+*.opendb
+
+############################################
+# Godot 4
+############################################
+.godot/
+.import/
+.export/
+.export.cfg
+*.translation
+
+############################################
+# Arduino / Embedded C++ (Arduino / Teensy)
+############################################
+**/.pio/
+**/build/
+**/bin/
+**/*.elf
+**/*.hex
+**/*.map
+**/*.o
+**/*.a
+**/*.d
+
+############################################
+# MATLAB
+############################################
+*.asv
+*.m~
+*.mex*
+*.slxc
+*.autosave
+*.fig.bak
+*.mdl.autosave
+*.slx.autosave
+matlab_crash_dump.*
+
+############################################
+# Python (analysis / tooling)
+############################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+pip-wheel-metadata/
+dist/
+build/
+.eggs/
+*.egg-info/
+
+############################################
+# Blender (temporary / backup files only)
+############################################
+*.blend1
+*.blend@
+*.blend.tmp
+
+############################################
+# Audio / Media caches (NOT source files)
+############################################
+*.peak
+*.asd
+
+############################################
+# Data / Captures / Exports
+############################################
+*.log
+*.dat
+*.raw
+captures/
+exports/
+cache/
+
+############################################
+# LaTeX / Overleaf
+############################################
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+############################################
+# Misc
+############################################
+*.swp
+*.tmp
+*~
