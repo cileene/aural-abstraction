@@ -1,0 +1,12 @@
+gradio>=5.0
+numpy
+scipy
+pandas
+plotly
+matplotlib
+librosa
+soundfile
+huggingface_hub
+datasets
+reportlab
+pydub

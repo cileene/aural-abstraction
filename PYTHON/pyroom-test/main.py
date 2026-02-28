@@ -1,3 +1,5 @@
+# Use this to capture an IR from you computers built in speakers and mic.
+
 import numpy as np
 import sounddevice as sd
 import soundfile as sf
