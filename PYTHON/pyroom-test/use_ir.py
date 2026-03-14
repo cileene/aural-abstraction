@@ -1,30 +1,47 @@
 import numpy as np
 import soundfile as sf
-from scipy.signal import fftconvolve
+from math import gcd
+from scipy.signal import fftconvolve, resample_poly
+
+
+def to_mono(x: np.ndarray) -> np.ndarray:
+    if x.ndim > 1:
+        return x[:, 0]
+    return x
+
+
+def resample_if_needed(x: np.ndarray, fs_in: int, fs_target: int) -> np.ndarray:
+    if fs_in == fs_target:
+        return x
+
+    g = gcd(fs_in, fs_target)
+    up = fs_target // g
+    down = fs_in // g
+    return resample_poly(x, up, down)
+
 
 # Load dry audio
 dry, fs_dry = sf.read("voice.wav")
 
 # Load impulse response
-ir, fs_ir = sf.read("large.aif")
+ir, fs_ir = sf.read("largeB.wav")
 
 # Ensure mono for simplicity
-if dry.ndim > 1:
-    dry = dry[:, 0]
-if ir.ndim > 1:
-    ir = ir[:, 0]
+dry = to_mono(dry)
+ir = to_mono(ir)
 
-# Resample if needed (optional but recommended if sample rates differ)
-if fs_dry != fs_ir:
-    raise ValueError("Sample rates must match")
+# Resample IR to match dry audio sample rate
+ir = resample_if_needed(ir, fs_ir, fs_dry)
 
 # Convolve
 wet = fftconvolve(dry, ir, mode="full")
 
 # Normalize to prevent clipping
-wet /= np.max(np.abs(wet) + 1e-12)
+peak = np.max(np.abs(wet))
+if peak > 1e-12:
+    wet = wet / peak
 
 # Save result
-sf.write("largeWet.wav", wet.astype(np.float32), fs_dry)
+sf.write("largeBWet.wav", wet.astype(np.float32), fs_dry)
 
-print("Saved wet.wav")
+print("Saved smallBWet.wav")
