@@ -35,8 +35,8 @@ AssetStoreTools/
 
 # Visual Studio / Rider Unity artifacts
 .vs/
-*.csproj
-*.sln
+#*.csproj
+#*.sln
 *.pidb
 *.mdb
 *.opendb
