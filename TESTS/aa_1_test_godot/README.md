@@ -1,6 +1,6 @@
 # AA 1 Test Godot
 
-- applicaiton for 1st think out loud test
+- application for 1st think out loud test
 - 4 options
   - A = anechoic voice recording 
   - B/C/D = Small/Medium/Large room
