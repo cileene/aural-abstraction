@@ -76,6 +76,20 @@ public partial class AudioControl : Control
         return max + 1;
     }
 
+    // Godot records mono mic input into only the left channel of a stereo stream.
+    // Copy the left channel bytes to the right channel so the file plays back centred.
+    private void FixMonoRecording(AudioStreamWav wav)
+    {
+        if (!wav.Stereo) return;
+        int bytesPerSample = wav.Format == AudioStreamWav.FormatEnum.Format8Bits ? 1 : 2;
+        int stride = bytesPerSample * 2;
+        var data = wav.Data;
+        for (int i = 0; i < data.Length; i += stride)
+            for (int b = 0; b < bytesPerSample; b++)
+                data[i + bytesPerSample + b] = data[i + b];
+        wav.Data = data;
+    }
+
     private int[] BuildMapping()
     {
         var shuffled = Enumerable.Range(1, Players.Length - 1)
@@ -101,7 +115,10 @@ public partial class AudioControl : Control
             _recorder?.SetRecordingActive(false);
             var recording = _recorder?.GetRecording();
             if (recording != null)
+            {
+                FixMonoRecording(recording);
                 recording.SaveToWav($"user://{_sessionPrefix}_recording.wav");
+            }
             _logFile?.Close();
             GetTree().Quit();
         }
