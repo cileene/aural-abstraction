@@ -10,6 +10,8 @@ public partial class AudioControl : Control
     [Export] public AudioStreamPlayer2D[] Players;
 
     private int[] _mapping; // _mapping[buttonIndex] = playerIndex
+    private FileAccess _logFile;
+    private AudioEffectRecord _recorder;
 
     public override void _EnterTree()
     {
@@ -23,6 +25,18 @@ public partial class AudioControl : Control
     public override void _Ready()
     {
         _mapping = BuildMapping();
+
+        // Session log
+        _logFile = FileAccess.Open("user://session_log.csv", FileAccess.ModeFlags.Write);
+        string header = "mapping";
+        for (int i = 0; i < _mapping.Length; i++)
+            header += $", {i}>{_mapping[i]}";
+        _logFile.StoreLine(header);
+
+        // Microphone recording
+        int busIdx = AudioServer.GetBusIndex("Record");
+        _recorder = (AudioEffectRecord)AudioServer.GetBusEffect(busIdx, 0);
+        _recorder.SetRecordingActive(true);
 
         Buttons[0].ButtonPressed = true;
         foreach (var player in Players)
@@ -45,5 +59,20 @@ public partial class AudioControl : Control
         int activePlayer = _mapping[buttonIndex];
         for (int i = 0; i < Players.Length; i++)
             Players[i].VolumeDb = i == activePlayer ? 0f : -80f;
+
+        _logFile?.StoreLine($"{Time.GetTicksMsec()}, {buttonIndex}, {_mapping[buttonIndex]}");
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey key && key.Pressed && key.Keycode == Key.Escape)
+        {
+            _recorder?.SetRecordingActive(false);
+            var recording = _recorder?.GetRecording();
+            if (recording != null)
+                recording.SaveToWav($"user://session_{Time.GetTicksMsec()}.wav");
+            _logFile?.Close();
+            GetTree().Quit();
+        }
     }
 }
