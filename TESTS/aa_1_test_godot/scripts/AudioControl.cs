@@ -33,7 +33,13 @@ public partial class AudioControl : Control
             header += $", {i}>{_mapping[i]}";
         _logFile.StoreLine(header);
 
-        // Microphone recording
+        // Microphone recording — route mic through the Record bus so AudioEffectRecord captures it
+        var micPlayer = new AudioStreamPlayer();
+        micPlayer.Stream = new AudioStreamMicrophone();
+        micPlayer.Bus = "Record";
+        AddChild(micPlayer);
+        micPlayer.Play();
+
         int busIdx = AudioServer.GetBusIndex("Record");
         _recorder = (AudioEffectRecord)AudioServer.GetBusEffect(busIdx, 0);
         _recorder.SetRecordingActive(true);
