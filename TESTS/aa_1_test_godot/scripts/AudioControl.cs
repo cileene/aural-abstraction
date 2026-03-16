@@ -10,6 +10,7 @@ public partial class AudioControl : Control
     [Export] public AudioStreamPlayer2D[] Players;
 
     private int[] _mapping; // _mapping[buttonIndex] = playerIndex
+    private static readonly string[] PlayerNames = { "CLEAN", "SMALL", "MEDIUM", "LARGE" };
     private FileAccess _logFile;
     private AudioEffectRecord _recorder;
 
@@ -30,7 +31,7 @@ public partial class AudioControl : Control
         _logFile = FileAccess.Open("user://session_log.csv", FileAccess.ModeFlags.Write);
         string header = "mapping";
         for (int i = 0; i < _mapping.Length; i++)
-            header += $", {i}>{_mapping[i]}";
+            header += $", {i}>{PlayerNames[_mapping[i]]}";
         _logFile.StoreLine(header);
 
         // Microphone recording — route mic through the Record bus so AudioEffectRecord captures it
@@ -66,7 +67,7 @@ public partial class AudioControl : Control
         for (int i = 0; i < Players.Length; i++)
             Players[i].VolumeDb = i == activePlayer ? 0f : -80f;
 
-        _logFile?.StoreLine($"{Time.GetTicksMsec()}, {buttonIndex}, {_mapping[buttonIndex]}");
+        _logFile?.StoreLine($"{Time.GetTicksMsec()}, {buttonIndex}, {PlayerNames[_mapping[buttonIndex]]}");
     }
 
     public override void _Input(InputEvent @event)
