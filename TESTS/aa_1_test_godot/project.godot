@@ -28,6 +28,10 @@ project/assembly_name="AA 1 Test Godot"
 
 3d/physics_engine="Jolt Physics"
 
+[audio]
+
+enable_audio_input=true
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
