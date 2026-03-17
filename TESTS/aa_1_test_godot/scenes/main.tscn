@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cyp2m7xxrwjf2" path="res://scripts/AudioControl.cs" id="1_o5qli"]
 [ext_resource type="AudioStream" uid="uid://b2y5n4ht21ioe" path="res://sounds/voice.wav" id="2_tbgi4"]
-[ext_resource type="AudioStream" uid="uid://dp7me8dbnoc67" path="res://sounds/smallWet.wav" id="3_tefeu"]
-[ext_resource type="AudioStream" uid="uid://dc5wa4wchgj4j" path="res://sounds/mediumWet.wav" id="4_o6xl0"]
-[ext_resource type="AudioStream" uid="uid://b162akooisnwe" path="res://sounds/largeWet.wav" id="5_tipki"]
+[ext_resource type="AudioStream" uid="uid://j4xpnqd61ea5" path="res://sounds/crashWet.wav" id="3_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://81f2vdi7qgq8" path="res://sounds/drawingRoomDPAWet.wav" id="4_tefeu"]
+[ext_resource type="AudioStream" uid="uid://b6bed2o7bee85" path="res://sounds/usinaWet.wav" id="5_o6xl0"]
 
 [sub_resource type="Theme" id="Theme_sgp6g"]
 Button/font_sizes/font_size = 75
@@ -86,13 +86,13 @@ text = "LARGE"
 stream = ExtResource("2_tbgi4")
 
 [node name="Small" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1541359646]
-stream = ExtResource("3_tefeu")
+stream = ExtResource("3_tbgi4")
 
 [node name="Medium" type="AudioStreamPlayer2D" parent="Sounds" unique_id=160585336]
-stream = ExtResource("4_o6xl0")
+stream = ExtResource("4_tefeu")
 
 [node name="Large" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1480786974]
-stream = ExtResource("5_tipki")
+stream = ExtResource("5_o6xl0")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Sounds" unique_id=945195618]
 current = true

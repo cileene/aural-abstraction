@@ -24,7 +24,7 @@ def resample_if_needed(x: np.ndarray, fs_in: int, fs_target: int) -> np.ndarray:
 dry, fs_dry = sf.read("voice.wav")
 
 # Load impulse response
-ir, fs_ir = sf.read("largeB.wav")
+ir, fs_ir = sf.read("DrawingRoomDPA.wav")
 
 # Ensure mono for simplicity
 dry = to_mono(dry)
@@ -42,6 +42,6 @@ if peak > 1e-12:
     wet = wet / peak
 
 # Save result
-sf.write("largeBWet.wav", wet.astype(np.float32), fs_dry)
+sf.write("drawingRoomDPAWet.wav", wet.astype(np.float32), fs_dry)
 
 print("Saved smallBWet.wav")

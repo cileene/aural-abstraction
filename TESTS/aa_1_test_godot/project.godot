@@ -21,10 +21,6 @@ buses/default_bus_layout="uid://djhovoyoygoib"
 driver/enable_input=true
 enable_audio_input=true
 
-[display]
-
-window/size/mode=3
-
 [dotnet]
 
 project/assembly_name="AA 1 Test Godot"
