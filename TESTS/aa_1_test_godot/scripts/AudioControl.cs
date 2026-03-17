@@ -92,11 +92,7 @@ public partial class AudioControl : Control
 
     private int[] BuildMapping()
     {
-        var shuffled = Enumerable.Range(1, Players.Length - 1)
-            .OrderBy(_ => GD.Randi())
-            .ToArray();
-
-        return new[] { 0 }.Concat(shuffled).ToArray();
+        return Enumerable.Range(0, Players.Length).ToArray();
     }
 
     private void OnPressed(int buttonIndex)

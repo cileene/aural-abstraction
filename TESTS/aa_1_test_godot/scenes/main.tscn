@@ -51,14 +51,14 @@ layout_mode = 2
 theme = SubResource("Theme_sgp6g")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_o5qli")
-text = "            A            "
+text = "CLEAN"
 
 [node name="CButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=994257719]
 layout_mode = 2
 theme = SubResource("Theme_sgp6g")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_o5qli")
-text = "            C            "
+text = "MEDIUM"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=1451959150]
 layout_mode = 2
@@ -71,14 +71,14 @@ size_flags_vertical = 4
 theme = SubResource("Theme_sgp6g")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_o5qli")
-text = "            B            "
+text = "SMALL"
 
 [node name="DButton" type="Button" parent="HBoxContainer/VBoxContainer2" unique_id=1604366077]
 layout_mode = 2
 theme = SubResource("Theme_sgp6g")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_o5qli")
-text = "            D            "
+text = "LARGE"
 
 [node name="Sounds" type="Node" parent="." unique_id=80224924]
 
