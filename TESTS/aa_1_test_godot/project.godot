@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="AA 1 Test Godot"
+run/main_scene="uid://bo3dh44r0vw5y"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -32,3 +33,4 @@ project/assembly_name="AA 1 Test Godot"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true
