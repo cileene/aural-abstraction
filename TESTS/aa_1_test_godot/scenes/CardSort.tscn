@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://bvxkncmr5cdry" path="res://scripts/CardSort/Logger.cs" id="2_i7mjd"]
 [ext_resource type="Script" uid="uid://cyp2m7xxrwjf2" path="res://scripts/AudioControl.cs" id="3_idxmp"]
 [ext_resource type="Script" uid="uid://yxowh51f8hgm" path="res://scripts/CardSort/CardList.cs" id="4_8tq4t"]
-[ext_resource type="AudioStream" uid="uid://dp7me8dbnoc67" path="res://sounds/smallWet.wav" id="4_wfk6j"]
-[ext_resource type="AudioStream" uid="uid://dc5wa4wchgj4j" path="res://sounds/mediumWet.wav" id="5_qxg32"]
-[ext_resource type="AudioStream" uid="uid://b162akooisnwe" path="res://sounds/largeWet.wav" id="6_6bp6k"]
+[ext_resource type="AudioStream" uid="uid://bl4em5mjqpjmd" path="res://sounds/NL/Small_1.mp3" id="4_idxmp"]
+[ext_resource type="AudioStream" uid="uid://ci2jb8t0h204n" path="res://sounds/NL/Medium_1.mp3" id="5_idxmp"]
+[ext_resource type="AudioStream" uid="uid://b1io06tyhmf28" path="res://sounds/NL/Large_1.mp3" id="6_wfk6j"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_i7mjd"]
 
@@ -18,21 +18,21 @@ _cardItemScene = ExtResource("2_40nkx")
 [node name="Audio" type="Node" parent="." unique_id=121135541 node_paths=PackedStringArray("Buttons", "Players")]
 script = ExtResource("3_idxmp")
 Buttons = [NodePath("../UI/MainLayout/SortArea/CategoryColumn_A/ColLayout/HBoxContainer/Button_A"), NodePath("../UI/MainLayout/SortArea/CategoryColumn_B/ColLayout/HBoxContainer/Button_B"), NodePath("../UI/MainLayout/SortArea/CategoryColumn_C/ColLayout/HBoxContainer/Button_C")]
-Players = [NodePath("Audio_Small"), NodePath("Audio_Medium"), NodePath("Audio_Large")]
+Players = [NodePath("Small"), NodePath("Medium"), NodePath("Large")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Audio" unique_id=16685655]
 current = true
 
-[node name="Audio_Small" type="AudioStreamPlayer2D" parent="Audio" unique_id=2089419650]
-stream = ExtResource("4_wfk6j")
+[node name="Small" type="AudioStreamPlayer2D" parent="Audio" unique_id=2089419650]
+stream = ExtResource("4_idxmp")
 autoplay = true
 
-[node name="Audio_Medium" type="AudioStreamPlayer2D" parent="Audio" unique_id=587178917]
-stream = ExtResource("5_qxg32")
+[node name="Medium" type="AudioStreamPlayer2D" parent="Audio" unique_id=587178917]
+stream = ExtResource("5_idxmp")
 autoplay = true
 
-[node name="Audio_Large" type="AudioStreamPlayer2D" parent="Audio" unique_id=1439789561]
-stream = ExtResource("6_6bp6k")
+[node name="Large" type="AudioStreamPlayer2D" parent="Audio" unique_id=1439789561]
+stream = ExtResource("6_wfk6j")
 autoplay = true
 
 [node name="Logger" type="Node" parent="." unique_id=1454455294]
