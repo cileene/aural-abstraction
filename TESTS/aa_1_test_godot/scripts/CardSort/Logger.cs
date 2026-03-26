@@ -5,6 +5,8 @@ using System.Linq;
 
 public partial class Logger : Node
 {
+    [Export] private NodePath _audioControlPath = "../Audio";
+    private AudioControl _audioControl;
     private string _filePath;
     private StreamWriter _writer;
 
@@ -12,6 +14,8 @@ public partial class Logger : Node
 
     public override void _Ready()
     {
+        _audioControl = GetNodeOrNull<AudioControl>(_audioControlPath);
+
         string dir = OS.GetUserDataDir();
         int index = 1;
 
@@ -33,11 +37,17 @@ public partial class Logger : Node
 
     public void WriteSnapshot()
     {
+        var categoryKeys = new[] { "CategoryA", "CategoryB", "CategoryC" };
         var columnOrder = new[] { "Unsorted", "CategoryA", "CategoryB", "CategoryC" };
         var columns = columnOrder.Select(GetColumnCards).ToArray();
         int maxRows = columns.Max(c => c.Count);
 
-        _writer.WriteLine("Unsorted,CategoryA,CategoryB,CategoryC");
+        var categoryHeaders = categoryKeys
+            .Select((key, i) => _audioControl != null ? _audioControl.GetPlayerNameForButton(i) : key)
+            .ToArray();
+
+        _writer.WriteLine($"Unsorted,{string.Join(",", categoryHeaders)}");
+
         for (int i = 0; i < maxRows; i++)
         {
             var row = columns.Select(c => i < c.Count ? c[i] : "");
@@ -47,6 +57,7 @@ public partial class Logger : Node
         _writer.Flush();
         _writer.Close();
     }
+
 
     private List<string> GetColumnCards(string name)
     {
