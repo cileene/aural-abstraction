@@ -1,0 +1,59 @@
+Category,Metric,Value
+Main,EDT_s,0.82
+Main,T20_s,1.04
+Main,T30_s,1.14
+Main,C80_dB,6.48
+Main,D50,0.773
+Main,IACC,0.626
+Main,STI_proxy,0.575
+Main,RoomVolume_m3,209.5
+Main,WellnessScore,56
+Main,SuggestedUse,Office/Meeting
+Octave,EDT_125Hz,1.4667
+Octave,T20_125Hz,1.7579
+Octave,T30_125Hz,1.5692
+Octave,EDT_250Hz,0.5599
+Octave,T20_250Hz,1.5006
+Octave,T30_250Hz,1.5767
+Octave,EDT_500Hz,0.2348
+Octave,T20_500Hz,0.8517
+Octave,T30_500Hz,1.1626
+Octave,EDT_1000Hz,0.3238
+Octave,T20_1000Hz,0.3840
+Octave,T30_1000Hz,0.6792
+Octave,EDT_2000Hz,0.4760
+Octave,T20_2000Hz,0.3596
+Octave,T30_2000Hz,0.6627
+Octave,EDT_4000Hz,0.3094
+Octave,T20_4000Hz,0.7680
+Octave,T30_4000Hz,0.9398
+RoomMode,Mode_1 (Axial),7.4 Hz
+RoomMode,Mode_2 (Axial),14.7 Hz
+RoomMode,Mode_3 (Axial),22.1 Hz
+RoomMode,Mode_4 (Axial),29.4 Hz
+RoomMode,Mode_5 (Axial),36.8 Hz
+RoomMode,Mode_6 (Axial),44.2 Hz
+RoomMode,Mode_7 (Axial),51.5 Hz
+RoomMode,Mode_8 (Axial),55.3 Hz
+RoomMode,Mode_9 (Tangential),55.8 Hz
+RoomMode,Mode_10 (Tangential),57.2 Hz
+RoomMode,Mode_11 (Axial),58.9 Hz
+RoomMode,Mode_12 (Axial),59.1 Hz
+RoomMode,Mode_13 (Tangential),59.6 Hz
+RoomMode,Mode_14 (Tangential),59.6 Hz
+RoomMode,Mode_15 (Tangential),60.9 Hz
+RoomMode,Mode_16 (Tangential),62.7 Hz
+RoomMode,Mode_17 (Tangential),63.1 Hz
+RoomMode,Mode_18 (Tangential),66.1 Hz
+RoomMode,Mode_19 (Axial),66.2 Hz
+RoomMode,Mode_20 (Tangential),66.4 Hz
+RoomMode,Mode_21 (Tangential),69.7 Hz
+RoomMode,Mode_22 (Tangential),70.8 Hz
+RoomMode,Mode_23 (Axial),73.6 Hz
+RoomMode,Mode_24 (Tangential),73.8 Hz
+RoomMode,Mode_25 (Tangential),75.6 Hz
+RoomMode,Mode_26 (Tangential),78.4 Hz
+RoomMode,Mode_27 (Tangential),80.8 Hz
+RoomMode,Mode_28 (Axial),81.0 Hz
+RoomMode,Mode_29 (Tangential),81.0 Hz
+RoomMode,Mode_30 (Oblique),81.3 Hz
