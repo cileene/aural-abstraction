@@ -53,6 +53,11 @@ public partial class CardSort : Node
             target.AddChild(card);
             card.Init(_vocabulary[i]);
         }
+
+        // Add one user-fillable card
+        var customCard = _cardItemScene.Instantiate<CardItem>();
+        unsortedB.AddChild(customCard);
+        customCard.InitEditable();
     }
     
     public override void _Input(InputEvent @event)
