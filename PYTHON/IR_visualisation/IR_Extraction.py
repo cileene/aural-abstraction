@@ -3,6 +3,7 @@ import csv
 import numpy as np
 import librosa
 import scipy.signal as signal
+import pandas as pd
 
 def load_ir(path):
     ir, sr = librosa.load(path, sr=None, mono=True)
@@ -90,7 +91,5 @@ if __name__ == "__main__": # only run when playing in this file
             results.append(result)
 
     # Save to CSV
-    with open("IR_Extraction_results.csv", "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=results[0].keys())
-        writer.writeheader()
-        writer.writerows(results)
+    df = pd.DataFrame(results)
+    df.to_csv("IR_Extraction_results.csv", index=False)
