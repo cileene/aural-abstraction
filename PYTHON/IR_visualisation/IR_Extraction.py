@@ -4,12 +4,13 @@ import numpy as np
 import librosa
 import scipy.signal as signal
 import pandas as pd
+from scipy.stats import linregress
 
 def load_ir(path):
     ir, sr = librosa.load(path, sr=None, mono=True)
     ir = ir / np.max(np.abs(ir))
     return ir, sr
-def compute_edc(ir): #compute early decay time using the formula from the report
+def compute_edc(ir): #compute energy decay curve using the formula from the report
     energy = ir**2
     edc = np.cumsum(energy[::-1])[::-1]
     edc = edc / np.max(edc)
@@ -17,12 +18,12 @@ def compute_edc(ir): #compute early decay time using the formula from the report
     return edc_db
 
 def compute_rt(edc_db, sr, start_db, end_db): #find rt60 using t20 and t30
-    decay_points = np.where((edc_db <= start_db) & (edc_db >= end_db))[0]
+    decay_index = np.where((edc_db <= start_db) & (edc_db >= end_db))[0] #find samples between start and end dB for line fitting
 
-    t = decay_points / sr  # time axis for the selected decay segment (in seconds)
-    y = edc_db[decay_points]  # corresponding EDC values (dB) used for line fitting
+    t = decay_index / sr  # time axis for the selected decay segment (in seconds)
+    y = edc_db[decay_index]  # corresponding EDC values (dB) used for line fitting
 
-    slope, intercept = np.polyfit(t, y, 1) #Linear fit using time and points
+    slope = linregress(t, y).slope #Linear fit using time and dB
 
     # Extrapolate to -60 dB
     rt60 = -60 / slope
@@ -78,7 +79,6 @@ if __name__ == "__main__": # only run when playing in this file
 
             result = {
                 "file": file,
-                "length_s": len(ir) / sr,
                 "T20": t20,
                 "T30": t30,
                 "EDT": EDT,
