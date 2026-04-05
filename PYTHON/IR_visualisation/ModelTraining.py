@@ -20,7 +20,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 model = MLPRegressor(
     hidden_layer_sizes=(32, 16),
     activation="relu",
-    alpha=0.3,           # increase alpha vs before, more input dims = more overfit risk
+    alpha=0.3,
     learning_rate="adaptive",
     max_iter=1000,
     random_state=42
