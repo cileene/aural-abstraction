@@ -55,15 +55,10 @@ if __name__ == "__main__":
     prediction = model.predict(X_pca)[0]
 
     # Store result
-    result = {
+    df = pd.DataFrame([{
         "file": file,
         "Size": prediction[0],
         "Texture": prediction[1],
-        "Temp": prediction[2]
-        }
-
-    results.append(result)
-
-    # Save predictions
-    df = pd.DataFrame(results)
+        "Temp": prediction[2],
+    }])
     df.to_csv("Predictions.csv", index=False)

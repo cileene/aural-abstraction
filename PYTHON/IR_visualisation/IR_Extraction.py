@@ -6,6 +6,7 @@ import scipy.signal as signal
 import pandas as pd
 from scipy.stats import linregress
 
+
 def load_ir(path):
     ir, sr = librosa.load(path, sr=None, mono=True)
     ir = ir / np.max(np.abs(ir))
@@ -62,6 +63,7 @@ def compute_definition(ir, sr):
 
 
 if __name__ == "__main__": # only run when playing in this file
+    skippedIRs = 0
 
     results = [] #create list for rsults
 
@@ -79,8 +81,8 @@ if __name__ == "__main__": # only run when playing in this file
 
             result = {
                 "file": file,
-                "T20": rt20,
-                "T30": rt30,
+                "RT20": rt20,
+                "RT30": rt30,
                 "EDT": EDT,
                 "C50": C50,
                 "C80": C80,
@@ -88,8 +90,20 @@ if __name__ == "__main__": # only run when playing in this file
                 "D80": D80,
             }
 
+            skip = False
+
+            for k, v in result.items(): #for each key, check value, if file is naN skip row
+                if k != "file":
+                    if np.isnan(v):
+                        skip = True
+                        skippedIRs += 1
+                        break
+            if skip:
+                continue
+
             results.append(result)
 
     # Save to CSV
     df = pd.DataFrame(results)
     df.to_csv("IR_Extraction_results.csv", index=False)
+    print(f"Finished extracting features. Skipped {skippedIRs} IRs due to NaN values.")
