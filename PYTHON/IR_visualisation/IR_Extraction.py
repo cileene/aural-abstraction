@@ -71,16 +71,16 @@ if __name__ == "__main__": # only run when playing in this file
 
             ir, sr = load_ir(path)
             edc_db = compute_edc(ir)
-            t20 = compute_rt(edc_db, sr, -5, -25)
-            t30 = compute_rt(edc_db, sr, -5, -35)
+            rt20 = compute_rt(edc_db, sr, -5, -25)
+            rt30 = compute_rt(edc_db, sr, -5, -35)
             EDT = compute_rt(edc_db, sr, 0, -10)
             C50, C80 = compute_clarity(ir, sr)
             D50, D80 = compute_definition(ir, sr)
 
             result = {
                 "file": file,
-                "T20": t20,
-                "T30": t30,
+                "T20": rt20,
+                "T30": rt30,
                 "EDT": EDT,
                 "C50": C50,
                 "C80": C80,

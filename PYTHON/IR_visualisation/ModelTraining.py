@@ -2,10 +2,9 @@ import pandas as pd
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import numpy as np
 import joblib
 
-df = pd.read_csv("testPCA_and_visual.csv", sep=None, engine="python")
+df = pd.read_csv("PCA_and_visual.csv", sep=None, engine="python")
 
 pc_cols = [col for col in df.columns if col.startswith("PC")]
 X_input = df[pc_cols]
@@ -23,7 +22,7 @@ model = MLPRegressor(
     activation="relu",
     alpha=0.3,           # increase alpha vs before, more input dims = more overfit risk
     learning_rate="adaptive",
-    max_iter=2000,
+    max_iter=1000,
     random_state=42
 )
 
