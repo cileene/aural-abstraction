@@ -16,7 +16,9 @@ def extract_features_from_ir(path):
     c50, c80 = IR.compute_clarity(ir, sr)
     d50, d80 = IR.compute_definition(ir, sr)
 
-    return {
+    mel_rt20_bands = IR.compute_mel_rt20_bands(ir, sr)
+
+    extracted_features = {
         "RT20": rt20,
         "RT30": rt30,
         "EDT": EDT,
@@ -25,6 +27,9 @@ def extract_features_from_ir(path):
         "D50": d50,
         "D80": d80
     }
+    extracted_features.update(mel_rt20_bands)
+    
+    return extracted_features
 
 if __name__ == "__main__":
 

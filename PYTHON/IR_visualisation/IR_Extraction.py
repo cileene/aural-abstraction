@@ -3,15 +3,17 @@ import csv
 import numpy as np
 import librosa
 import scipy.signal as signal
+import scipy.fft as fft
 import pandas as pd
 from scipy.stats import linregress
+import matplotlib.pyplot as plt
 
 
-def load_ir(path):
+def load_ir(path): #Returns a normalized impulse response and its sampling rate from a given file path
     ir, sr = librosa.load(path, sr=None, mono=True)
     ir = ir / np.max(np.abs(ir))
     return ir, sr
-def compute_edc(ir): #compute energy decay curve using the formula from the report
+def compute_edc(ir): #Compute energy decay curve using the formula from the report
     energy = ir**2
     edc = np.cumsum(energy[::-1])[::-1]
     edc = edc / np.max(edc)
@@ -61,6 +63,30 @@ def compute_definition(ir, sr):
     D80 = early_80 / total_energy
     return D50, D80
 
+def compute_mel_T20_bands(ir, sr, n_bands=40):
+    n_fft = 2048 #Windows size for STFT
+    hop_length = 512 #Hop length for STFT
+
+    stft = np.abs(librosa.stft(ir, n_fft=n_fft, hop_length=hop_length))**2 #Power spectrogram
+    mel_filter_bank = librosa.filters.mel(sr=sr, n_fft=n_fft, n_mels=n_bands) #Mel filter bank to map frequencies to mel scale
+    mel_power_spectrogram = mel_filter_bank @ stft #Apply mel filter bank to power spectrogram using matrix multiplication
+    results = {}
+    frame_times = librosa.frames_to_time(np.arange(mel_power_spectrogram.shape[1]), sr=sr, hop_length=hop_length) #Time axis for frames
+
+    for i, mel_band_energy in enumerate(mel_power_spectrogram):
+        edc = np.cumsum(mel_band_energy[::-1])[::-1] #EDC for each mel band
+        if np.max(edc) == 0:
+            results[i] = np.nan
+            continue
+
+        edc = edc / np.max(edc) #Normalize EDC
+        edc_db = 10 * np.log10(edc + 1e-12) #Convert to dB
+        T20 = compute_rt(edc_db, {sr / hop_length}, -5, -25) #Compute T20 for the corresponding mel band
+
+        results[f"mel_T20_band_{i}"] = T20
+
+    return results
+
 
 if __name__ == "__main__": # only run when playing in this file
     skippedIRs = 0
@@ -78,6 +104,7 @@ if __name__ == "__main__": # only run when playing in this file
             EDT = compute_rt(edc_db, sr, 0, -10)
             C50, C80 = compute_clarity(ir, sr)
             D50, D80 = compute_definition(ir, sr)
+            mel_T20_bands = compute_mel_T20_bands(ir, sr)
 
             result = {
                 "file": file,
@@ -89,7 +116,8 @@ if __name__ == "__main__": # only run when playing in this file
                 "D50": D50,
                 "D80": D80,
             }
-
+            result.update(mel_T20_bands)
+            
             skip = False
 
             for k, v in result.items(): #for each key, check value, if file is naN skip row
