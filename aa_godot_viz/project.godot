@@ -25,6 +25,7 @@ enabled=PackedStringArray("res://addons/rider-plugin/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://materials/": "yellow",
 "res://scenes/": "red"
 }
 

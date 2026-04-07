@@ -1,0 +1,20 @@
+[gd_resource type="VisualShader" format=3 uid="uid://cr1inawuvnexk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7kmgf"]
+noise_type = 2
+frequency = 0.0005
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_er3jn"]
+width = 1024
+height = 1024
+depth = 1024
+noise = SubResource("FastNoiseLite_7kmgf")
+seamless = true
+
+[sub_resource type="VisualShaderNodeTexture3D" id="VisualShaderNodeTexture3D_epn0i"]
+texture = SubResource("NoiseTexture3D_er3jn")
+
+[resource]
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture3D_epn0i")
+nodes/fragment/2/position = Vector2(-190.3334, 459.73688)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
