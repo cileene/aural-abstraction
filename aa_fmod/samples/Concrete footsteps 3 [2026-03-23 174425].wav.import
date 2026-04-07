@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7wjcnri2ptio"
+path="res://.godot/imported/Concrete footsteps 3 [2026-03-23 174425].wav-250f34477f70957aa5fcb56c499a4a7a.sample"
+
+[deps]
+
+source_file="res://aa_fmod/samples/Concrete footsteps 3 [2026-03-23 174425].wav"
+dest_files=["res://.godot/imported/Concrete footsteps 3 [2026-03-23 174425].wav-250f34477f70957aa5fcb56c499a4a7a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

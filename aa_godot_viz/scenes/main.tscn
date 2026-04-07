@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brhni1ol7hu5t" path="res://scripts/SceneController.cs" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://f8juhu55iutx" path="res://prefabs/test_cube.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 
@@ -23,18 +24,26 @@ glow_enabled = true
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_light")]
 script = ExtResource("1_0wfyh")
 _worldEnvironment = NodePath("WorldEnvironment")
-_light = NodePath("DirectionalLight3D")
+_light = NodePath("OmniLight3D")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
-_threshold = 0.6
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=727652312]
-transform = Transform3D(0.97701955, -0.1845932, 0.10657486, 2.780595e-08, 0.49999994, 0.86602545, -0.21314982, -0.8461238, 0.4885097, 0, 0, 0)
-shadow_enabled = true
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.392257)
+transform = Transform3D(-0.6018151, -0.38107595, -0.7018545, 0, 0.8788171, -0.47715878, 0.7986355, -0.28716135, -0.52888536, 5.278, 0.524, 1.969)
 current = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=581746310]
+
+[node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
+event_name = "event:/Footsteps/Loop"
+event_guid = "{6a02cf4e-fe4a-46c0-aaf0-5a167837e52a}"
+volume = 0.5
+script = ExtResource("3_sugp2")
+
+[node name="FmodListener2D" type="FmodListener2D" parent="." unique_id=1257144794]
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1967251096]
+bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
