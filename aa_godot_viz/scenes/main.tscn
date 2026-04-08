@@ -21,6 +21,9 @@ _light = NodePath("OmniLight3D")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
 _camera = NodePath("Camera3D")
+_lightSpeed = 10.0
+_lightLifetime = 1.0
+_lightIntensity = 5.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
