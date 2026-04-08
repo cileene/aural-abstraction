@@ -1,5 +1,6 @@
 using Godot;
 
+//TODO: Set up event system to decouple input, light impulse, and room building logic
 public partial class SceneController : Node
 {
     [Export] private WorldEnvironment _worldEnvironment;
@@ -37,6 +38,7 @@ public partial class SceneController : Node
             _sendLightRequested = true;
     }
 
+    //TODO: Move to separate RoomBuilder class
     private void PlaceObjectsWithNoise()
     {
         if (_noise == null || _cube == null)
@@ -60,6 +62,7 @@ public partial class SceneController : Node
         }
     }
 
+    //TODO: Move to separate LightImpulse class
     private void SendLight(Camera3D camera, float speed, float lifetime, float intensity, Color color)
     {
         var lightInstance = new OmniLight3D
