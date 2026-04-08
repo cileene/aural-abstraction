@@ -15,8 +15,7 @@ public partial class SceneController : Node
     [Export] private float _lightIntensity = 1f;
     [Export] private Color _lightColor = Colors.White;
 
-    private bool _sendLightRequested = false;
-    private bool _lightInFlight = false;
+    private bool _sendLightRequested, _lightInFlight;
 
     public override void _Ready()
     {

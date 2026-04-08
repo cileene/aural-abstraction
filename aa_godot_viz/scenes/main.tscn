@@ -7,12 +7,15 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
-background_mode = 2
+background_mode = 1
+reflected_light_source = 1
 tonemap_mode = 2
 ssao_enabled = true
 sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
 
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_light", "_camera")]
 script = ExtResource("1_0wfyh")
