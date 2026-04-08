@@ -3,7 +3,6 @@ using Godot;
 public partial class SceneController : Node
 {
     [Export] private WorldEnvironment _worldEnvironment;
-    [Export] private Light3D _light;
     [Export] private FastNoiseLite _noise;
     [Export] private PackedScene _cube;
     [Export] private int _gridSize = 10;

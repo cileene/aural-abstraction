@@ -16,17 +16,17 @@ sdfgi_read_sky_light = false
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
+volumetric_fog_temporal_reprojection_amount = 0.5
 
-[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_light", "_camera")]
+[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
 _worldEnvironment = NodePath("WorldEnvironment")
-_light = NodePath("OmniLight3D")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
 _camera = NodePath("Camera3D")
-_lightSpeed = 10.0
+_lightSpeed = 12.5
 _lightLifetime = 1.0
-_lightIntensity = 5.0
+_lightIntensity = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
@@ -34,11 +34,6 @@ environment = SubResource("Environment_0wfyh")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
 transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 4.1518955, 1.3600683, 1.3892902)
 current = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=581746310]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7505913, 1.9135119, 3.2818832)
-visible = false
-light_energy = 14.292
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
 event_name = "event:/Footsteps/Loop"
