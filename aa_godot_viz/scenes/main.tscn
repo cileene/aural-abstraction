@@ -24,11 +24,11 @@ _cube = ExtResource("2_0wfyh")
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.6018151, -0.38107595, -0.7018545, 0, 0.8788171, -0.47715878, 0.7986355, -0.28716135, -0.52888536, 5.278, 0.524, 1.969)
+transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 4.1518955, 1.3600683, 1.3892902)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=581746310]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.752604, 1.9135119, 5.998784)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7505913, 1.9135119, 3.2818832)
 light_energy = 14.292
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]

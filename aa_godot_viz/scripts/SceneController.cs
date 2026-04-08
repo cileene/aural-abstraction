@@ -9,10 +9,23 @@ public partial class SceneController : Node
 	[Export] private int _gridSize = 10;
 	[Export] private float _spacing = 2f;
 	[Export] private float _threshold = 0.5f;
+	[Export] private Camera3D _camera;
+	[Export] private float _lightSpeed = 1f;
+	[Export] private float _lightLifetime = 5f;
+	[Export] private float _lightIntensity = 1f;
+	[Export] private Color _lightColor = Colors.White;
 	
 	public override void _Ready()
 	{
 		PlaceObjectsWithNoise();
+	}
+	
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("Step"))
+		{
+			//SendLight(_camera, _lightSpeed, _lightLifetime, _lightIntensity, _lightColor);
+		}
 	}
 
 	private void PlaceObjectsWithNoise()
