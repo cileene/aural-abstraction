@@ -11,14 +11,16 @@ background_mode = 2
 tonemap_mode = 2
 ssao_enabled = true
 sdfgi_enabled = true
+sdfgi_read_sky_light = false
 glow_enabled = true
 
-[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_light")]
+[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_light", "_camera")]
 script = ExtResource("1_0wfyh")
 _worldEnvironment = NodePath("WorldEnvironment")
 _light = NodePath("OmniLight3D")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
+_camera = NodePath("Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
@@ -29,6 +31,7 @@ current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=581746310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7505913, 1.9135119, 3.2818832)
+visible = false
 light_energy = 14.292
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]

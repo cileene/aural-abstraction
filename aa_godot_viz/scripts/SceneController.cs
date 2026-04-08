@@ -15,16 +15,30 @@ public partial class SceneController : Node
 	[Export] private float _lightIntensity = 1f;
 	[Export] private Color _lightColor = Colors.White;
 	
+	private bool _sendLightRequested = false;
+	private bool _lightSent = false;
+	
 	public override void _Ready()
 	{
 		PlaceObjectsWithNoise();
 	}
 	
+	public override void _Process(double delta)
+	{
+		if (_sendLightRequested)
+		{
+			_lightSent = true;
+			SendLight(_camera, _lightSpeed, _lightLifetime, _lightIntensity, _lightColor);
+			_sendLightRequested = false;
+			_lightSent = false;
+		}
+	}
+	
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("Step"))
+		if (@event.IsActionPressed("Step") && !_lightSent)
 		{
-			//SendLight(_camera, _lightSpeed, _lightLifetime, _lightIntensity, _lightColor);
+			_sendLightRequested = true;
 		}
 	}
 
@@ -49,5 +63,34 @@ public partial class SceneController : Node
 				AddChild(instance);
 			}
 		}
+	}
+	
+	private void SendLight(Camera3D camera, float speed, float lifetime, float intensity, Color color)
+	{
+		var lightInstance = new OmniLight3D
+		{
+			Position = camera.GlobalPosition,
+			LightColor = color,
+			LightEnergy = intensity,
+		};
+
+		AddChild(lightInstance);
+
+		var direction = -camera.GlobalTransform.Basis.Z.Normalized();
+		var endPosition = lightInstance.Position + direction * speed * lifetime;
+
+		var tween = CreateTween();
+		tween.TweenProperty(lightInstance, "position", endPosition, lifetime).SetTrans(Tween.TransitionType.Linear);
+		
+		tween.Parallel().TweenProperty(lightInstance, "light_energy", 0.0f, lifetime);
+
+		var timer = new Timer { WaitTime = lifetime, OneShot = true };
+		timer.Timeout += () =>
+		{
+			lightInstance.QueueFree();
+			timer.QueueFree();
+		};
+		AddChild(timer);
+		timer.Start();
 	}
 }
