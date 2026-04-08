@@ -35,7 +35,9 @@ public partial class SceneController : Node
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("Step") && !_lightInFlight)
+        {
             _sendLightRequested = true;
+        }
     }
 
     //TODO: Move to separate RoomBuilder class
@@ -71,7 +73,7 @@ public partial class SceneController : Node
             LightEnergy = intensity,
         };
 
-        AddChild(lightInstance); // must be in tree before touching GlobalPosition
+        AddChild(lightInstance);
 
         lightInstance.GlobalPosition = camera.GlobalPosition;
 
