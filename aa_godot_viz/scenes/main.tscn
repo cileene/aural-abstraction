@@ -6,16 +6,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_o5qli"]
-sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
-
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
-sky = SubResource("Sky_o5qli")
 tonemap_mode = 2
 ssao_enabled = true
 sdfgi_enabled = true
@@ -36,11 +28,12 @@ transform = Transform3D(-0.6018151, -0.38107595, -0.7018545, 0, 0.8788171, -0.47
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=581746310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.752604, 1.9135119, 5.998784)
+light_energy = 14.292
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
 event_name = "event:/Footsteps/Loop"
 event_guid = "{6a02cf4e-fe4a-46c0-aaf0-5a167837e52a}"
-volume = 0.5
 script = ExtResource("3_sugp2")
 
 [node name="FmodListener2D" type="FmodListener2D" parent="." unique_id=1257144794]

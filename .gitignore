@@ -50,6 +50,9 @@ AssetStoreTools/
 .export.cfg
 *.translation
 
+# FMOD cache
+aa_fmod/.cache/
+
 ############################################
 # Arduino / Embedded C++ (Arduino / Teensy)
 ############################################

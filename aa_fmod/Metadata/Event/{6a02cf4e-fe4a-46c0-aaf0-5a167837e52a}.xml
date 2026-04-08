@@ -5,7 +5,7 @@
 			<value>Loop</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>3</value>
 		</property>
 		<relationship name="folder">
 			<destination>{5b4af26a-6346-4165-ae69-72b80a8b2127}</destination>
@@ -72,9 +72,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e5df5530-e500-40b1-9324-2624be2c12e4}">
-		<property name="volume">
-			<value>-80</value>
-		</property>
 		<relationship name="effectChain">
 			<destination>{8570575e-ef2f-44e3-8f60-ae45a59246ed}</destination>
 		</relationship>
@@ -98,15 +95,12 @@
 	<object class="MixerBusPanner" id="{4c5baaa6-9747-402a-bb99-0e75adce3f7a}" />
 	<object class="MixerBusEffectChain" id="{8570575e-ef2f-44e3-8f60-ae45a59246ed}">
 		<relationship name="effects">
-			<destination>{b05309c9-e642-4cd7-877a-75b20c93b3c5}</destination>
 			<destination>{00ce11cb-1cfd-4f96-8ce8-fda5bc0110ee}</destination>
+			<destination>{a6a11ba5-5b9b-4c04-a3e2-419a8e5ca788}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3ef30978-45f3-4f4d-a56f-15031ed561c1}" />
 	<object class="MultiSound" id="{1b926ddc-1f96-4fbc-98db-5e8d3231aa6a}">
-		<property name="looping">
-			<value>true</value>
-		</property>
 		<property name="playlistMode">
 			<value>1</value>
 		</property>
@@ -134,18 +128,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{09b81f70-397e-4e68-a31d-6d1949ed8931}" />
-	<object class="MixerSend" id="{b05309c9-e642-4cd7-877a-75b20c93b3c5}">
-		<property name="level">
-			<value>0</value>
+	<object class="MixerBusFader" id="{00ce11cb-1cfd-4f96-8ce8-fda5bc0110ee}" />
+	<object class="ConvolutionReverbEffect" id="{a6a11ba5-5b9b-4c04-a3e2-419a8e5ca788}">
+		<property name="endFrame">
+			<value>40447</value>
 		</property>
-		<property name="inputFormat">
-			<value>1</value>
-		</property>
-		<relationship name="mixerReturn">
-			<destination>{2e7cd1a1-8ca0-4a15-9cbf-dd2443e31e36}</destination>
+		<relationship name="referenceableData">
+			<destination>{d56b3be9-e73b-4f78-bf79-6ae9f8ac497c}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusFader" id="{00ce11cb-1cfd-4f96-8ce8-fda5bc0110ee}" />
 	<object class="SingleSound" id="{9cb95304-3d29-4bea-8e2a-bc5674ed0e7f}">
 		<relationship name="audioFile">
 			<destination>{b3a2531d-96d3-41c7-a90f-29e3dda0fa40}</destination>
