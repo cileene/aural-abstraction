@@ -20,6 +20,8 @@ shader_parameter/height_scale = 0.5
 shader_parameter/speed = 0.1
 shader_parameter/displacement = SubResource("NoiseTexture2D_jyhfs")
 shader_parameter/albedo_color = Color(0.36953926, 0.5408606, 0.52171326, 1)
+shader_parameter/roughness = 0.2
+shader_parameter/metallic = 0.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
 material = SubResource("ShaderMaterial_jyhfs")
