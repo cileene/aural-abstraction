@@ -5,6 +5,15 @@
 [ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
+noise_type = 2
+frequency = 0.5134
+fractal_type = 0
+fractal_octaves = 4
+fractal_gain = 1.17
+fractal_weighted_strength = 0.4
+cellular_distance_function = 1
+cellular_jitter = 1.05
+cellular_return_type = 0
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1

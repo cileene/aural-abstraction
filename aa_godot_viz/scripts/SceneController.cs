@@ -13,6 +13,7 @@ public partial class SceneController : Node
     [Export] private float _lightSpeed = 1f;
     [Export] private float _lightLifetime = 5f;
     [Export] private float _lightIntensity = 1f;
+    [Export] private float _lightRange = 30f;
     [Export] private Color _lightColor = Colors.White;
 
     private bool _sendLightRequested, _lightInFlight;
@@ -28,7 +29,7 @@ public partial class SceneController : Node
         {
             _sendLightRequested = false;
             _lightInFlight = true;
-            SendLight(_camera, _lightSpeed, _lightLifetime, _lightIntensity, _lightColor);
+            SendLight(_camera, _lightSpeed, _lightLifetime, _lightIntensity, _lightRange, _lightColor);
         }
     }
 
@@ -65,12 +66,15 @@ public partial class SceneController : Node
     }
 
     //TODO: Move to separate LightImpulse class
-    private void SendLight(Camera3D camera, float speed, float lifetime, float intensity, Color color)
+    private void SendLight(Camera3D camera, float speed, float lifetime, float intensity, float range, Color color)
     {
         var lightInstance = new OmniLight3D
         {
             LightColor = color,
             LightEnergy = intensity,
+            ShadowEnabled = true,
+            OmniRange = range,
+            OmniAttenuation = 2f
         };
 
         AddChild(lightInstance);
