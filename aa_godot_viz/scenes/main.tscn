@@ -27,6 +27,10 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_temporal_reprojection_amount = 0.5
 
+[sub_resource type="BoxMesh" id="BoxMesh_sugp2"]
+flip_faces = true
+size = Vector3(20, 20, 20)
+
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
 _worldEnvironment = NodePath("WorldEnvironment")
@@ -41,7 +45,7 @@ _lightIntensity = 10.0
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 4.1518955, 1.3600683, 1.3892902)
+transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 4.1518955, -2.4772024, 1.3892902)
 current = true
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
@@ -53,3 +57,7 @@ script = ExtResource("3_sugp2")
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1967251096]
 bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.934818, 0, 8.5078535)
+mesh = SubResource("BoxMesh_sugp2")
