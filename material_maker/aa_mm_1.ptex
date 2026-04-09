@@ -1,0 +1,215 @@
+{
+	"connections": [
+		{
+			"from": "voronoi2",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 0
+		},
+		{
+			"from": "noise_white",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 1
+		},
+		{
+			"from": "blend2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "_Node_723",
+	"node_position": {
+		"x": 0.0,
+		"y": 0.0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 Standard",
+			"export_paths": {
+				"Blender": "/Users/nickjerlung/Desktop/test.res",
+				"Godot/Godot 4 Standard": "/Users/nickjerlung/Developer/AAU/PROJECTS/aural-abstraction/aa_godot_viz/materials/mm_test1.res"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1.0,
+					"b": 1.0,
+					"g": 1.0,
+					"r": 1.0,
+					"type": "Color"
+				},
+				"ao": 1.0,
+				"depth_scale": 0.5,
+				"emission_energy": 1.0,
+				"flags_transparent": true,
+				"metallic": 0.0,
+				"normal": 1.0,
+				"roughness": 1.0,
+				"size": 11.0,
+				"sss": 1.0
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "voronoi2",
+			"node_position": {
+				"x": -537.562316894531,
+				"y": -173.375900268555
+			},
+			"parameters": {
+				"intensity": 1.0,
+				"randomness": 0.85,
+				"scale_x": 10.0,
+				"scale_y": 10.0,
+				"stretch_x": 1.0,
+				"stretch_y": 1.0
+			},
+			"seed_int": 0,
+			"shader_model": {
+				"code": "vec4 $(name_uv)_xyzw = voronoi($uv, vec2($scale_x, $scale_y), vec2($stretch_y, $stretch_x), $intensity, $randomness, $seed);",
+				"global": "// Based on https://www.shadertoy.com/view/ldl3W8\n// The MIT License\n// Copyright © 2013 Inigo Quilez\nvec3 iq_voronoi(vec2 x, vec2 size, vec2 stretch, float randomness, vec2 seed) {\n\tvec2 n = floor(x);\n\tvec2 f = fract(x);\n\n\tvec2 mg, mr, mc;\n\tfloat md = 8.0;\n\tfor (int j=-1; j<=1; j++)\n\tfor (int i=-1; i<=1; i++) {\n\t\tvec2 g = vec2(float(i),float(j));\n\t\tvec2 o = randomness*rand2(seed + mod(n + g + size, size));\n\t\tvec2 c = g + o;\n\t\tvec2 r = c - f;\n\t\tvec2 rr = r*stretch;\n\t\tfloat d = dot(rr,rr);\n\n\t\tif (d<md) {\n\t\t\tmc = c;\n\t\t\tmd = d;\n\t\t\tmr = r;\n\t\t\tmg = g;\n\t\t}\n\t}\n\n\tmd = 8.0;\n\tfor (int j=-2; j<=2; j++)\n\tfor (int i=-2; i<=2; i++) {\n\t\tvec2 g = mg + vec2(float(i),float(j));\n\t\tvec2 o = randomness*rand2(seed + mod(n + g + size, size));\n\t\tvec2 r = g + o - f;\n\t\tvec2 rr = (mr-r)*stretch;\n\t\tif (dot(rr,rr)>0.00001)\n\t   \t\tmd = min(md, dot(0.5*(mr+r)*stretch, normalize((r-mr)*stretch)));\n\t}\n\n\treturn vec3(md, mc+n);\n}\n\nvec4 voronoi(vec2 uv, vec2 size, vec2 stretch, float intensity, float randomness, float seed) {\n\tuv *= size;\n\tvec3 v = iq_voronoi(uv, size, stretch, randomness, rand2(vec2(seed, 1.0-seed)));\n\treturn vec4(v.yz, intensity*length((uv-v.yz)*stretch), v.x);\n}\n",
+				"inputs": [],
+				"instance": "",
+				"longdesc": "Generates several images from a tileable voronoi noise",
+				"name": "Voronoi",
+				"outputs": [
+					{
+						"f": "$(name_uv)_xyzw.z",
+						"longdesc": "A grayscale pattern based on the distance to cell centers",
+						"shortdesc": "Nodes",
+						"type": "f"
+					},
+					{
+						"f": "$(name_uv)_xyzw.w",
+						"longdesc": "A grayscale pattern based on the distance to borders",
+						"shortdesc": "Borders",
+						"type": "f"
+					},
+					{
+						"fill": "round(vec4(fract(($(name_uv)_xyzw.xy-1.0)/vec2($scale_x, $scale_y)), vec2(2.0)/vec2($scale_x, $scale_y))*4096.0)/4096.0",
+						"longdesc": "An output that should be plugged into a Fill companion node",
+						"shortdesc": "Fill",
+						"type": "fill"
+					}
+				],
+				"parameters": [
+					{
+						"control": "None",
+						"default": 4.0,
+						"label": "Scale X",
+						"longdesc": "The scale along the X axis",
+						"max": 32.0,
+						"min": 1.0,
+						"name": "scale_x",
+						"shortdesc": "Scale.x",
+						"step": 1.0,
+						"type": "float"
+					},
+					{
+						"control": "None",
+						"default": 4.0,
+						"label": "Scale Y",
+						"longdesc": "The scale along the Y axis",
+						"max": 32.0,
+						"min": 1.0,
+						"name": "scale_y",
+						"shortdesc": "Scale.y",
+						"step": 1.0,
+						"type": "float"
+					},
+					{
+						"control": "None",
+						"default": 1.0,
+						"label": "Stretch X",
+						"longdesc": "The stretch factor along the X axis",
+						"max": 1.0,
+						"min": 0.01,
+						"name": "stretch_x",
+						"shortdesc": "Stretch.x",
+						"step": 0.01,
+						"type": "float"
+					},
+					{
+						"control": "None",
+						"default": 1.0,
+						"label": "Stretch Y",
+						"longdesc": "The stretch factor along the Y axis",
+						"max": 1.0,
+						"min": 0.01,
+						"name": "stretch_y",
+						"shortdesc": "Stretch.y",
+						"step": 0.01,
+						"type": "float"
+					},
+					{
+						"control": "None",
+						"default": 0.75,
+						"label": "Intensity",
+						"longdesc": "A value factor for grayscale outputs",
+						"max": 1.0,
+						"min": 0.0,
+						"name": "intensity",
+						"shortdesc": "Intensity",
+						"step": 0.01,
+						"type": "float"
+					},
+					{
+						"control": "None",
+						"default": 1.0,
+						"label": "Randomness",
+						"longdesc": "The randomness of cell centers positions",
+						"max": 1.0,
+						"min": 0.0,
+						"name": "randomness",
+						"shortdesc": "Randomness",
+						"step": 0.01,
+						"type": "float"
+					}
+				],
+				"shortdesc": "Voronoi Noise"
+			},
+			"type": "shader"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2",
+			"node_position": {
+				"x": -283.572021484375,
+				"y": -47.3652038574219
+			},
+			"parameters": {
+				"amount1": 0.57,
+				"blend_type1": 2.0
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "noise_white",
+			"node_position": {
+				"x": -630.101440429688,
+				"y": 118.02384185791
+			},
+			"parameters": {
+				"size": 5
+			},
+			"seed_int": 0,
+			"type": "noise_white"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}
