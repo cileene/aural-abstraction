@@ -19,7 +19,9 @@ cellular_return_type = 0
 background_mode = 1
 reflected_light_source = 1
 tonemap_mode = 2
+ssr_enabled = true
 ssao_enabled = true
+ssil_enabled = true
 sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
@@ -29,7 +31,7 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_sugp2"]
 flip_faces = true
-size = Vector3(20, 20, 20)
+size = Vector3(20, 10, 20)
 
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
