@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://brhni1ol7hu5t" path="res://scripts/SceneController.cs" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://f8juhu55iutx" path="res://prefabs/test_cube.tscn" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -46,7 +47,7 @@ _lightIntensity = 10.0
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 4.1518955, -2.4772024, 1.3892902)
+transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 5.5424676, -4.2395296, 2.5809765)
 current = true
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
@@ -62,3 +63,6 @@ bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.934818, 0, 8.5078535)
 mesh = SubResource("BoxMesh_sugp2")
+
+[node name="Node3D" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.489487, -5.104108, 6.0982356)
