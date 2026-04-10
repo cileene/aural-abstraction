@@ -22,7 +22,6 @@ tonemap_mode = 2
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
 volumetric_fog_enabled = true
