@@ -66,3 +66,6 @@ mesh = SubResource("BoxMesh_sugp2")
 
 [node name="Node3D" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.489487, -5.104108, 6.0982356)
+BranchAngle = -25.0
+LengthDecay = 0.85
+TrunkLength = 2.0

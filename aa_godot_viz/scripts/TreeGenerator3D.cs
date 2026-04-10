@@ -6,10 +6,11 @@ public partial class TreeGenerator3D : Node3D
     [ExportGroup("Structure")]
     [Export] public int MaxDepth = 6;
     [Export] public int BranchCount = 3;
-    [Export] public float BranchAngle = 28f;       // tilt from parent axis (degrees)
+    [Export] public float TrunkLean = 8f; 
+    [Export] public float BranchAngle = 28f;
     [Export] public float LengthDecay = 0.65f;
     [Export] public float RadiusDecay = 0.60f;
-    [Export] public float Randomness = 0.25f;      // 0 = symmetric, 1 = wild
+    [Export] public float Randomness = 0.25f;
 
     [ExportGroup("Dimensions")]
     [Export] public float TrunkLength = 2.5f;
@@ -27,14 +28,21 @@ public partial class TreeGenerator3D : Node3D
         set { if (value) { _seed = GD.Randi(); Generate(); } }
     }
 
+    private const int MaxNodes = 50_000;
+    private int _nodeCount = 0;
     private uint _seed = 42;
 
     public override void _Ready() => Generate();
 
     private void Generate()
     {
+        long estimated = (long)Mathf.Pow(BranchCount, MaxDepth);
+        GD.Print($"TreeGenerator: estimated ~{estimated:N0} leaf nodes");
+
         foreach (var child in GetChildren())
             child.QueueFree();
+
+        _nodeCount = 0;
 
         var rng = new RandomNumberGenerator { Seed = _seed };
         SpawnBranch(rng, this, TrunkLength, TrunkRadius, 0);
@@ -42,6 +50,14 @@ public partial class TreeGenerator3D : Node3D
 
     private void SpawnBranch(RandomNumberGenerator rng, Node3D parent, float length, float radius, int depth)
     {
+        if (_nodeCount > MaxNodes)
+        {
+            GD.PushWarning($"TreeGenerator: node limit ({MaxNodes}) reached — reduce BranchCount or MaxDepth.");
+            return;
+        }
+
+        _nodeCount++;
+
         // --- Cylinder ---
         var meshInst = new MeshInstance3D();
         var cyl = new CylinderMesh
@@ -51,7 +67,7 @@ public partial class TreeGenerator3D : Node3D
             Height       = length
         };
         meshInst.Mesh = cyl;
-        meshInst.Position = new Vector3(0f, length / 2f, 0f); // center the cylinder
+        meshInst.Position = new Vector3(0f, length / 2f, 0f);
         meshInst.MaterialOverride = MakeMaterial(WoodColor);
         parent.AddChild(meshInst);
 
@@ -71,25 +87,26 @@ public partial class TreeGenerator3D : Node3D
         }
 
         // --- Child branches ---
-        float azimuthStep = 360f / BranchCount;
+        int count = depth == 0 ? 1 : BranchCount;
+        float azimuthStep = 360f / count;
 
         for (int i = 0; i < BranchCount; i++)
         {
-            // Spread evenly around the axis, then jitter
             float azimuth = azimuthStep * i
-                + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
+                            + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
 
-            float tilt = BranchAngle
-                + rng.RandfRange(-BranchAngle * 0.5f, BranchAngle * 0.5f) * Randomness;
+            // Trunk uses its own lean angle, branches use BranchAngle
+            float tiltBase = depth == 0 ? TrunkLean : BranchAngle;
+            float tilt = tiltBase
+                         + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
 
             float childLength = length * LengthDecay
-                * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
+                                       * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
 
-            // Pivot sits at the tip of the current branch
             var pivot = new Node3D();
             pivot.Position = new Vector3(0f, length, 0f);
-            pivot.RotateY(Mathf.DegToRad(azimuth)); // spin around trunk axis
-            pivot.RotateZ(Mathf.DegToRad(tilt));    // lean outward
+            pivot.RotateY(Mathf.DegToRad(azimuth));
+            pivot.RotateZ(Mathf.DegToRad(tilt));
             parent.AddChild(pivot);
 
             SpawnBranch(rng, pivot, childLength, radius * RadiusDecay, depth + 1);
@@ -99,7 +116,6 @@ public partial class TreeGenerator3D : Node3D
     private static StandardMaterial3D MakeMaterial(Color color) => new()
     {
         AlbedoColor = color,
-        RoughnessTexture = null,
         Roughness = 0.9f,
     };
 }
