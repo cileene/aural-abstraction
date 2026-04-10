@@ -7,6 +7,8 @@ import scipy.fft as fft
 import pandas as pd
 from scipy.stats import linregress
 import matplotlib.pyplot as plt
+import pyfar as pf
+from pyfar.dsp.filter import fractional_octave_bands as fob
 
 
 def load_ir(path): #Returns a normalized impulse response and its sampling rate from a given file path
@@ -63,6 +65,7 @@ def compute_definition(ir, sr):
     D80 = early_80 / total_energy
     return D50, D80
 
+"""
 def compute_mel_T20_bands(ir, sr, n_bands=40):
     n_fft = 2048 #Windows size for STFT
     hop_length = 512 #Hop length for STFT
@@ -81,21 +84,42 @@ def compute_mel_T20_bands(ir, sr, n_bands=40):
 
         edc = edc / np.max(edc) #Normalize EDC
         edc_db = 10 * np.log10(edc + 1e-12) #Convert to dB
-        T20 = compute_rt(edc_db, {sr / hop_length}, -5, -25) #Compute T20 for the corresponding mel band
+        T20 = compute_rt(edc_db, sr / hop_length, -5, -25) #Compute T20 for the corresponding mel band
 
         results[f"mel_T20_band_{i}"] = T20
 
     return results
+"""
 
+def compute_T30_octave_band(signal, sr):
+    pf_signal = pf.Signal(signal, sr)
+    filtered_signal = fob(signal = pf_signal, num_fractions = 1,
+                           sampling_rate=None, frequency_range=(20, 20000))
+
+    results = {}
+    center_freqs = pf.dsp.filter.fractional_octave_frequencies(num_fractions=1, frequency_range=(20, 20000))[0]
+    
+    for i in range(len(center_freqs)):
+        band_ir = filtered_signal.time[i, 0, :]  #band, channel, time
+        edc_db = compute_edc(band_ir)
+        freq = int(center_freqs[i])
+        T30 = compute_rt(edc_db, sr, -5, -35)
+        results[f"oct_band_T30_{freq}hz"] = T30
+
+    return results
 
 if __name__ == "__main__": # only run when playing in this file
     skippedIRs = 0
 
-    results = [] #create list for rsults
+    results = [] #create list for results
+    
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    ir_dir = os.path.join(script_dir, "IR")
 
-    for file in os.listdir("IR"):
+    for file in os.listdir(ir_dir):
         if file.endswith(".wav"):
-            path = "IR/" + file
+            path = os.path.join(ir_dir, file)
 
             ir, sr = load_ir(path)
             edc_db = compute_edc(ir)
@@ -104,7 +128,7 @@ if __name__ == "__main__": # only run when playing in this file
             EDT = compute_rt(edc_db, sr, 0, -10)
             C50, C80 = compute_clarity(ir, sr)
             D50, D80 = compute_definition(ir, sr)
-            mel_T20_bands = compute_mel_T20_bands(ir, sr)
+            t30_octave_band = compute_T30_octave_band(ir, sr)
 
             result = {
                 "file": file,
@@ -116,8 +140,8 @@ if __name__ == "__main__": # only run when playing in this file
                 "D50": D50,
                 "D80": D80,
             }
-            result.update(mel_T20_bands)
-            
+            result.update(t30_octave_band) 
+
             skip = False
 
             for k, v in result.items(): #for each key, check value, if file is naN skip row
@@ -132,6 +156,8 @@ if __name__ == "__main__": # only run when playing in this file
             results.append(result)
 
     # Save to CSV
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_path = os.path.join(script_dir, "IR_Extraction_results.csv")
     df = pd.DataFrame(results)
-    df.to_csv("IR_Extraction_results.csv", index=False)
+    df.to_csv(output_path, index=False)
     print(f"Finished extracting features. Skipped {skippedIRs} IRs due to NaN values.")
