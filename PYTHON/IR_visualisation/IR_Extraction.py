@@ -98,12 +98,12 @@ def compute_T30_octave_band(signal, sr):
 
     results = {}
     center_freqs = pf.dsp.filter.fractional_octave_frequencies(num_fractions=1, frequency_range=(20, 20000))[0]
-    
+
     for i in range(len(center_freqs)):
         band_ir = filtered_signal.time[i, 0, :]  #band, channel, time
         edc_db = compute_edc(band_ir)
         freq = int(center_freqs[i])
-        T30 = compute_rt(edc_db, sr, -5, -35)
+        T30 = compute_rt(edc_db, sr, -5, -25)
         results[f"oct_band_T30_{freq}hz"] = T30
 
     return results
