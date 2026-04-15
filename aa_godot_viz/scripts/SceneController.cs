@@ -19,6 +19,14 @@ public partial class SceneController : Node
     [Export] private float _lightRange = 30f;
     [Export] private Color _lightColor = Colors.White;
 
+    [ExportCategory("Parameters")] 
+    [Export(PropertyHint.Range, "0,1")] private float _color;
+    [Export(PropertyHint.Range, "0,1")] private float _spatiality;
+    [Export(PropertyHint.Range, "0,1")] private float _composition;
+    [Export(PropertyHint.Range, "0,1")] private float _shape;
+    [Export(PropertyHint.Range, "0,1")] private float _material;
+    
+
     private bool _sendLightRequested, _lightInFlight;
 
     public override void _Ready()

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -75,3 +76,5 @@ TrunkLength = 2.0
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.502074, -4.8875113, 8.329168)
+
+[node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]
