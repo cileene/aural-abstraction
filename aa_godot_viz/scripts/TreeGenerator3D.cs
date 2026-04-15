@@ -1,5 +1,7 @@
 using Godot;
 
+namespace aa_godot_viz.scripts;
+
 [Tool]
 public partial class TreeGenerator3D : Node3D
 {

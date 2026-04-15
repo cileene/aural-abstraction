@@ -1,6 +1,9 @@
 using Godot;
 
+namespace aa_godot_viz.scripts;
+
 //TODO: Set up event system to decouple input, light impulse, and room building logic
+
 public partial class SceneController : Node
 {
     [Export] private WorldEnvironment _worldEnvironment;
