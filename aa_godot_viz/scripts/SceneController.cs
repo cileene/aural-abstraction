@@ -20,7 +20,7 @@ public partial class SceneController : Node
 
     public override void _Ready()
     {
-        PlaceObjectsWithNoise();
+        //PlaceObjectsWithNoise();
     }
 
     public override void _Process(double delta)

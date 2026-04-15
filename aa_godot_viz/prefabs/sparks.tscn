@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://t50lfrdfx2sx"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ixfb0"]
+gravity = Vector3(0, 1.8, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+scale_min = 0.0
+anim_speed_min = 1.36
+anim_speed_max = 10.21
+turbulence_enabled = true
+turbulence_noise_strength = 0.36
+turbulence_noise_scale = 1.704
+turbulence_initial_displacement_min = -26.099998
+turbulence_initial_displacement_max = 46.800003
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vob68"]
+emission_enabled = true
+emission = Color(0.9228175, 0.723852, 0.6216481, 1)
+emission_energy_multiplier = 8.54
+
+[sub_resource type="SphereMesh" id="SphereMesh_y3if3"]
+material = SubResource("StandardMaterial3D_vob68")
+radius = 0.05
+height = 0.1
+
+[node name="sparks" type="Node3D" unique_id=41806041]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1788537736]
+amount = 200
+lifetime = 10.03
+process_material = SubResource("ParticleProcessMaterial_ixfb0")
+draw_pass_1 = SubResource("SphereMesh_y3if3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="GPUParticles3D" unique_id=1481725820]
+light_color = Color(0.90983075, 0.79356295, 0.6856988, 1)
+light_energy = 0.129
+omni_range = 25.534
