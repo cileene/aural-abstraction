@@ -6,6 +6,7 @@ namespace aa_godot_viz.scripts;
 
 public partial class SceneController : Node
 {
+    [Export] private VBoxContainer _uI;
     [Export] private WorldEnvironment _worldEnvironment;
     [Export] private FastNoiseLite _noise;
     [Export] private PackedScene _cube;

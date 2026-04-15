@@ -50,7 +50,7 @@ text = "Warm"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer" unique_id=1111931762]
+[node name="ColorSlider" type="HSlider" parent="HBoxContainer" unique_id=1111931762]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -91,7 +91,7 @@ text = "Distant"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer2" unique_id=243621710]
+[node name="SpatialitySlider" type="HSlider" parent="HBoxContainer2" unique_id=243621710]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -132,7 +132,7 @@ text = "Dense"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer3" unique_id=1056583552]
+[node name="CompositionSlider" type="HSlider" parent="HBoxContainer3" unique_id=1056583552]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -173,7 +173,7 @@ text = "Jagged/Fragmented"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer4" unique_id=1324329922]
+[node name="ShapeSlider" type="HSlider" parent="HBoxContainer4" unique_id=1324329922]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -214,7 +214,7 @@ text = "Sharp/Noisy"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer5" unique_id=2097730917]
+[node name="MaterialSlider" type="HSlider" parent="HBoxContainer5" unique_id=2097730917]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0

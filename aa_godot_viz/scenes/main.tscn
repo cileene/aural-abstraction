@@ -36,8 +36,9 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 flip_faces = true
 size = Vector3(20, 10, 20)
 
-[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_worldEnvironment", "_camera")]
+[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_uI", "_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
+_uI = NodePath("UI")
 _worldEnvironment = NodePath("WorldEnvironment")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
