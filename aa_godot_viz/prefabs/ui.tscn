@@ -1,18 +1,26 @@
 [gd_scene format=3 uid="uid://by42x086ymje"]
 
 [sub_resource type="Theme" id="Theme_tbgi4"]
-default_font_size = 17
+default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_vcts4"]
 
 [node name="UI" type="VBoxContainer" unique_id=1090373297]
-anchors_preset = 12
+custom_minimum_size = Vector2(800, 0)
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -231.0
-grow_horizontal = 2
+offset_left = -1000.0
+offset_top = -440.0
+offset_right = -52.0
+offset_bottom = -49.0
+grow_horizontal = 0
 grow_vertical = 0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1678938413]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=166293803]
@@ -44,6 +52,7 @@ uppercase = true
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer" unique_id=1111931762]
 layout_mode = 2
+theme = SubResource("Theme_vcts4")
 max_value = 1.0
 step = 0.001
 value = 0.5
@@ -52,6 +61,7 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="." unique_id=75433263]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2" unique_id=711685436]
@@ -83,6 +93,7 @@ uppercase = true
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer2" unique_id=243621710]
 layout_mode = 2
+theme = SubResource("Theme_vcts4")
 max_value = 1.0
 step = 0.001
 value = 0.5
@@ -91,6 +102,7 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="HBoxContainer3" type="VBoxContainer" parent="." unique_id=1804032301]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3" unique_id=1985490858]
@@ -122,6 +134,7 @@ uppercase = true
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer3" unique_id=1056583552]
 layout_mode = 2
+theme = SubResource("Theme_vcts4")
 max_value = 1.0
 step = 0.001
 value = 0.5
@@ -130,6 +143,7 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="HBoxContainer4" type="VBoxContainer" parent="." unique_id=1877125448]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer4" unique_id=435978400]
@@ -161,6 +175,7 @@ uppercase = true
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer4" unique_id=1324329922]
 layout_mode = 2
+theme = SubResource("Theme_vcts4")
 max_value = 1.0
 step = 0.001
 value = 0.5
@@ -169,6 +184,7 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="HBoxContainer5" type="VBoxContainer" parent="." unique_id=1601131212]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer5" unique_id=868691405]
@@ -200,6 +216,7 @@ uppercase = true
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer5" unique_id=2097730917]
 layout_mode = 2
+theme = SubResource("Theme_vcts4")
 max_value = 1.0
 step = 0.001
 value = 0.5
