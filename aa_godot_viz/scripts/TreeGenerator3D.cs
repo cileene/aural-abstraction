@@ -2,13 +2,12 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-//[Tool]
 public partial class TreeGenerator3D : Node3D
 {
     [ExportGroup("Structure")]
     [Export] public int MaxDepth = 6;
     [Export] public int BranchCount = 3;
-    [Export] public float TrunkLean = 8f; 
+    [Export] public float TrunkLean = 8f;
     [Export] public float BranchAngle = 28f;
     [Export] public float LengthDecay = 0.65f;
     [Export] public float RadiusDecay = 0.60f;
@@ -17,21 +16,18 @@ public partial class TreeGenerator3D : Node3D
     [ExportGroup("Dimensions")]
     [Export] public float TrunkLength = 2.5f;
     [Export] public float TrunkRadius = 0.18f;
-    
+
     [ExportGroup("Leafs")]
     [Export] public bool ShowLeafs = false;
     [Export] public float LeafRadius = 0.35f;
 
-    [ExportGroup("Colors")]
+    [ExportGroup("Materials")]
+    [Export] public Material WoodMaterial;
+    [Export] public Material LeafMaterial;
+    
+    [ExportGroup("Fallback Colors")]
     [Export] public Color WoodColor = new Color(0.38f, 0.22f, 0.09f);
     [Export] public Color LeafColor = new Color(0.18f, 0.65f, 0.28f);
-
-    [ExportGroup("Generation")]
-    [Export] public bool Regenerate
-    {
-        get => false;
-        set { if (value) { _seed = GD.Randi(); Generate(); } }
-    }
 
     private const int MaxNodes = 50_000;
     private int _nodeCount = 0;
@@ -40,6 +36,11 @@ public partial class TreeGenerator3D : Node3D
     public override void _EnterTree()
     {
         EventSystem.ImpulseSent += OnImpulseSent;
+    }
+
+    public override void _ExitTree()
+    {
+        EventSystem.ImpulseSent -= OnImpulseSent;
     }
 
     private void OnImpulseSent()
@@ -68,57 +69,62 @@ public partial class TreeGenerator3D : Node3D
     {
         if (_nodeCount > MaxNodes)
         {
-            GD.PushWarning($"TreeGenerator: node limit ({MaxNodes}) reached — reduce BranchCount or MaxDepth.");
+            GD.PushWarning($"TreeGenerator: node limit ({MaxNodes}) reached - reduce BranchCount or MaxDepth.");
             return;
         }
 
         _nodeCount++;
 
-        // --- Cylinder ---
+        // Branch cylinder
         var meshInst = new MeshInstance3D();
         var cyl = new CylinderMesh
         {
             BottomRadius = radius,
-            TopRadius    = Mathf.Max(0.01f, radius * 0.6f),
-            Height       = length
+            TopRadius = Mathf.Max(0.01f, radius * 0.6f),
+            Height = length
         };
         meshInst.Mesh = cyl;
         meshInst.Position = new Vector3(0f, length / 2f, 0f);
-        meshInst.MaterialOverride = MakeMaterial(WoodColor);
+        meshInst.MaterialOverride = WoodMaterial ?? MakeMaterial(WoodColor);
         parent.AddChild(meshInst);
 
-        // --- Leaf at terminal branches ---
+        // Leaf at terminal branches
         if (depth >= MaxDepth)
         {
-            if (!ShowLeafs) return;
+            if (!ShowLeafs)
+                return;
+
             var leaf = new MeshInstance3D();
-            var sphere = new SphereMesh();
             float r = LeafRadius * rng.RandfRange(0.75f, 1.35f);
-            sphere.Radius = r;
-            sphere.Height = r * 2f;
-            leaf.Mesh = sphere;
+
+            var quad = new QuadMesh
+            {
+                Size = new Vector2(r * 2f, r * 2f)
+            };
+
+            leaf.Mesh = quad;
             leaf.Position = new Vector3(0f, length, 0f);
-            leaf.MaterialOverride = MakeMaterial(LeafColor);
+            leaf.MaterialOverride = LeafMaterial ?? MakeBillboardLeafMaterial(LeafColor);
+
             parent.AddChild(leaf);
             return;
         }
 
-        // --- Child branches ---
+        // Child branches
         int count = depth == 0 ? 1 : BranchCount;
         float azimuthStep = 360f / count;
 
         for (int i = 0; i < BranchCount; i++)
         {
             float azimuth = azimuthStep * i
-                            + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
+                + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
 
-            // Trunk uses its own lean angle, branches use BranchAngle
             float tiltBase = depth == 0 ? TrunkLean : BranchAngle;
             float tilt = tiltBase
-                         + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
+                + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
 
             float childLength = length * LengthDecay
-                                       * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
+                * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
 
             var pivot = new Node3D();
             pivot.Position = new Vector3(0f, length, 0f);
@@ -133,6 +139,14 @@ public partial class TreeGenerator3D : Node3D
     private static StandardMaterial3D MakeMaterial(Color color) => new()
     {
         AlbedoColor = color,
+        Roughness = 0.9f
+    };
+
+    private static StandardMaterial3D MakeBillboardLeafMaterial(Color color) => new()
+    {
+        AlbedoColor = color,
         Roughness = 0.9f,
+        BillboardMode = BaseMaterial3D.BillboardModeEnum.Enabled,
+        Transparency = BaseMaterial3D.TransparencyEnum.Alpha
     };
 }

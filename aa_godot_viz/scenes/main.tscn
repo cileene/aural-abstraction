@@ -80,6 +80,8 @@ Randomness = 0.5
 TrunkLength = 1.4
 TrunkRadius = 0.3
 ShowLeafs = true
+LeafRadius = 0.1
+LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.502074, -4.8875113, 8.329168)
