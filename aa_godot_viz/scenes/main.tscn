@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -34,7 +35,7 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_sugp2"]
 flip_faces = true
-size = Vector3(20, 12, 20)
+size = Vector3(28.55, 15.62, 21.58)
 
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_uI", "_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
@@ -44,15 +45,18 @@ _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
 _camera = NodePath("Camera3D")
 _lightSpeed = 2.5
-_lightLifetime = 10.0
 _lightIntensity = 10.0
 _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=545642773]
+transform = Transform3D(-0.70957077, 0.056510907, 0.7023645, 0, 0.9967789, -0.08019893, -0.7046342, -0.056906816, -0.70728517, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.7771458, -0.31466025, -0.5450076, 0, 0.8660254, -0.50000006, 0.62932044, -0.38857293, -0.6730281, 5.4663925, -4.24, 2.401813)
+transform = Transform3D(-0.77714586, -0.23370941, -0.58431524, 0, 0.9284859, -0.37136787, 0.6293205, -0.288607, -0.72156894, 2.075907, -4.5178065, 1.3978813)
 current = true
 fov = 80.0
 
@@ -69,11 +73,11 @@ script = ExtResource("3_sugp2")
 bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.934818, 1, 8.5078535)
+transform = Transform3D(0.603208, 0, 0.79758394, 0, 1, 0, -0.79758394, 0, 0.603208, 11.934818, 1, 8.5078535)
 mesh = SubResource("BoxMesh_sugp2")
 
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.459759, -5.104108, 7.432157)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
 BranchAngle = -35.0
 LengthDecay = 0.93
 Randomness = 0.5
@@ -85,4 +89,14 @@ LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
 PartsPerSecond = 240.0
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.502074, -4.8875113, 8.329168)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
+
+[node name="Bubble" parent="." unique_id=864385922 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71515, -1.6159854, 7.60667)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
+light_energy = 16.0
+light_volumetric_fog_energy = 0.653
+shadow_enabled = true
+omni_range = 61.311
+omni_attenuation = 2.0

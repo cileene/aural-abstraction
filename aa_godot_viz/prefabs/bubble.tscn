@@ -40,8 +40,8 @@ shader_parameter/water_color = Color(3.3691526e-07, 0.20095614, 0.26725382, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_tkw31"]
 material = SubResource("ShaderMaterial_tkw31")
 flip_faces = true
-radius = 10.0
-height = 20.0
+radius = 5.0
+height = 10.0
 radial_segments = 256
 rings = 256
 

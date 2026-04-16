@@ -1,6 +1,8 @@
+// from https://godotshaders.com/shader/water-shader-easy-setup/
+
 shader_type spatial;
 
-render_mode unshaded, cull_disabled, depth_draw_always;
+render_mode depth_draw_always;
 
 uniform sampler2D screen_texture : hint_screen_texture;
 
