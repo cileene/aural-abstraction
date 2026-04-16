@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bv6swk25wcqfi" path="res://prefabs/bubble_system.tscn" id="8_tipki"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -33,9 +34,12 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
 volumetric_fog_temporal_reprojection_amount = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_sugp2"]
-flip_faces = true
-size = Vector3(28.55, 15.62, 21.58)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
+material = SubResource("StandardMaterial3D_o6xl0")
+radius = 15.0
+height = 30.0
 
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_uI", "_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
@@ -75,7 +79,8 @@ bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
 transform = Transform3D(0.603208, 0, 0.79758394, 0, 1, 0, -0.79758394, 0, 0.603208, 11.934818, 1, 8.5078535)
-mesh = SubResource("BoxMesh_sugp2")
+flip_faces = true
+mesh = SubResource("SphereMesh_o6xl0")
 
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
@@ -96,12 +101,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71515, -1.6159854, 7.60667)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
-light_energy = 16.0
+light_energy = 7.011
+light_indirect_energy = 0.4
 light_volumetric_fog_energy = 0.653
 light_size = 0.13
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 3.595
+shadow_blur = 2.535
 omni_range = 61.311
 omni_attenuation = 2.0
 
@@ -114,3 +120,6 @@ shadow_enabled = true
 shadow_blur = 1.2
 spot_range = 48.946518
 spot_angle = 10.95
+
+[node name="sparks" parent="." unique_id=795322719 instance=ExtResource("8_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.358566)

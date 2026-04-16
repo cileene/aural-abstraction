@@ -42,8 +42,7 @@ material = SubResource("ShaderMaterial_tkw31")
 flip_faces = true
 radius = 5.0
 height = 10.0
-radial_segments = 256
-rings = 256
+radial_segments = 32
 
 [node name="Bubble" type="Node3D" unique_id=864385922]
 

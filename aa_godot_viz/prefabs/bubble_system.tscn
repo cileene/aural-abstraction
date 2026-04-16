@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bv6swk25wcqfi"]
+
+[ext_resource type="Shader" uid="uid://ibc1ivsy2edc" path="res://materials/godot_shaders/water.gdshader" id="1_sftjs"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ixfb0"]
+emission_shape_scale = Vector3(5, 0.5, 5)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0.9, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+scale_min = 0.0
+anim_speed_min = 1.36
+anim_speed_max = 10.21
+turbulence_enabled = true
+turbulence_noise_strength = 0.36
+turbulence_noise_scale = 1.704
+turbulence_initial_displacement_min = -26.099998
+turbulence_initial_displacement_max = 46.800003
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jtvre"]
+noise_type = 2
+frequency = 0.0025
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kw1mi"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_jtvre")
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sftjs"]
+frequency = 0.0141
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtvre"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_sftjs")
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gpore"]
+render_priority = 0
+shader = ExtResource("1_sftjs")
+shader_parameter/normal1tex = SubResource("NoiseTexture2D_kw1mi")
+shader_parameter/normal2tex = SubResource("NoiseTexture2D_jtvre")
+shader_parameter/speed1 = Vector2(0.01, 0)
+shader_parameter/speed2 = Vector2(0, 0.01)
+shader_parameter/strength = 1.83
+shader_parameter/distortion = 1.99
+shader_parameter/water_color = Color(1.2995303e-06, 0.46242142, 0.6018255, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lqcs4"]
+material = SubResource("ShaderMaterial_gpore")
+radius = 0.125
+height = 0.25
+
+[node name="bubbles" type="Node3D" unique_id=41806041]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1788537736]
+amount = 200
+lifetime = 10.03
+process_material = SubResource("ParticleProcessMaterial_ixfb0")
+draw_pass_1 = SubResource("SphereMesh_lqcs4")

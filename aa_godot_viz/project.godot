@@ -24,6 +24,11 @@ config/icon="res://icon.svg"
 
 FmodManager="*uid://cds10pm7hwn3p"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [dotnet]
 
 project/assembly_name="aa_godot_viz"
