@@ -34,7 +34,7 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_sugp2"]
 flip_faces = true
-size = Vector3(20, 10, 20)
+size = Vector3(20, 12, 20)
 
 [node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_uI", "_worldEnvironment", "_camera")]
 script = ExtResource("1_0wfyh")
@@ -52,8 +52,11 @@ _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.6018151, -0.38107598, -0.7018545, 0, 0.87881714, -0.4771588, 0.7986355, -0.28716138, -0.52888536, 5.5424676, -4.2395296, 2.5809765)
+transform = Transform3D(-0.7771458, -0.31466025, -0.5450076, 0, 0.8660254, -0.50000006, 0.62932044, -0.38857293, -0.6730281, 5.4663925, -4.24, 2.401813)
 current = true
+fov = 80.0
+
+[node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]
 
 [node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
 event_name = "event:/Footsteps/Loop"
@@ -66,16 +69,17 @@ script = ExtResource("3_sugp2")
 bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.934818, 0, 8.5078535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.934818, 1, 8.5078535)
 mesh = SubResource("BoxMesh_sugp2")
 
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.459759, -5.104108, 7.432157)
-BranchAngle = -25.0
-LengthDecay = 0.85
-TrunkLength = 2.0
+BranchAngle = -35.0
+LengthDecay = 0.93
+Randomness = 0.5
+TrunkLength = 1.4
+TrunkRadius = 0.3
+ShowLeafs = true
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.502074, -4.8875113, 8.329168)
-
-[node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]

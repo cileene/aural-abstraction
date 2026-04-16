@@ -2,7 +2,7 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-[Tool]
+//[Tool]
 public partial class TreeGenerator3D : Node3D
 {
     [ExportGroup("Structure")]
@@ -17,6 +17,9 @@ public partial class TreeGenerator3D : Node3D
     [ExportGroup("Dimensions")]
     [Export] public float TrunkLength = 2.5f;
     [Export] public float TrunkRadius = 0.18f;
+    
+    [ExportGroup("Leafs")]
+    [Export] public bool ShowLeafs = false;
     [Export] public float LeafRadius = 0.35f;
 
     [ExportGroup("Colors")]
@@ -33,6 +36,17 @@ public partial class TreeGenerator3D : Node3D
     private const int MaxNodes = 50_000;
     private int _nodeCount = 0;
     private uint _seed = 42;
+
+    public override void _EnterTree()
+    {
+        EventSystem.ImpulseSent += OnImpulseSent;
+    }
+
+    private void OnImpulseSent()
+    {
+        _seed = GD.Randi();
+        Generate();
+    }
 
     public override void _Ready() => Generate();
 
@@ -76,6 +90,7 @@ public partial class TreeGenerator3D : Node3D
         // --- Leaf at terminal branches ---
         if (depth >= MaxDepth)
         {
+            if (!ShowLeafs) return;
             var leaf = new MeshInstance3D();
             var sphere = new SphereMesh();
             float r = LeafRadius * rng.RandfRange(0.75f, 1.35f);

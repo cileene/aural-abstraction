@@ -11,6 +11,7 @@ public static class EventSystem
 {
     // EVENTS
     public static event Action<Parameters> SetParameters;
+    public static event Action ImpulseSent;
     
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -22,5 +23,11 @@ public static class EventSystem
                  $"{parameters.Param3}, " +
                  $"{parameters.Param4}, " +
                  $"{parameters.Param5}");
+    }
+    
+    public static void RaiseImpulseSent()
+    {
+        ImpulseSent?.Invoke();
+        GD.Print("EventSystem: Raised ImpulseSent");
     }
 }

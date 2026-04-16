@@ -49,6 +49,7 @@ public partial class SceneController : Node
     {
         if (@event.IsActionPressed("Step") && !_lightInFlight)
         {
+            EventSystem.RaiseImpulseSent();
             _sendLightRequested = true;
         }
     }
