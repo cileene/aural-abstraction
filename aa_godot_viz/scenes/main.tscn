@@ -22,19 +22,27 @@ cellular_return_type = 0
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
+ambient_light_source = 1
 reflected_light_source = 1
-tonemap_mode = 2
+tonemap_mode = 4
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
+glow_intensity = 2.88
+glow_bloom = 0.42
+glow_blend_mode = 2
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
+volumetric_fog_sky_affect = 0.0
 volumetric_fog_temporal_reprojection_amount = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
+metallic = 0.29
+metallic_specular = 1.0
+roughness = 0.6
 
 [sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
 material = SubResource("StandardMaterial3D_o6xl0")
@@ -61,7 +69,7 @@ shadow_enabled = true
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.77714586, -0.23370941, -0.58431524, 0, 0.9284859, -0.37136787, 0.6293205, -0.288607, -0.72156894, 2.456, -4.518, 1.758)
+transform = Transform3D(-0.8589599, -0.19015624, -0.4754245, 0, 0.9284858, -0.37136784, 0.5120428, -0.31899008, -0.7975321, 2.346, -4.518, 1.938)
 current = true
 fov = 80.0
 
@@ -84,15 +92,16 @@ mesh = SubResource("SphereMesh_o6xl0")
 
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
+MaxDepth = 7
 BranchAngle = -35.0
 LengthDecay = 0.93
 Randomness = 0.5
 TrunkLength = 1.4
 TrunkRadius = 0.3
 ShowLeafs = true
-LeafRadius = 0.1
+LeafRadius = 0.15
 LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
-PartsPerSecond = 240.0
+PartsPerSecond = 480.0
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
@@ -101,9 +110,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71515, -1.6159854, 7.60667)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
-light_energy = 7.011
+light_energy = 10.304
 light_indirect_energy = 0.4
-light_volumetric_fog_energy = 0.653
 light_size = 0.13
 light_specular = 0.0
 shadow_enabled = true
@@ -112,10 +120,10 @@ omni_range = 61.311
 omni_attenuation = 2.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Bubble" unique_id=1300690305]
-transform = Transform3D(-0.7922897, 0.052116714, 0.60791516, 0, 0.9963453, -0.08541692, -0.6101451, -0.06767494, -0.7893941, 16.21, -2.981, -20.328)
-light_energy = 13.524
+transform = Transform3D(-0.7660444, 0.14459573, 0.626313, 0, 0.97437, -0.22495103, -0.6427876, -0.17232248, -0.7464107, 18.25, -5.491, -20.328)
+light_energy = 16.0
 light_volumetric_fog_energy = 0.0
-light_specular = 3.496
+light_specular = 6.971
 shadow_enabled = true
 shadow_blur = 1.2
 spot_range = 48.946518
