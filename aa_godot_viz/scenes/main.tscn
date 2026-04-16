@@ -50,13 +50,14 @@ _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=545642773]
 transform = Transform3D(-0.70957077, 0.056510907, 0.7023645, 0, 0.9967789, -0.08019893, -0.7046342, -0.056906816, -0.70728517, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
-transform = Transform3D(-0.77714586, -0.23370941, -0.58431524, 0, 0.9284859, -0.37136787, 0.6293205, -0.288607, -0.72156894, 2.075907, -4.5178065, 1.3978813)
+transform = Transform3D(-0.77714586, -0.23370941, -0.58431524, 0, 0.9284859, -0.37136787, 0.6293205, -0.288607, -0.72156894, 2.456, -4.518, 1.758)
 current = true
 fov = 80.0
 
@@ -97,6 +98,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71515, -1.6159854, 7.60667)
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
 light_energy = 16.0
 light_volumetric_fog_energy = 0.653
+light_size = 0.13
+light_specular = 0.0
 shadow_enabled = true
+shadow_blur = 3.595
 omni_range = 61.311
 omni_attenuation = 2.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Bubble" unique_id=1300690305]
+transform = Transform3D(-0.7922897, 0.052116714, 0.60791516, 0, 0.9963453, -0.08541692, -0.6101451, -0.06767494, -0.7893941, 16.21, -2.981, -20.328)
+light_energy = 13.524
+light_volumetric_fog_energy = 0.0
+light_specular = 3.496
+shadow_enabled = true
+shadow_blur = 1.2
+spot_range = 48.946518
+spot_angle = 10.95
