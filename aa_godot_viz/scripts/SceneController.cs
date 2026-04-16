@@ -2,18 +2,20 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-//TODO: Set up event system to decouple input, light impulse, and room building logic
+//TODO: Split into multiple classes via the event system. Just take the inputs here.
 
 public partial class SceneController : Node
 {
-    [Export] private VBoxContainer _uI;
-    [Export] private WorldEnvironment _worldEnvironment;
-    [Export] private FastNoiseLite _noise;
-    [Export] private PackedScene _cube;
-    [Export] private int _gridSize = 10;
-    [Export] private float _spacing = 2f;
-    [Export] private float _threshold = 0.5f;
-    [Export] private Camera3D _camera;
+    [Export] private TreeGenerator3D _treeGenerator; //TODO: not hooked up
+    [Export] private Node3D _bubble; //TODO: not hooked up
+    [Export] private VBoxContainer _uI; //TODO: not hooked up
+    [Export] private Camera3D _camera; //TODO: not hooked up
+    [Export] private WorldEnvironment _worldEnvironment; //TODO: not hooked up
+    [Export] private FastNoiseLite _noise; //TODO: not hooked up
+    [Export] private PackedScene _cube; // is this needed?
+    [Export] private int _gridSize = 10; // leftover
+    [Export] private float _spacing = 2f; // leftover
+    [Export] private float _threshold = 0.5f; // leftover
     [Export] private float _lightSpeed = 1f;
     [Export] private float _lightLifetime = 5f;
     [Export] private float _lightIntensity = 1f;

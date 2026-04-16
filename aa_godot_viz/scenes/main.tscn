@@ -49,13 +49,15 @@ material = SubResource("StandardMaterial3D_o6xl0")
 radius = 15.0
 height = 30.0
 
-[node name="Node3D" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_uI", "_worldEnvironment", "_camera")]
+[node name="SceneController" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_treeGenerator", "_bubble", "_uI", "_camera", "_worldEnvironment")]
 script = ExtResource("1_0wfyh")
+_treeGenerator = NodePath("Tree")
+_bubble = NodePath("Bubble")
 _uI = NodePath("UI")
+_camera = NodePath("Camera3D")
 _worldEnvironment = NodePath("WorldEnvironment")
 _noise = SubResource("FastNoiseLite_sugp2")
 _cube = ExtResource("2_0wfyh")
-_camera = NodePath("Camera3D")
 _lightSpeed = 2.5
 _lightIntensity = 10.0
 _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
@@ -85,7 +87,7 @@ script = ExtResource("3_sugp2")
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1967251096]
 bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=842620577]
+[node name="BigBubble" type="CSGMesh3D" parent="." unique_id=842620577]
 transform = Transform3D(0.603208, 0, 0.79758394, 0, 1, 0, -0.79758394, 0, 0.603208, 11.934818, 1, 8.5078535)
 flip_faces = true
 mesh = SubResource("SphereMesh_o6xl0")
