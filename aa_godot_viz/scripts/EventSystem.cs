@@ -6,25 +6,26 @@ namespace aa_godot_viz.scripts;
 /// <summary>
 /// Centralized event system for that sweet sweet decoupling.
 /// </summary>
-
 public static class EventSystem
 {
     // EVENTS
     public static event Action<Parameters> SetParameters;
+    public static event Action<SceneConfig> SetSceneConfig;
     public static event Action ImpulseSent;
-    
+
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
     {
         SetParameters?.Invoke(parameters);
-        GD.Print($"EventSystem: Raised SetParameters with values: " +
-                 $"{parameters.Param1}, " +
-                 $"{parameters.Param2}, " +
-                 $"{parameters.Param3}, " +
-                 $"{parameters.Param4}, " +
-                 $"{parameters.Param5}");
+        GD.Print($"EventSystem: Raised SetParameters");
     }
-    
+
+    public static void RaiseSetSceneConfig(SceneConfig config)
+    {
+        SetSceneConfig?.Invoke(config);
+        GD.Print("EventSystem: Raised SetSceneConfig");
+    }
+
     public static void RaiseImpulseSent()
     {
         ImpulseSent?.Invoke();

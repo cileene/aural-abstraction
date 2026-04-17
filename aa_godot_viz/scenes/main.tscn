@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bv6swk25wcqfi" path="res://prefabs/bubble_system.tscn" id="8_tipki"]
+[ext_resource type="Script" uid="uid://cy5tvs530t5db" path="res://scripts/LightSender.cs" id="9_85g3d"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -62,11 +63,6 @@ _lightSpeed = 2.5
 _lightIntensity = 10.0
 _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=545642773]
-transform = Transform3D(-0.70957077, 0.056510907, 0.7023645, 0, 0.9967789, -0.08019893, -0.7046342, -0.056906816, -0.70728517, 0, 0, 0)
-visible = false
-shadow_enabled = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
 
@@ -103,7 +99,7 @@ TrunkRadius = 0.3
 ShowLeafs = true
 LeafRadius = 0.15
 LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
-PartsPerSecond = 480.0
+PartsPerSecond = 720.0
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
@@ -133,3 +129,6 @@ spot_angle = 10.95
 
 [node name="sparks" parent="." unique_id=795322719 instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.358566)
+
+[node name="LightSender" type="Node" parent="." unique_id=655582616]
+script = ExtResource("9_85g3d")
