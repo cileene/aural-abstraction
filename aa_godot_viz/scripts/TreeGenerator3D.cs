@@ -9,8 +9,8 @@ namespace aa_godot_viz.scripts;
 public partial class TreeGenerator3D : Node3D
 {
     [ExportGroup("Structure")]
-    [Export] public int MaxDepth = 6;
-    [Export] public int BranchCount = 3;
+    [Export(PropertyHint.Range, "1, 7")] public int MaxDepth = 6;
+    [Export(PropertyHint.Range, "1, 3")] public int BranchCount = 3;
     [Export] public float TrunkLean = 8f;
     [Export] public float BranchAngle = 28f;
     [Export] public float LengthDecay = 0.65f;

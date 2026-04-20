@@ -107,6 +107,7 @@ mesh = SubResource("SphereMesh_o6xl0")
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
 MaxDepth = 7
+BranchCount = 2
 BranchAngle = -35.0
 LengthDecay = 0.93
 Randomness = 0.5
