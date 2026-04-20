@@ -17,7 +17,7 @@ public static class EventSystem
     public static void RaiseSetParameters(Parameters parameters)
     {
         SetParameters?.Invoke(parameters);
-        GD.Print($"EventSystem: Raised SetParameters");
+        GD.Print($"EventSystem: Raised SetParameters | Color:{parameters.Param1:F2} Spatiality:{parameters.Param2:F2} Composition:{parameters.Param3:F2} Shape:{parameters.Param4:F2} Material:{parameters.Param5:F2}");
     }
 
     public static void RaiseSetSceneConfig(SceneConfig config)

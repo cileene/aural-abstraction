@@ -6,16 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 [ext_resource type="Shader" uid="uid://dk3ypn052v3nl" path="res://materials/godot_shaders/blend_three.gdshader" id="5_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dqkvaydi1vyc6" path="res://materials/ingrid/3/3a.png" id="6_muem4"]
+[ext_resource type="Texture2D" uid="uid://ccnag3wfe5txm" path="res://materials/ingrid/2/2a.png" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
-[ext_resource type="Texture2D" uid="uid://7h5yi21kvbqw" path="res://materials/ingrid/3/3b.png" id="7_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://dujgtccuq5ypr" path="res://materials/ingrid/2/2b.png" id="7_muem4"]
 [ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://bblmi3jqe2lif" path="res://materials/ingrid/3/3c.png" id="8_0ld40"]
+[ext_resource type="Texture2D" uid="uid://bntk2dfhyyoom" path="res://materials/ingrid/2/2c.png" id="8_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://bv6swk25wcqfi" path="res://prefabs/bubble_system.tscn" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://13lyl4gyy2tk" path="res://materials/ingrid/2/2a_normal.png" id="9_0ld40"]
 [ext_resource type="Script" uid="uid://cy5tvs530t5db" path="res://scripts/LightSender.cs" id="9_85g3d"]
-[ext_resource type="Texture2D" uid="uid://clnwarm4grobv" path="res://materials/ingrid/3/3a_normal.png" id="9_gqmmt"]
-[ext_resource type="Texture2D" uid="uid://bv1pqe4uj6e6k" path="res://materials/ingrid/3/3b_normal.png" id="10_yc10j"]
-[ext_resource type="Texture2D" uid="uid://cb2i85c3486a4" path="res://materials/ingrid/3/3c_normal.png" id="11_jscy8"]
+[ext_resource type="Texture2D" uid="uid://4dxm6622yhw6" path="res://materials/ingrid/2/2b_normal.png" id="10_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://nqxu7cbps41p" path="res://materials/ingrid/2/2c_normal.png" id="11_yc10j"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
 noise_type = 2
@@ -50,18 +50,16 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pm3ni"]
 render_priority = 0
 shader = ExtResource("5_jbj1t")
-shader_parameter/albedo_a = ExtResource("6_muem4")
-shader_parameter/normal_a = ExtResource("9_gqmmt")
-shader_parameter/uv_scale_a = Vector2(1, 1)
-shader_parameter/albedo_b = ExtResource("7_dp3eg")
-shader_parameter/normal_b = ExtResource("10_yc10j")
-shader_parameter/uv_scale_b = Vector2(1, 1)
-shader_parameter/albedo_c = ExtResource("8_0ld40")
-shader_parameter/normal_c = ExtResource("11_jscy8")
-shader_parameter/uv_scale_c = Vector2(1, 1)
-shader_parameter/blend = 0.53200002527
-shader_parameter/normal_strength = 1.0
-shader_parameter/tint = Color(0.91015846, 0.51856273, 0.57173735, 1)
+shader_parameter/albedo_a = ExtResource("6_jbj1t")
+shader_parameter/normal_a = ExtResource("9_0ld40")
+shader_parameter/albedo_b = ExtResource("7_muem4")
+shader_parameter/normal_b = ExtResource("10_gqmmt")
+shader_parameter/albedo_c = ExtResource("8_dp3eg")
+shader_parameter/normal_c = ExtResource("11_yc10j")
+shader_parameter/blend = 0.0
+shader_parameter/normal_strength = 2.0
+shader_parameter/tint = Color(0.9483821, 0.6772877, 0.70750755, 1)
+shader_parameter/uv_scale = Vector2(10, 10)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
 material = SubResource("ShaderMaterial_pm3ni")
@@ -117,7 +115,7 @@ TrunkRadius = 0.3
 ShowLeafs = true
 LeafRadius = 0.1
 LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
-PartsPerSecond = 720.0
+PartsPerSecond = 2880.0
 
 [node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)

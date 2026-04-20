@@ -20,32 +20,28 @@ render_priority = 0
 shader = ExtResource("2_boo0n")
 shader_parameter/albedo_a = ExtResource("3_hfeuv")
 shader_parameter/normal_a = ExtResource("6_o2aim")
-shader_parameter/uv_scale_a = Vector2(1, 1)
 shader_parameter/albedo_b = ExtResource("4_c3gcp")
 shader_parameter/normal_b = ExtResource("7_e7630")
-shader_parameter/uv_scale_b = Vector2(1, 1)
 shader_parameter/albedo_c = ExtResource("5_dv2g2")
 shader_parameter/normal_c = ExtResource("8_pc6qf")
-shader_parameter/uv_scale_c = Vector2(1, 1)
 shader_parameter/blend = 0.0
-shader_parameter/normal_strength = 1.0
+shader_parameter/normal_strength = 0.54400002584
 shader_parameter/tint = Color(0.91692144, 0.7220746, 0.59451544, 1)
+shader_parameter/uv_scale = Vector2(0.5, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5kf5q"]
 render_priority = 0
 shader = ExtResource("2_boo0n")
 shader_parameter/albedo_a = ExtResource("9_pc6qf")
 shader_parameter/normal_a = ExtResource("12_xnm1o")
-shader_parameter/uv_scale_a = Vector2(1, 1)
 shader_parameter/albedo_b = ExtResource("10_1o0bf")
 shader_parameter/normal_b = ExtResource("13_mp4ns")
-shader_parameter/uv_scale_b = Vector2(1, 1)
 shader_parameter/albedo_c = ExtResource("11_kmn1q")
 shader_parameter/normal_c = ExtResource("14_ssgdm")
-shader_parameter/uv_scale_c = Vector2(1, 1)
 shader_parameter/blend = 0.2050000097375
-shader_parameter/normal_strength = 1.0
+shader_parameter/normal_strength = 1.458000069255
 shader_parameter/tint = Color(0.556212, 0.73062307, 0.304515, 1)
+shader_parameter/uv_scale = Vector2(0.5, 0.5)
 
 [node name="Tree" type="Node3D" unique_id=8670340]
 script = ExtResource("1_odf6j")

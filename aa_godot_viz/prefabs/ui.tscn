@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://by42x086ymje"]
 
+[ext_resource type="Script" uid="uid://cvypjxy1u8uc5" path="res://scripts/UIController.cs" id="1_8bix8"]
+
 [sub_resource type="Theme" id="Theme_tbgi4"]
 default_font_size = 20
 
 [sub_resource type="Theme" id="Theme_vcts4"]
 
-[node name="UI" type="VBoxContainer" unique_id=1090373297]
+[node name="UI" type="VBoxContainer" unique_id=1090373297 node_paths=PackedStringArray("_colorSlider", "_spatialitySlider", "_compositionSlider", "_shapeSlider", "_materialSlider")]
 custom_minimum_size = Vector2(800, 0)
 anchors_preset = 3
 anchor_left = 1.0
@@ -18,23 +20,29 @@ offset_right = -52.0
 offset_bottom = -49.0
 grow_horizontal = 0
 grow_vertical = 0
+script = ExtResource("1_8bix8")
+_colorSlider = NodePath("1/ColorSlider")
+_spatialitySlider = NodePath("2/SpatialitySlider")
+_compositionSlider = NodePath("3/CompositionSlider")
+_shapeSlider = NodePath("4/ShapeSlider")
+_materialSlider = NodePath("5/MaterialSlider")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1678938413]
+[node name="1" type="VBoxContainer" parent="." unique_id=1678938413]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=166293803]
+[node name="HBoxContainer" type="HBoxContainer" parent="1" unique_id=166293803]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1972087832]
+[node name="Label" type="Label" parent="1/HBoxContainer" unique_id=1972087832]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 text = "Cold"
 uppercase = true
 
-[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1279774299]
+[node name="Label2" type="Label" parent="1/HBoxContainer" unique_id=1279774299]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -42,7 +50,7 @@ text = "COLOR"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label3" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1178535355]
+[node name="Label3" type="Label" parent="1/HBoxContainer" unique_id=1178535355]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -50,7 +58,7 @@ text = "Warm"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="ColorSlider" type="HSlider" parent="HBoxContainer" unique_id=1111931762]
+[node name="ColorSlider" type="HSlider" parent="1" unique_id=1111931762]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -60,22 +68,22 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="." unique_id=75433263]
+[node name="2" type="VBoxContainer" parent="." unique_id=75433263]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2" unique_id=711685436]
+[node name="HBoxContainer" type="HBoxContainer" parent="2" unique_id=711685436]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer2/HBoxContainer" unique_id=766781978]
+[node name="Label" type="Label" parent="2/HBoxContainer" unique_id=766781978]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 text = "Intimate"
 uppercase = true
 
-[node name="Label2" type="Label" parent="HBoxContainer2/HBoxContainer" unique_id=2064994188]
+[node name="Label2" type="Label" parent="2/HBoxContainer" unique_id=2064994188]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -83,7 +91,7 @@ text = "Spatiality"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label3" type="Label" parent="HBoxContainer2/HBoxContainer" unique_id=1696135750]
+[node name="Label3" type="Label" parent="2/HBoxContainer" unique_id=1696135750]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -91,7 +99,7 @@ text = "Distant"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="SpatialitySlider" type="HSlider" parent="HBoxContainer2" unique_id=243621710]
+[node name="SpatialitySlider" type="HSlider" parent="2" unique_id=243621710]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -101,22 +109,22 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="HBoxContainer3" type="VBoxContainer" parent="." unique_id=1804032301]
+[node name="3" type="VBoxContainer" parent="." unique_id=1804032301]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3" unique_id=1985490858]
+[node name="HBoxContainer" type="HBoxContainer" parent="3" unique_id=1985490858]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer3/HBoxContainer" unique_id=982298461]
+[node name="Label" type="Label" parent="3/HBoxContainer" unique_id=982298461]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 text = "Diffuse"
 uppercase = true
 
-[node name="Label2" type="Label" parent="HBoxContainer3/HBoxContainer" unique_id=1183427946]
+[node name="Label2" type="Label" parent="3/HBoxContainer" unique_id=1183427946]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -124,7 +132,7 @@ text = "Composition"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label3" type="Label" parent="HBoxContainer3/HBoxContainer" unique_id=309080769]
+[node name="Label3" type="Label" parent="3/HBoxContainer" unique_id=309080769]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -132,7 +140,7 @@ text = "Dense"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="CompositionSlider" type="HSlider" parent="HBoxContainer3" unique_id=1056583552]
+[node name="CompositionSlider" type="HSlider" parent="3" unique_id=1056583552]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -142,22 +150,22 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="HBoxContainer4" type="VBoxContainer" parent="." unique_id=1877125448]
+[node name="4" type="VBoxContainer" parent="." unique_id=1877125448]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer4" unique_id=435978400]
+[node name="HBoxContainer" type="HBoxContainer" parent="4" unique_id=435978400]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer4/HBoxContainer" unique_id=1404191360]
+[node name="Label" type="Label" parent="4/HBoxContainer" unique_id=1404191360]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 text = "Rounded/Organic"
 uppercase = true
 
-[node name="Label2" type="Label" parent="HBoxContainer4/HBoxContainer" unique_id=1813618257]
+[node name="Label2" type="Label" parent="4/HBoxContainer" unique_id=1813618257]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -165,7 +173,7 @@ text = "Shape"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label3" type="Label" parent="HBoxContainer4/HBoxContainer" unique_id=667295560]
+[node name="Label3" type="Label" parent="4/HBoxContainer" unique_id=667295560]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -173,7 +181,7 @@ text = "Jagged/Fragmented"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="ShapeSlider" type="HSlider" parent="HBoxContainer4" unique_id=1324329922]
+[node name="ShapeSlider" type="HSlider" parent="4" unique_id=1324329922]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
@@ -183,22 +191,22 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="HBoxContainer5" type="VBoxContainer" parent="." unique_id=1601131212]
+[node name="5" type="VBoxContainer" parent="." unique_id=1601131212]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer5" unique_id=868691405]
+[node name="HBoxContainer" type="HBoxContainer" parent="5" unique_id=868691405]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer5/HBoxContainer" unique_id=1646330795]
+[node name="Label" type="Label" parent="5/HBoxContainer" unique_id=1646330795]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 text = "Smooth/Blurred"
 uppercase = true
 
-[node name="Label2" type="Label" parent="HBoxContainer5/HBoxContainer" unique_id=430533118]
+[node name="Label2" type="Label" parent="5/HBoxContainer" unique_id=430533118]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -206,7 +214,7 @@ text = "Material"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label3" type="Label" parent="HBoxContainer5/HBoxContainer" unique_id=443391780]
+[node name="Label3" type="Label" parent="5/HBoxContainer" unique_id=443391780]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -214,7 +222,7 @@ text = "Sharp/Noisy"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="MaterialSlider" type="HSlider" parent="HBoxContainer5" unique_id=2097730917]
+[node name="MaterialSlider" type="HSlider" parent="5" unique_id=2097730917]
 layout_mode = 2
 theme = SubResource("Theme_vcts4")
 max_value = 1.0
