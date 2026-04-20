@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://20advsmn33db"]
+
+[ext_resource type="Shader" uid="uid://dk3ypn052v3nl" path="res://materials/godot_shaders/blend_three.gdshader" id="1_p1sy2"]
+[ext_resource type="Texture2D" uid="uid://m6fdleal0qqd" path="res://materials/ingrid/1/1a.png" id="2_g6whr"]
+[ext_resource type="Texture2D" uid="uid://biv68hjadiklp" path="res://materials/ingrid/1/1b.png" id="3_7w4h8"]
+[ext_resource type="Texture2D" uid="uid://bxk537vnx2n0a" path="res://materials/ingrid/1/1c.jpeg" id="4_rqn0r"]
+[ext_resource type="Texture2D" uid="uid://b43iqgmqjp5ij" path="res://materials/ingrid/1/1a_normal.png" id="5_lav3f"]
+[ext_resource type="Texture2D" uid="uid://c0ooirtjwr8mx" path="res://materials/ingrid/1/1b_normal.png" id="6_dc13e"]
+[ext_resource type="Texture2D" uid="uid://y8f06q8bivqs" path="res://materials/ingrid/1/1c_normal.png" id="7_lsiur"]
+[ext_resource type="Texture2D" uid="uid://ccnag3wfe5txm" path="res://materials/ingrid/2/2a.png" id="8_k78hu"]
+[ext_resource type="Texture2D" uid="uid://dujgtccuq5ypr" path="res://materials/ingrid/2/2b.png" id="9_uu245"]
+[ext_resource type="Texture2D" uid="uid://bntk2dfhyyoom" path="res://materials/ingrid/2/2c.png" id="10_235ft"]
+[ext_resource type="Texture2D" uid="uid://13lyl4gyy2tk" path="res://materials/ingrid/2/2a_normal.png" id="11_ndwhj"]
+[ext_resource type="Texture2D" uid="uid://4dxm6622yhw6" path="res://materials/ingrid/2/2b_normal.png" id="12_hh00d"]
+[ext_resource type="Texture2D" uid="uid://nqxu7cbps41p" path="res://materials/ingrid/2/2c_normal.png" id="13_580nl"]
+[ext_resource type="Texture2D" uid="uid://dqkvaydi1vyc6" path="res://materials/ingrid/3/3a.png" id="14_560qs"]
+[ext_resource type="Texture2D" uid="uid://7h5yi21kvbqw" path="res://materials/ingrid/3/3b.png" id="15_h01q2"]
+[ext_resource type="Texture2D" uid="uid://bblmi3jqe2lif" path="res://materials/ingrid/3/3c.png" id="16_xgax7"]
+[ext_resource type="Texture2D" uid="uid://clnwarm4grobv" path="res://materials/ingrid/3/3a_normal.png" id="17_6welx"]
+[ext_resource type="Texture2D" uid="uid://bv1pqe4uj6e6k" path="res://materials/ingrid/3/3b_normal.png" id="18_e62op"]
+[ext_resource type="Texture2D" uid="uid://cb2i85c3486a4" path="res://materials/ingrid/3/3c_normal.png" id="19_rsclw"]
+[ext_resource type="Texture2D" uid="uid://xiu01doa8hnf" path="res://materials/ingrid/4/4a.png" id="20_xh5mf"]
+[ext_resource type="Texture2D" uid="uid://blnmbpmsckkqh" path="res://materials/ingrid/4/4b.png" id="21_t4c1i"]
+[ext_resource type="Texture2D" uid="uid://cpi5ef31yxegb" path="res://materials/ingrid/4/4c.png" id="22_l81gh"]
+[ext_resource type="Texture2D" uid="uid://e21po1r0yvj0" path="res://materials/ingrid/4/4a_normal.png" id="23_sayha"]
+[ext_resource type="Texture2D" uid="uid://7xw338aj3hic" path="res://materials/ingrid/4/4b_normal.png" id="24_8wl2p"]
+[ext_resource type="Texture2D" uid="uid://c4536ginx2vfa" path="res://materials/ingrid/4/4c_normal.png" id="25_h431c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k28o4"]
+render_priority = 0
+shader = ExtResource("1_p1sy2")
+shader_parameter/albedo_a = ExtResource("2_g6whr")
+shader_parameter/normal_a = ExtResource("5_lav3f")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("3_7w4h8")
+shader_parameter/normal_b = ExtResource("6_dc13e")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("4_rqn0r")
+shader_parameter/normal_c = ExtResource("7_lsiur")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.0
+shader_parameter/normal_strength = 1.018000048355
+shader_parameter/tint = Color(0.93635046, 0.67460454, 0.520623, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fnfpm"]
+material = SubResource("ShaderMaterial_k28o4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5t8an"]
+render_priority = 0
+shader = ExtResource("1_p1sy2")
+shader_parameter/albedo_a = ExtResource("8_k78hu")
+shader_parameter/normal_a = ExtResource("11_ndwhj")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("9_uu245")
+shader_parameter/normal_b = ExtResource("12_hh00d")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("10_235ft")
+shader_parameter/normal_c = ExtResource("13_580nl")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.210000009975
+shader_parameter/normal_strength = 1.6130000766175
+shader_parameter/tint = Color(0.98257476, 0.5979369, 0.67284185, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8k1sn"]
+material = SubResource("ShaderMaterial_5t8an")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jov35"]
+render_priority = 0
+shader = ExtResource("1_p1sy2")
+shader_parameter/albedo_a = ExtResource("14_560qs")
+shader_parameter/normal_a = ExtResource("17_6welx")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("15_h01q2")
+shader_parameter/normal_b = ExtResource("18_e62op")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("16_xgax7")
+shader_parameter/normal_c = ExtResource("19_rsclw")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.270000012825
+shader_parameter/normal_strength = 1.45200006897
+shader_parameter/tint = Color(0.47526956, 0.7756796, 0.8304309, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fv582"]
+material = SubResource("ShaderMaterial_jov35")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3i1d"]
+render_priority = 0
+shader = ExtResource("1_p1sy2")
+shader_parameter/albedo_a = ExtResource("20_xh5mf")
+shader_parameter/normal_a = ExtResource("23_sayha")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("21_t4c1i")
+shader_parameter/normal_b = ExtResource("24_8wl2p")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("22_l81gh")
+shader_parameter/normal_c = ExtResource("25_h431c")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.0
+shader_parameter/normal_strength = 1.0
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dulr8"]
+material = SubResource("ShaderMaterial_u3i1d")
+
+[node name="Node3D" type="Node3D" unique_id=1358493987]
+
+[node name="1" type="MeshInstance3D" parent="." unique_id=658153684]
+transform = Transform3D(0.079120316, 0, -0.9968651, 0, 1, 0, 0.9968651, 0, 0.079120316, -0.030344069, -0.16741765, 0.036753953)
+mesh = SubResource("BoxMesh_fnfpm")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=11526004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7789792, 0, 0.80993813)
+shadow_enabled = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1741131378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7789792, -0.17964876, 2.720591)
+shadow_enabled = true
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=348485849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7789792, 1.4144267, 2.720591)
+shadow_enabled = true
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=813848467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7789792, -0.17964876, 4.4617653)
+shadow_enabled = true
+
+[node name="2" type="MeshInstance3D" parent="." unique_id=787742854]
+transform = Transform3D(-0.8662087, 0, 0.4996825, 0, 1, 0, -0.4996825, 0, -0.8662087, 0, -0.3241267, 1.5581975)
+mesh = SubResource("BoxMesh_8k1sn")
+
+[node name="3" type="MeshInstance3D" parent="." unique_id=1027818177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.3371406)
+mesh = SubResource("BoxMesh_fv582")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=546122619]
+transform = Transform3D(-0.30047277, 0, 0.9537907, 0, 1, 0, -0.9537907, 0, -0.30047277, 0, 1.2550132, 1.5221102)
+mesh = SubResource("SphereMesh_dulr8")
