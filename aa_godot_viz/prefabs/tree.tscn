@@ -1,6 +1,53 @@
 [gd_scene format=3 uid="uid://b03lqryki3my2"]
 
 [ext_resource type="Script" uid="uid://pn2o5kabks4u" path="res://scripts/TreeGenerator3D.cs" id="1_odf6j"]
+[ext_resource type="Shader" uid="uid://dk3ypn052v3nl" path="res://materials/godot_shaders/blend_three.gdshader" id="2_boo0n"]
+[ext_resource type="Texture2D" uid="uid://m6fdleal0qqd" path="res://materials/ingrid/1/1a.png" id="3_hfeuv"]
+[ext_resource type="Texture2D" uid="uid://biv68hjadiklp" path="res://materials/ingrid/1/1b.png" id="4_c3gcp"]
+[ext_resource type="Texture2D" uid="uid://bxk537vnx2n0a" path="res://materials/ingrid/1/1c.jpeg" id="5_dv2g2"]
+[ext_resource type="Texture2D" uid="uid://b43iqgmqjp5ij" path="res://materials/ingrid/1/1a_normal.png" id="6_o2aim"]
+[ext_resource type="Texture2D" uid="uid://c0ooirtjwr8mx" path="res://materials/ingrid/1/1b_normal.png" id="7_e7630"]
+[ext_resource type="Texture2D" uid="uid://y8f06q8bivqs" path="res://materials/ingrid/1/1c_normal.png" id="8_pc6qf"]
+[ext_resource type="Texture2D" uid="uid://ccnag3wfe5txm" path="res://materials/ingrid/2/2a.png" id="9_pc6qf"]
+[ext_resource type="Texture2D" uid="uid://dujgtccuq5ypr" path="res://materials/ingrid/2/2b.png" id="10_1o0bf"]
+[ext_resource type="Texture2D" uid="uid://bntk2dfhyyoom" path="res://materials/ingrid/2/2c.png" id="11_kmn1q"]
+[ext_resource type="Texture2D" uid="uid://13lyl4gyy2tk" path="res://materials/ingrid/2/2a_normal.png" id="12_xnm1o"]
+[ext_resource type="Texture2D" uid="uid://4dxm6622yhw6" path="res://materials/ingrid/2/2b_normal.png" id="13_mp4ns"]
+[ext_resource type="Texture2D" uid="uid://nqxu7cbps41p" path="res://materials/ingrid/2/2c_normal.png" id="14_ssgdm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1o0bf"]
+render_priority = 0
+shader = ExtResource("2_boo0n")
+shader_parameter/albedo_a = ExtResource("3_hfeuv")
+shader_parameter/normal_a = ExtResource("6_o2aim")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("4_c3gcp")
+shader_parameter/normal_b = ExtResource("7_e7630")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("5_dv2g2")
+shader_parameter/normal_c = ExtResource("8_pc6qf")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.0
+shader_parameter/normal_strength = 1.0
+shader_parameter/tint = Color(0.91692144, 0.7220746, 0.59451544, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5kf5q"]
+render_priority = 0
+shader = ExtResource("2_boo0n")
+shader_parameter/albedo_a = ExtResource("9_pc6qf")
+shader_parameter/normal_a = ExtResource("12_xnm1o")
+shader_parameter/uv_scale_a = Vector2(1, 1)
+shader_parameter/albedo_b = ExtResource("10_1o0bf")
+shader_parameter/normal_b = ExtResource("13_mp4ns")
+shader_parameter/uv_scale_b = Vector2(1, 1)
+shader_parameter/albedo_c = ExtResource("11_kmn1q")
+shader_parameter/normal_c = ExtResource("14_ssgdm")
+shader_parameter/uv_scale_c = Vector2(1, 1)
+shader_parameter/blend = 0.2050000097375
+shader_parameter/normal_strength = 1.0
+shader_parameter/tint = Color(0.556212, 0.73062307, 0.304515, 1)
 
 [node name="Tree" type="Node3D" unique_id=8670340]
 script = ExtResource("1_odf6j")
+WoodMaterial = SubResource("ShaderMaterial_1o0bf")
+LeafMaterial = SubResource("ShaderMaterial_5kf5q")
