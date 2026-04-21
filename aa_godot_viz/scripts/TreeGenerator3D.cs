@@ -6,20 +6,21 @@ namespace aa_godot_viz.scripts;
 /// <summary>
 /// Procedural tree generator.
 /// </summary>
+
 public partial class TreeGenerator3D : Node3D
 {
     [ExportGroup("Structure")]
-    [Export(PropertyHint.Range, "1, 7")] public int MaxDepth = 6;
-    [Export(PropertyHint.Range, "1, 3")] public int BranchCount = 3;
-    [Export] public float TrunkLean = 8f;
-    [Export] public float BranchAngle = 28f;
-    [Export] public float LengthDecay = 0.65f;
-    [Export] public float RadiusDecay = 0.60f;
-    [Export] public float Randomness = 0.25f;
+    [Export(PropertyHint.Range, "1, 7, prefer_slider")] public int MaxDepth = 6;
+    [Export(PropertyHint.Range, "1, 3, prefer_slider")] public int BranchCount = 3;
+    [Export(PropertyHint.Range, "-5.0, 20.0, degrees")] public float TrunkLean = 8f;
+    [Export(PropertyHint.Range, "15.0, 90.0, degrees")] public float BranchAngle = 28f;
+    [Export(PropertyHint.Range, "0.75, 0.99")] public float LengthDecay = 0.65f;
+    [Export(PropertyHint.Range, "0.5, 0.99")] public float RadiusDecay = 0.60f;
+    [Export(PropertyHint.Range, "0.0, 0.99")] public float Randomness = 0.25f;
 
     [ExportGroup("Dimensions")]
-    [Export] public float TrunkLength = 2.5f;
-    [Export] public float TrunkRadius = 0.18f;
+    [Export(PropertyHint.Range, "1.0, 2.5")] public float TrunkLength = 2.0f;
+    [Export(PropertyHint.Range, "0.18, 0.9")] public float TrunkRadius = 0.18f;
 
     [ExportGroup("Leafs")]
     [Export] public bool ShowLeafs = false;
@@ -55,12 +56,30 @@ public partial class TreeGenerator3D : Node3D
         public int Depth;
     }
 
-    public override void _EnterTree() => EventSystem.ImpulseSent += OnImpulseSent;
-    public override void _ExitTree() => EventSystem.ImpulseSent -= OnImpulseSent;
+    public override void _EnterTree()
+    {
+        EventSystem.ImpulseSent += OnImpulseSent;
+        EventSystem.SetParameters += OnSetParameters;
+    }
+
+    public override void _ExitTree()
+    {
+        EventSystem.ImpulseSent -= OnImpulseSent;
+        EventSystem.SetParameters -= OnSetParameters;
+    }
 
     private void OnImpulseSent()
     {
         _seed = GD.Randi();
+        Generate();
+    }
+
+    private void OnSetParameters(Parameters parameters)
+    {
+        MaxDepth = Mathf.RoundToInt(Mathf.Lerp(3, 7, parameters.Param3));
+        BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
+        LengthDecay = Mathf.Lerp(0.75f, 0.99f, parameters.Param2);
+        BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
         Generate();
     }
 

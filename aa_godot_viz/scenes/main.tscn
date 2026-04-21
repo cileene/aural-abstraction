@@ -66,6 +66,11 @@ material = SubResource("ShaderMaterial_pm3ni")
 radius = 15.0
 height = 30.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_jbj1t"]
+top_radius = 0.0
+bottom_radius = 49.185
+height = 42.742
+
 [node name="SceneController" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_treeGenerator", "_bubble", "_uI", "_camera", "_worldEnvironment")]
 script = ExtResource("1_0wfyh")
 _treeGenerator = NodePath("Tree")
@@ -108,13 +113,15 @@ mesh = SubResource("SphereMesh_o6xl0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
 MaxDepth = 7
 BranchCount = 2
-BranchAngle = -35.0
-LengthDecay = 0.93
-Randomness = 0.5
-TrunkLength = 1.4
-TrunkRadius = 0.3
+TrunkLean = -5.0
+BranchAngle = 34.75
+LengthDecay = 0.9390000000000001
+RadiusDecay = 0.619
+Randomness = 0.4
+TrunkLength = 1.6360000000000001
+TrunkRadius = 0.722
 ShowLeafs = true
-LeafRadius = 0.1
+LeafRadius = 0.2
 LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
 PartsPerSecond = 2880.0
 
@@ -149,3 +156,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.35856
 
 [node name="LightSender" type="Node" parent="." unique_id=655582616]
 script = ExtResource("9_85g3d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1118348511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.761, -25.888, 7.586)
+mesh = SubResource("CylinderMesh_jbj1t")
