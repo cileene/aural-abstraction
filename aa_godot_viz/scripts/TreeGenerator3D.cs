@@ -54,8 +54,8 @@ public partial class TreeGenerator3D : Node3D
 
     private void OnSetParameters(Parameters parameters)
     {
-        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 7, parameters.Param3));
-        BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
+        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param3));
+        BranchCount = Mathf.RoundToInt(Mathf.Lerp(1, 3, parameters.Param3));
         LengthDecay = Mathf.Lerp(0.75f, 0.99f, parameters.Param2);
         BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
         Generate();

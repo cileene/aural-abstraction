@@ -10,15 +10,15 @@ public partial class UIController : VBoxContainer
 	[Export] private HSlider _shapeSlider;
 	[Export] private HSlider _materialSlider;
 	
-	private float _color, _spatiality, _composition, _shape, _material;
+	private float _color = 0.5f, _spatiality = 0.5f, _composition = 0.5f, _shape = 0.5f, _material = 0.5f;
 
 	public override void _Ready()
 	{
-		_colorSlider.DragEnded += _ => { _color = (float)_colorSlider.Value; RaiseParameters(); };
-		_spatialitySlider.DragEnded += _ => { _spatiality = (float)_spatialitySlider.Value; RaiseParameters(); };
-		_compositionSlider.DragEnded += _ => { _composition = (float)_compositionSlider.Value; RaiseParameters(); };
-		_shapeSlider.DragEnded += _ => { _shape = (float)_shapeSlider.Value; RaiseParameters(); };
-		_materialSlider.DragEnded += _ => { _material = (float)_materialSlider.Value; RaiseParameters(); };
+		_colorSlider.ValueChanged += v => { _color = (float)v; RaiseParameters(); };
+		_spatialitySlider.ValueChanged += v => { _spatiality = (float)v; RaiseParameters(); };
+		_compositionSlider.ValueChanged += v => { _composition = (float)v; RaiseParameters(); };
+		_shapeSlider.ValueChanged += v => { _shape = (float)v; RaiseParameters(); };
+		_materialSlider.ValueChanged += v => { _material = (float)v; RaiseParameters(); };
 
 		RaiseParameters();
 	}
