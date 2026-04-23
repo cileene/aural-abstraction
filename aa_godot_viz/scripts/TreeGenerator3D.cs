@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace aa_godot_viz.scripts;
 
-/// <summary>
-/// Procedural tree generator.
-/// </summary>
-
 public partial class TreeGenerator3D : Node3D
 {
     [ExportGroup("Structure")]
@@ -22,50 +18,32 @@ public partial class TreeGenerator3D : Node3D
     [Export(PropertyHint.Range, "1.0, 2.5")] public float TrunkLength = 2.0f;
     [Export(PropertyHint.Range, "0.18, 0.9")] public float TrunkRadius = 0.18f;
 
-    [ExportGroup("Leafs")]
-    [Export] public bool ShowLeafs = false;
-    [Export] public float LeafRadius = 0.35f;
-
-    [ExportGroup("Materials")]
-    [Export] public Material WoodMaterial;
-    [Export] public Material LeafMaterial;
+    [ExportGroup("Point Cloud")]
+    // Points per unit of cylinder lateral surface area (2π·r·h).
+    [Export(PropertyHint.Range, "1, 500")] public float PointDensity = 80f;
+    [Export(PropertyHint.Range, "0.005, 0.1")] public float PointRadius = 0.02f;
+    [Export] public ShaderMaterial PointMaterial;
 
     [ExportGroup("Fallback Colors")]
-    [Export] public Color WoodColor = new Color(0.38f, 0.22f, 0.09f);
-    [Export] public Color LeafColor = new Color(0.18f, 0.65f, 0.28f);
+    [Export] public Color RootColor = new Color(0.38f, 0.22f, 0.09f);
+    [Export] public Color TipColor  = new Color(0.18f, 0.65f, 0.28f);
 
-    [ExportGroup("Growth Animation")]
-    [Export] public bool AnimateGrowth = true;
-    [Export(PropertyHint.Range, "1,5000,1")] public float PartsPerSecond = 120.0f;
-    [Export] public bool AutoGrowOnGenerate = true;
-
-    private const int MaxNodes = 50_000;
-    private int _nodeCount = 0;
     private uint _seed = 42;
 
-    private bool _isGrowing;
-    private readonly Queue<BranchJob> _growthQueue = new();
-    private RandomNumberGenerator _growthRng;
-    private double _growthBudget = 0.0;
-
-    private struct BranchJob
-    {
-        public Node3D Parent;
-        public float Length;
-        public float Radius;
-        public int Depth;
-    }
+    // Accumulated point data before MultiMesh is built.
+    private readonly List<Vector3> _positions = new();
+    private readonly List<Color>   _colors    = new();
 
     public override void _EnterTree()
     {
-        EventSystem.ImpulseSent += OnImpulseSent;
-        EventSystem.SetParameters += OnSetParameters;
+        EventSystem.ImpulseSent    += OnImpulseSent;
+        EventSystem.SetParameters  += OnSetParameters;
     }
 
     public override void _ExitTree()
     {
-        EventSystem.ImpulseSent -= OnImpulseSent;
-        EventSystem.SetParameters -= OnSetParameters;
+        EventSystem.ImpulseSent    -= OnImpulseSent;
+        EventSystem.SetParameters  -= OnSetParameters;
     }
 
     private void OnImpulseSent()
@@ -76,7 +54,7 @@ public partial class TreeGenerator3D : Node3D
 
     private void OnSetParameters(Parameters parameters)
     {
-        MaxDepth = Mathf.RoundToInt(Mathf.Lerp(3, 7, parameters.Param3));
+        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 7, parameters.Param3));
         BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
         LengthDecay = Mathf.Lerp(0.75f, 0.99f, parameters.Param2);
         BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
@@ -85,194 +63,31 @@ public partial class TreeGenerator3D : Node3D
 
     public override void _Ready() => Generate();
 
-    public override void _Process(double delta)
-    {
-        if (!_isGrowing)
-            return;
-
-        float rate = Mathf.Max(1.0f, PartsPerSecond);
-        _growthBudget += delta * rate;
-
-        int steps = (int)_growthBudget;
-        if (steps <= 0)
-            return;
-
-        _growthBudget -= steps;
-
-        for (int i = 0; i < steps; i++)
-        {
-            if (_growthQueue.Count == 0)
-            {
-                _isGrowing = false;
-                _growthBudget = 0.0;
-                return;
-            }
-
-            SpawnBranchStep(_growthQueue.Dequeue());
-        }
-    }
-
     private void Generate()
     {
-        long estimated = (long)Mathf.Pow(BranchCount, MaxDepth);
-        GD.Print($"TreeGenerator: estimated ~{estimated:N0} leaf nodes");
-
-        _isGrowing = false;
-        _growthBudget = 0.0;
-        _growthQueue.Clear();
-
         foreach (var child in GetChildren())
             child.QueueFree();
 
-        _nodeCount = 0;
-
-        if (AnimateGrowth && AutoGrowOnGenerate)
-        {
-            _growthRng = new RandomNumberGenerator { Seed = _seed };
-            _growthQueue.Enqueue(new BranchJob
-            {
-                Parent = this,
-                Length = TrunkLength,
-                Radius = TrunkRadius,
-                Depth = 0
-            });
-            _isGrowing = true;
-            return;
-        }
+        _positions.Clear();
+        _colors.Clear();
 
         var rng = new RandomNumberGenerator { Seed = _seed };
-        SpawnBranch(rng, this, TrunkLength, TrunkRadius, 0);
+        // Walk the tree recursively, collecting world-space point positions.
+        CollectBranch(rng, Transform3D.Identity, TrunkLength, TrunkRadius, 0);
+
+        BuildMultiMesh();
     }
 
-    private void SpawnBranchStep(BranchJob job)
+    // Recursive collect pass — no nodes spawned, just maths.
+    // `worldXform` is the transform of the branch base in world space.
+    private void CollectBranch(RandomNumberGenerator rng, Transform3D worldXform,
+                                float length, float radius, int depth)
     {
-        if (job.Parent == null || !IsInstanceValid(job.Parent))
-            return;
+        SampleBranchSurface(rng, worldXform, length, radius, depth);
 
-        if (_nodeCount > MaxNodes)
-        {
-            GD.PushWarning($"TreeGenerator: node limit ({MaxNodes}) reached - reduce BranchCount or MaxDepth.");
-            _isGrowing = false;
-            _growthQueue.Clear();
-            return;
-        }
-
-        _nodeCount++;
-
-        // Branch cylinder
-        var meshInst = new MeshInstance3D();
-        var cyl = new CylinderMesh
-        {
-            BottomRadius = job.Radius,
-            TopRadius = Mathf.Max(0.01f, job.Radius * 0.6f),
-            Height = job.Length
-        };
-        meshInst.Mesh = cyl;
-        meshInst.Position = new Vector3(0f, job.Length / 2f, 0f);
-        meshInst.MaterialOverride = WoodMaterial ?? MakeWoodMaterial(WoodColor);
-        job.Parent.AddChild(meshInst);
-
-        // Leaf at terminal branches
-        if (job.Depth >= MaxDepth)
-        {
-            if (!ShowLeafs)
-                return;
-
-            var leaf = new MeshInstance3D();
-            float r = LeafRadius * _growthRng.RandfRange(0.75f, 1.35f);
-
-            var quad = new QuadMesh
-            {
-                Size = new Vector2(r * 2f, r * 2f)
-            };
-
-            leaf.Mesh = quad;
-            leaf.Position = new Vector3(0f, job.Length, 0f);
-            leaf.MaterialOverride = LeafMaterial ?? MakeLeafMaterial(LeafColor);
-
-            job.Parent.AddChild(leaf);
-            return;
-        }
-
-        // Child branches
-        int count = job.Depth == 0 ? 1 : BranchCount;
-        float azimuthStep = 360f / count;
-
-        for (int i = 0; i < BranchCount; i++)
-        {
-            float azimuth = azimuthStep * i
-                + _growthRng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
-
-            float tiltBase = job.Depth == 0 ? TrunkLean : BranchAngle;
-            float tilt = tiltBase
-                + _growthRng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
-
-            float childLength = job.Length * LengthDecay
-                * _growthRng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
-
-            var pivot = new Node3D();
-            pivot.Position = new Vector3(0f, job.Length, 0f);
-            pivot.RotateY(Mathf.DegToRad(azimuth));
-            pivot.RotateZ(Mathf.DegToRad(tilt));
-            job.Parent.AddChild(pivot);
-
-            _growthQueue.Enqueue(new BranchJob
-            {
-                Parent = pivot,
-                Length = childLength,
-                Radius = job.Radius * RadiusDecay,
-                Depth = job.Depth + 1
-            });
-        }
-    }
-
-    // Instant path (used when AnimateGrowth is false)
-    private void SpawnBranch(RandomNumberGenerator rng, Node3D parent, float length, float radius, int depth)
-    {
-        if (_nodeCount > MaxNodes)
-        {
-            GD.PushWarning($"TreeGenerator: node limit ({MaxNodes}) reached - reduce BranchCount or MaxDepth.");
-            return;
-        }
-
-        _nodeCount++;
-
-        // Branch cylinder
-        var meshInst = new MeshInstance3D();
-        var cyl = new CylinderMesh
-        {
-            BottomRadius = radius,
-            TopRadius = Mathf.Max(0.01f, radius * 0.6f),
-            Height = length
-        };
-        meshInst.Mesh = cyl;
-        meshInst.Position = new Vector3(0f, length / 2f, 0f);
-        meshInst.MaterialOverride = WoodMaterial ?? MakeWoodMaterial(WoodColor);
-        parent.AddChild(meshInst);
-
-        // Leaf at terminal branches
         if (depth >= MaxDepth)
-        {
-            if (!ShowLeafs)
-                return;
-
-            var leaf = new MeshInstance3D();
-            float r = LeafRadius * rng.RandfRange(0.75f, 1.35f);
-
-            var quad = new QuadMesh
-            {
-                Size = new Vector2(r * 2f, r * 2f)
-            };
-
-            leaf.Mesh = quad;
-            leaf.Position = new Vector3(0f, length, 0f);
-            leaf.MaterialOverride = LeafMaterial ?? MakeLeafMaterial(LeafColor);
-
-            parent.AddChild(leaf);
             return;
-        }
 
-        // Child branches
         int count = depth == 0 ? 1 : BranchCount;
         float azimuthStep = 360f / count;
 
@@ -281,34 +96,74 @@ public partial class TreeGenerator3D : Node3D
             float azimuth = azimuthStep * i
                 + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
 
-            float tiltBase = depth == 0 ? TrunkLean : BranchAngle;
-            float tilt = tiltBase
-                + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
-
+            float tiltBase   = depth == 0 ? TrunkLean : BranchAngle;
+            float tilt       = tiltBase + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
             float childLength = length * LengthDecay
                 * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
 
-            var pivot = new Node3D();
-            pivot.Position = new Vector3(0f, length, 0f);
-            pivot.RotateY(Mathf.DegToRad(azimuth));
-            pivot.RotateZ(Mathf.DegToRad(tilt));
-            parent.AddChild(pivot);
+            // Build child transform: translate to branch tip, then rotate.
+            var childXform = worldXform
+                .Translated(worldXform.Basis.Y * length)
+                .RotatedLocal(Vector3.Up,     Mathf.DegToRad(azimuth))
+                .RotatedLocal(Vector3.Back,   Mathf.DegToRad(tilt));
 
-            SpawnBranch(rng, pivot, childLength, radius * RadiusDecay, depth + 1);
+            CollectBranch(rng, childXform, childLength, radius * RadiusDecay, depth + 1);
         }
     }
 
-    private static StandardMaterial3D MakeWoodMaterial(Color color) => new()
+    // Scatter points over the lateral surface of a cylinder aligned to the branch's Y axis.
+    private void SampleBranchSurface(RandomNumberGenerator rng, Transform3D worldXform,
+                                     float length, float radius, int depth)
     {
-        AlbedoColor = color,
-        Roughness = 0.9f
-    };
+        // Lateral surface area of the cylinder drives point count.
+        float area   = 2f * Mathf.Pi * radius * length;
+        int   count  = Mathf.Max(1, (int)(area * PointDensity));
 
-    private static StandardMaterial3D MakeLeafMaterial(Color color) => new()
+        float t = (float)depth / MaxDepth;
+        var   color = RootColor.Lerp(TipColor, t);
+
+        for (int i = 0; i < count; i++)
+        {
+            float height = rng.RandfRange(0f, length);
+            float angle  = rng.RandfRange(0f, Mathf.Tau);
+
+            // Local point on cylinder surface.
+            var localPos = new Vector3(
+                Mathf.Cos(angle) * radius,
+                height,
+                Mathf.Sin(angle) * radius
+            );
+
+            _positions.Add(worldXform * localPos);
+            _colors.Add(color);
+        }
+    }
+
+    // Build a single MultiMeshInstance3D from the collected points.
+    private void BuildMultiMesh()
     {
-        AlbedoColor = color,
-        Roughness = 0.9f,
-        BillboardMode = BaseMaterial3D.BillboardModeEnum.Enabled,
-        Transparency = BaseMaterial3D.TransparencyEnum.Alpha
-    };
+        int total = _positions.Count;
+        GD.Print($"TreeGenerator: {total} points");
+
+        var mm = new MultiMesh();
+        mm.UseColors       = true;
+        mm.TransformFormat = MultiMesh.TransformFormatEnum.Transform3D;
+        mm.InstanceCount   = total;
+
+        var sphere = new SphereMesh { Radius = PointRadius, Height = PointRadius * 2f, RadialSegments = 4, Rings = 2 };
+        mm.Mesh = sphere;
+
+        for (int i = 0; i < total; i++)
+        {
+            var t = Transform3D.Identity;
+            t.Origin = _positions[i];
+            mm.SetInstanceTransform(i, t);
+            mm.SetInstanceColor(i, _colors[i]);
+        }
+
+        var mmInst = new MultiMeshInstance3D { Multimesh = mm };
+        if (PointMaterial != null)
+            mmInst.MaterialOverride = PointMaterial;
+        AddChild(mmInst);
+    }
 }
