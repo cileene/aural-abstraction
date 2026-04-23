@@ -28,7 +28,8 @@ public partial class TreeGenerator3D : Node3D
     [Export] public Color RootColor = new Color(0.38f, 0.22f, 0.09f);
     [Export] public Color TipColor  = new Color(0.18f, 0.65f, 0.28f);
 
-    private uint _seed = 42;
+    private readonly RandomNumberGenerator _structureRng = new() { Seed = 1337 };
+    private readonly RandomNumberGenerator _pointRng     = new() { Seed = 7 };
 
     // Accumulated point data before MultiMesh is built.
     private readonly List<Vector3> _positions = new();
@@ -46,19 +47,15 @@ public partial class TreeGenerator3D : Node3D
         EventSystem.SetParameters  -= OnSetParameters;
     }
 
-    private void OnImpulseSent()
-    {
-        _seed = GD.Randi();
-        Generate();
-    }
+    private void OnImpulseSent() => Generate();
 
     private void OnSetParameters(Parameters parameters)
     {
-        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 8, parameters.Param2));
+        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param2));
         //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
         PointDensity = Mathf.Lerp(10f, 200f, parameters.Param3);
         PointRadius = Mathf.Lerp(0.03f, 0.012f, parameters.Param3);
-        LengthDecay = Mathf.Lerp(0.75f, 0.97f, parameters.Param2);
+        LengthDecay = Mathf.Lerp(0.75f, 0.975f, parameters.Param2);
         BranchAngle = Mathf.Lerp(20f, 45f, parameters.Param4);
         Randomness = Mathf.Lerp(0.5f, 0.0f, parameters.Param4);
         Generate();
@@ -74,63 +71,55 @@ public partial class TreeGenerator3D : Node3D
         _positions.Clear();
         _colors.Clear();
 
-        var rng = new RandomNumberGenerator { Seed = _seed };
-        // Walk the tree recursively, collecting world-space point positions.
-        CollectBranch(rng, Transform3D.Identity, TrunkLength, TrunkRadius, 0);
+        _structureRng.Seed = 1337;
+        _pointRng.Seed     = 7;
+        CollectBranch(Transform3D.Identity, TrunkLength, TrunkRadius, 0);
 
         BuildMultiMesh();
     }
 
-    // Recursive collect pass — no nodes spawned, just maths.
-    // `worldXform` is the transform of the branch base in world space.
-    private void CollectBranch(RandomNumberGenerator rng, Transform3D worldXform,
-                                float length, float radius, int depth)
+    private void CollectBranch(Transform3D worldXform, float length, float radius, int depth)
     {
-        SampleBranchSurface(rng, worldXform, length, radius, depth);
+        SampleBranchSurface(worldXform, length, radius, depth);
 
         if (depth >= MaxDepth)
             return;
 
-        int count = depth == 0 ? 1 : (rng.Randf() < 0.3f ? 1 : BranchCount);
+        int count = depth == 0 ? 1 : (_structureRng.Randf() > (float)depth / MaxDepth ? BranchCount : 1);
         float azimuthStep = 360f / count;
 
         for (int i = 0; i < count; i++)
         {
             float azimuth = azimuthStep * i
-                + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
+                + _structureRng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
 
-            float tiltBase   = depth == 0 ? TrunkLean : BranchAngle;
-            float tilt       = tiltBase + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
+            float tiltBase    = depth == 0 ? TrunkLean : BranchAngle;
+            float tilt        = tiltBase + _structureRng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
             float childLength = length * LengthDecay
-                * rng.RandfRange(1f - (Randomness / 2) * 0.25f, 1f + (Randomness / 2)* 0.25f);
+                * _structureRng.RandfRange(1f - (Randomness / 2) * 0.25f, 1f + (Randomness / 2) * 0.25f);
 
-            // Build child transform: translate to branch tip, then rotate.
             var childXform = worldXform
                 .Translated(worldXform.Basis.Y * length)
-                .RotatedLocal(Vector3.Up,     Mathf.DegToRad(azimuth))
-                .RotatedLocal(Vector3.Back,   Mathf.DegToRad(tilt));
+                .RotatedLocal(Vector3.Up,   Mathf.DegToRad(azimuth))
+                .RotatedLocal(Vector3.Back, Mathf.DegToRad(tilt));
 
-            CollectBranch(rng, childXform, childLength, radius * RadiusDecay, depth + 1);
+            CollectBranch(childXform, childLength, radius * RadiusDecay, depth + 1);
         }
     }
 
-    // Scatter points over the lateral surface of a cylinder aligned to the branch's Y axis.
-    private void SampleBranchSurface(RandomNumberGenerator rng, Transform3D worldXform,
-                                     float length, float radius, int depth)
+    private void SampleBranchSurface(Transform3D worldXform, float length, float radius, int depth)
     {
-        // Lateral surface area of the cylinder drives point count.
-        float area   = 2f * Mathf.Pi * radius * length;
-        int   count  = Mathf.Max(1, (int)(area * PointDensity));
+        float area  = 2f * Mathf.Pi * radius * length;
+        int   count = Mathf.Max(1, (int)(area * PointDensity));
 
-        float t = (float)depth / MaxDepth;
+        float t     = (float)depth / MaxDepth;
         var   color = RootColor.Lerp(TipColor, t);
 
         for (int i = 0; i < count; i++)
         {
-            float height = rng.RandfRange(0f, length);
-            float angle  = rng.RandfRange(0f, Mathf.Tau);
+            float height = _pointRng.RandfRange(0f, length);
+            float angle  = _pointRng.RandfRange(0f, Mathf.Tau);
 
-            // Local point on cylinder surface.
             var localPos = new Vector3(
                 Mathf.Cos(angle) * radius,
                 height,
@@ -142,7 +131,6 @@ public partial class TreeGenerator3D : Node3D
         }
     }
 
-    // Build a single MultiMeshInstance3D from the collected points.
     private void BuildMultiMesh()
     {
         int total = _positions.Count;
