@@ -54,10 +54,13 @@ public partial class TreeGenerator3D : Node3D
 
     private void OnSetParameters(Parameters parameters)
     {
-        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param3));
-        BranchCount = Mathf.RoundToInt(Mathf.Lerp(1, 3, parameters.Param3));
-        LengthDecay = Mathf.Lerp(0.75f, 0.99f, parameters.Param2);
-        BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
+        MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 8, parameters.Param2));
+        //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
+        PointDensity = Mathf.Lerp(10f, 200f, parameters.Param3);
+        PointRadius = Mathf.Lerp(0.03f, 0.012f, parameters.Param3);
+        LengthDecay = Mathf.Lerp(0.75f, 0.97f, parameters.Param2);
+        BranchAngle = Mathf.Lerp(20f, 45f, parameters.Param4);
+        Randomness = Mathf.Lerp(0.5f, 0.0f, parameters.Param4);
         Generate();
     }
 
@@ -88,10 +91,10 @@ public partial class TreeGenerator3D : Node3D
         if (depth >= MaxDepth)
             return;
 
-        int count = depth == 0 ? 1 : BranchCount;
+        int count = depth == 0 ? 1 : (rng.Randf() < 0.3f ? 1 : BranchCount);
         float azimuthStep = 360f / count;
 
-        for (int i = 0; i < BranchCount; i++)
+        for (int i = 0; i < count; i++)
         {
             float azimuth = azimuthStep * i
                 + rng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
@@ -99,7 +102,7 @@ public partial class TreeGenerator3D : Node3D
             float tiltBase   = depth == 0 ? TrunkLean : BranchAngle;
             float tilt       = tiltBase + rng.RandfRange(-tiltBase * 0.5f, tiltBase * 0.5f) * Randomness;
             float childLength = length * LengthDecay
-                * rng.RandfRange(1f - Randomness * 0.25f, 1f + Randomness * 0.25f);
+                * rng.RandfRange(1f - (Randomness / 2) * 0.25f, 1f + (Randomness / 2)* 0.25f);
 
             // Build child transform: translate to branch tip, then rotate.
             var childXform = worldXform
