@@ -53,10 +53,10 @@ public partial class TreeGenerator3D : Node3D
     {
         MaxDepth    = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param2));
         //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
-        PointDensity = Mathf.Lerp(10f, 200f, parameters.Param3);
+        PointDensity = Mathf.Lerp(10f, 250f, parameters.Param3);
         PointRadius = Mathf.Lerp(0.03f, 0.012f, parameters.Param3);
         LengthDecay = Mathf.Lerp(0.75f, 0.975f, parameters.Param2);
-        BranchAngle = Mathf.Lerp(20f, 45f, parameters.Param4);
+        BranchAngle = Mathf.Lerp(20f, 90f, parameters.Param4);
         Randomness = Mathf.Lerp(0.5f, 0.0f, parameters.Param4);
         Generate();
     }
@@ -71,7 +71,7 @@ public partial class TreeGenerator3D : Node3D
         _positions.Clear();
         _colors.Clear();
 
-        _structureRng.Seed = 1337;
+        _structureRng.Seed = 42;
         _pointRng.Seed     = 7;
         CollectBranch(Transform3D.Identity, TrunkLength, TrunkRadius, 0);
 
@@ -85,7 +85,13 @@ public partial class TreeGenerator3D : Node3D
         if (depth >= MaxDepth)
             return;
 
-        int count = depth == 0 ? 1 : (_structureRng.Randf() > (float)depth / MaxDepth ? BranchCount : 1);
+        float t   = (float)depth / MaxDepth;
+        float r   = _structureRng.Randf();
+        int count = depth == 0 ? 1 : (
+            r < (1f-t)*(1f-t)*(1f-t)*(1f-t)              ? 5 :
+            r < (1f-t)*(1f-t)*(1f-t)*(1f+3f*t)           ? 4 :
+            r < (1f-t)*(1f-t)*(1f+2f*t+3f*t*t)           ? 3 :
+            r < 1f - t*t*t*t                              ? 2 : 1);
         float azimuthStep = 360f / count;
 
         for (int i = 0; i < count; i++)
