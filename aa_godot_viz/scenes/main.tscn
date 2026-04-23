@@ -56,9 +56,9 @@ shader_parameter/albedo_b = ExtResource("7_muem4")
 shader_parameter/normal_b = ExtResource("10_gqmmt")
 shader_parameter/albedo_c = ExtResource("8_dp3eg")
 shader_parameter/normal_c = ExtResource("11_yc10j")
-shader_parameter/blend = 0.0
+shader_parameter/blend = 1.0
 shader_parameter/normal_strength = 2.0
-shader_parameter/tint = Color(0.9483821, 0.6772877, 0.70750755, 1)
+shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(10, 10)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
@@ -115,12 +115,11 @@ MaxDepth = 7
 BranchCount = 2
 TrunkLean = -5.0
 BranchAngle = 34.75
-LengthDecay = 0.9390000000000001
+LengthDecay = 0.939
 RadiusDecay = 0.619
 Randomness = 0.4
-TrunkLength = 1.6360000000000001
+TrunkLength = 1.636
 TrunkRadius = 0.722
-ShowLeafs = true
 LeafRadius = 0.2
 LeafColor = Color(0.53538173, 0.5797636, 0.25592643, 1)
 PartsPerSecond = 2880.0
@@ -159,4 +158,5 @@ script = ExtResource("9_85g3d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1118348511]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.761, -25.888, 7.586)
+visible = false
 mesh = SubResource("CylinderMesh_jbj1t")

@@ -35,10 +35,10 @@ shader_parameter/albedo_b = ExtResource("3_7w4h8")
 shader_parameter/normal_b = ExtResource("6_dc13e")
 shader_parameter/albedo_c = ExtResource("4_rqn0r")
 shader_parameter/normal_c = ExtResource("7_lsiur")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/blend = 0.0
-shader_parameter/normal_strength = 1.0000000475
+shader_parameter/blend = 1.0
+shader_parameter/normal_strength = 0.5750000273125
 shader_parameter/tint = Color(0.93635046, 0.67460454, 0.520623, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fnfpm"]
 material = SubResource("ShaderMaterial_k28o4")
@@ -52,10 +52,10 @@ shader_parameter/albedo_b = ExtResource("9_uu245")
 shader_parameter/normal_b = ExtResource("12_hh00d")
 shader_parameter/albedo_c = ExtResource("10_235ft")
 shader_parameter/normal_c = ExtResource("13_580nl")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/blend = 0.210000009975
+shader_parameter/blend = 0.3470000164825
 shader_parameter/normal_strength = 1.6130000766175
 shader_parameter/tint = Color(0.98257476, 0.5979369, 0.67284185, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8k1sn"]
 material = SubResource("ShaderMaterial_5t8an")
@@ -69,10 +69,10 @@ shader_parameter/albedo_b = ExtResource("15_h01q2")
 shader_parameter/normal_b = ExtResource("18_e62op")
 shader_parameter/albedo_c = ExtResource("16_xgax7")
 shader_parameter/normal_c = ExtResource("19_rsclw")
-shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/blend = 0.270000012825
 shader_parameter/normal_strength = 1.45200006897
 shader_parameter/tint = Color(0.47526956, 0.7756796, 0.8304309, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fv582"]
 material = SubResource("ShaderMaterial_jov35")
@@ -86,10 +86,10 @@ shader_parameter/albedo_b = ExtResource("21_t4c1i")
 shader_parameter/normal_b = ExtResource("24_8wl2p")
 shader_parameter/albedo_c = ExtResource("22_l81gh")
 shader_parameter/normal_c = ExtResource("25_h431c")
-shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/blend = 0.0
 shader_parameter/normal_strength = 1.0
 shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_dulr8"]
 material = SubResource("ShaderMaterial_u3i1d")
