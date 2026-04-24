@@ -196,7 +196,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
-text = "Rounded/Organic"
+text = "Organic"
 uppercase = true
 
 [node name="SpinBox" type="SpinBox" parent="4/HBoxContainer" unique_id=605132169]
@@ -210,7 +210,7 @@ select_all_on_focus = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
-text = "Jagged/Fragmented"
+text = "Fragmented"
 horizontal_alignment = 2
 uppercase = true
 
@@ -244,7 +244,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
-text = "Smooth/Blurred"
+text = "Smooth"
 uppercase = true
 
 [node name="SpinBox" type="SpinBox" parent="5/HBoxContainer" unique_id=103470525]
@@ -258,7 +258,7 @@ select_all_on_focus = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
-text = "Sharp/Noisy"
+text = "Noisy"
 horizontal_alignment = 2
 uppercase = true
 

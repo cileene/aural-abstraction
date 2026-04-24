@@ -76,7 +76,7 @@ public partial class TreeGenerator3D : Node3D
         PointMaterial?.SetShaderParameter("metallic", Mathf.Lerp(0.8f, 0.2f, parameters.Param1));
         PointMaterial?.SetShaderParameter("roughness", Mathf.Lerp(0.2f, 0.8f, parameters.Param1));
         MaxDepth = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param2));
-        LengthDecay = Mathf.Lerp(0.75f, 0.975f, parameters.Param2);
+        LengthDecay = Mathf.Lerp(0.79f, 0.965f, parameters.Param2);
         //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
         PointDensity = Mathf.Lerp(10f, 300f, parameters.Param3);
         PointRadius = Mathf.Lerp(0.04f, 0.01f, parameters.Param3);

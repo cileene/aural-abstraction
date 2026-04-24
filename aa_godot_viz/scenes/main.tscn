@@ -50,7 +50,6 @@ albedo_color = Color(7.9112988, 7.9112988, 7.9112988, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
 material = SubResource("StandardMaterial3D_choun")
-radius = 15.0
 height = 30.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eb6dy"]
@@ -131,13 +130,13 @@ script = ExtResource("10_a8y0u")
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 light_color = Color(0.72225624, 0.7222563, 0.7222563, 1)
-light_energy = 10.304
+light_energy = 11.0
 light_indirect_energy = 0.4
 light_size = 0.073
-light_specular = 0.0
+light_specular = 0.264
 shadow_enabled = true
-shadow_blur = 2.535
-omni_range = 111.754
+shadow_blur = 2.958
+omni_range = 43.443
 omni_attenuation = 2.0
 script = ExtResource("15_muem4")
 _coldColor = Color(0.091718696, 0.76841474, 0.9639973, 1)
