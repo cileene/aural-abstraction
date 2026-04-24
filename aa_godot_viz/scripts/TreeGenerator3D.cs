@@ -49,12 +49,16 @@ public partial class TreeGenerator3D : Node3D
 
     [Export] public Color TipColor = new Color(0.18f, 0.65f, 0.28f);
 
+    [ExportGroup("Debug")]
+    [Export] public bool ShowCylinderMesh;
+
     private readonly RandomNumberGenerator _structureRng = new() { Seed = 1337 };
     private readonly RandomNumberGenerator _pointRng = new() { Seed = 7 };
 
     // Accumulated point data before MultiMesh is built.
     private readonly List<Vector3> _positions = new();
     private readonly List<Color> _colors = new();
+    private readonly List<(Transform3D Xform, float Length, float Radius, int Depth)> _branches = new();
 
     public override void _EnterTree()
     {
@@ -97,16 +101,21 @@ public partial class TreeGenerator3D : Node3D
 
         _positions.Clear();
         _colors.Clear();
+        _branches.Clear();
 
         _structureRng.Seed = 42;
         _pointRng.Seed = 7;
         CollectBranch(Transform3D.Identity, TrunkLength, TrunkRadius, 0);
 
-        BuildMultiMesh();
+        if (ShowCylinderMesh)
+            BuildCylinderMeshes();
+        else
+            BuildMultiMesh();
     }
 
     private void CollectBranch(Transform3D worldXform, float length, float radius, int depth)
     {
+        _branches.Add((worldXform, length, radius, depth));
         SampleBranchSurface(worldXform, length, radius, depth);
 
         if (depth >= MaxDepth)
@@ -179,6 +188,33 @@ public partial class TreeGenerator3D : Node3D
             _positions.Add(worldXform * localPos);
             _colors.Add(color);
         }
+    }
+
+    private void BuildCylinderMeshes()
+    {
+        var mm = new MultiMesh();
+        mm.UseColors = true;
+        mm.TransformFormat = MultiMesh.TransformFormatEnum.Transform3D;
+        mm.InstanceCount = _branches.Count;
+        mm.Mesh = new CylinderMesh { TopRadius = 1f, BottomRadius = 1f, Height = 1f };
+
+        for (int i = 0; i < _branches.Count; i++)
+        {
+            var (xform, length, radius, depth) = _branches[i];
+
+            // Scale X/Z by radius and Y by length so the unit cylinder matches this branch.
+            var basis = xform.Basis;
+            var scaledBasis = new Basis(basis.X * radius, basis.Y * length, basis.Z * radius);
+            var centeredOrigin = xform.Origin + basis.Y * (length * 0.5f);
+
+            mm.SetInstanceTransform(i, new Transform3D(scaledBasis, centeredOrigin));
+            mm.SetInstanceColor(i, new Color(1f, 1f, 1f, (float)depth / MaxDepth));
+        }
+
+        var mmInst = new MultiMeshInstance3D { Multimesh = mm };
+        if (PointMaterial != null)
+            mmInst.MaterialOverride = PointMaterial;
+        AddChild(mmInst);
     }
 
     private void BuildMultiMesh()
