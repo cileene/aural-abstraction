@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://brhni1ol7hu5t" path="res://scripts/SceneController.cs" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://f8juhu55iutx" path="res://prefabs/test_cube.tscn" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://cdej8ofkuxdxg" path="res://scripts/EnvironmentController.cs" id="3_trceg"]
 [ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
@@ -10,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bv6swk25wcqfi" path="res://prefabs/bubble_system.tscn" id="8_tipki"]
 [ext_resource type="Script" uid="uid://cy5tvs530t5db" path="res://scripts/LightSender.cs" id="9_85g3d"]
+[ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
+[ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
 [ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/LightColorController.cs" id="15_muem4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
@@ -55,10 +58,10 @@ render_priority = 0
 shader = ExtResource("6_ya4ey")
 shader_parameter/amplitude = 0.0
 shader_parameter/speed = 9.082000431395
-shader_parameter/cold_root = Color(0.15, 0.25, 0.5, 1)
-shader_parameter/cold_tip = Color(0.25, 0.55, 0.65, 1)
+shader_parameter/cold_root = Color(0.14901961, 0.2509804, 0.5019608, 1)
+shader_parameter/cold_tip = Color(0.2509804, 0.54901963, 0.6509804, 1)
 shader_parameter/warm_root = Color(0.38, 0.22, 0.09, 1)
-shader_parameter/warm_tip = Color(0.92152596, 0.31727022, 3.85046e-07, 1)
+shader_parameter/warm_tip = Color(0.8520567, 0.29494625, 0, 1)
 shader_parameter/param1 = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0
@@ -78,6 +81,7 @@ _lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
+script = ExtResource("3_trceg")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1503192210]
 transform = Transform3D(-0.8589599, 0.511636, 0.020406306, 0, -0.03985277, 0.9992056, 0.51204276, 0.85827756, 0.034231946, 9.058, 7.005, 7.917)
@@ -121,7 +125,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
 visible = false
 
 [node name="Bubble" parent="." unique_id=864385922 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
+transform = Transform3D(1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
+script = ExtResource("10_a8y0u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
@@ -146,8 +151,9 @@ light_volumetric_fog_energy = 0.12
 light_specular = 6.971
 shadow_enabled = true
 spot_range = 144.596
-spot_angle = 23.44
-spot_angle_attenuation = 1.6245036
+spot_angle = 13.94
+spot_angle_attenuation = 1.51
+script = ExtResource("10_eb6dy")
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Bubble" unique_id=1655822491]
 transform = Transform3D(0.69885397, 0.3162019, -0.6415756, -0.16649729, 0.94425297, 0.28401533, 0.6956159, -0.09166466, 0.7125419, -18.25, 11.559, 20.328)
@@ -157,8 +163,9 @@ light_volumetric_fog_energy = 0.12
 light_specular = 6.971
 shadow_enabled = true
 spot_range = 144.596
-spot_angle = 23.44
-spot_angle_attenuation = 1.6245036
+spot_angle = 13.94
+spot_angle_attenuation = 1.5157145
+script = ExtResource("10_eb6dy")
 
 [node name="sparks" parent="." unique_id=795322719 instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.358566)

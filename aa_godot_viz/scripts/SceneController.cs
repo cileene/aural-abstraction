@@ -33,6 +33,14 @@ public partial class SceneController : Node
     public override void _Ready()
     {
         HandleSceneConfig();
+        EventSystem.RaiseSetParameters(new Parameters
+        {
+            Param1 = _color,
+            Param2 = _spatiality,
+            Param3 = _composition,
+            Param4 = _shape,
+            Param5 = _material
+        });
     }
 
     public override void _Input(InputEvent @event)

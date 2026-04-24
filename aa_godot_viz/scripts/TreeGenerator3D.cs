@@ -73,8 +73,8 @@ public partial class TreeGenerator3D : Node3D
     private void OnSetParameters(Parameters parameters)
     {
         PointMaterial?.SetShaderParameter("param1", parameters.Param1);
-        PointMaterial?.SetShaderParameter("metallic", Mathf.Lerp(1.0f, 0.0f, parameters.Param1));
-        PointMaterial?.SetShaderParameter("roughness", Mathf.Lerp(0.0f, 1.0f, parameters.Param1));
+        PointMaterial?.SetShaderParameter("metallic", Mathf.Lerp(0.8f, 0.2f, parameters.Param1));
+        PointMaterial?.SetShaderParameter("roughness", Mathf.Lerp(0.2f, 0.8f, parameters.Param1));
         MaxDepth = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param2));
         LengthDecay = Mathf.Lerp(0.75f, 0.975f, parameters.Param2);
         //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
