@@ -10,6 +10,8 @@ uniform vec4 cold_tip  : source_color = vec4(0.25, 0.55, 0.65, 1.0);
 uniform vec4 warm_root : source_color = vec4(0.38, 0.22, 0.09, 1.0);
 uniform vec4 warm_tip  : source_color = vec4(0.18, 0.65, 0.28, 1.0);
 uniform float param1 : hint_range(0.0, 1.0) = 0.5;
+uniform float metallic  : hint_range(0.0, 1.0) = 0.0;
+uniform float roughness : hint_range(0.0, 1.0) = 0.8;
 
 float hash(vec3 p) {
     // Nonlinear scramble — breaks the planar coherence of a plain dot product.
@@ -31,5 +33,7 @@ void fragment() {
     float depth = COLOR.a;
     vec3 cold = mix(cold_root.rgb, cold_tip.rgb, depth);
     vec3 warm = mix(warm_root.rgb, warm_tip.rgb, depth);
-    ALBEDO = mix(cold, warm, param1);
+    ALBEDO     = mix(cold, warm, param1);
+    METALLIC   = metallic;
+    ROUGHNESS  = roughness;
 }

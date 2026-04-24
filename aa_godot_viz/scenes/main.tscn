@@ -60,12 +60,9 @@ shader_parameter/cold_root = Color(0.15, 0.25, 0.5, 1)
 shader_parameter/cold_tip = Color(0.25, 0.55, 0.65, 1)
 shader_parameter/warm_root = Color(0.38, 0.22, 0.09, 1)
 shader_parameter/warm_tip = Color(0.92152596, 0.31727022, 3.85046e-07, 1)
-shader_parameter/param1 = 0.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jbj1t"]
-top_radius = 0.0
-bottom_radius = 49.185
-height = 42.742
+shader_parameter/param1 = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
 
 [node name="SceneController" type="Node3D" unique_id=1557778390 node_paths=PackedStringArray("_treeGenerator", "_bubble", "_uI", "_camera", "_worldEnvironment")]
 script = ExtResource("1_0wfyh")
@@ -158,8 +155,3 @@ visible = false
 
 [node name="LightSender" type="Node" parent="." unique_id=655582616]
 script = ExtResource("9_85g3d")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1118348511]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.761, -25.888, 7.586)
-visible = false
-mesh = SubResource("CylinderMesh_jbj1t")

@@ -18,7 +18,7 @@ General/should_load_by_name=true
 config/name="aa_godot_viz"
 run/main_scene="uid://f3cedgdj3cjk"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-run/max_fps=30
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]

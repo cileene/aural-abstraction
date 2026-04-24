@@ -73,15 +73,17 @@ public partial class TreeGenerator3D : Node3D
     private void OnSetParameters(Parameters parameters)
     {
         PointMaterial?.SetShaderParameter("param1", parameters.Param1);
-        PointMaterial?.SetShaderParameter("amplitude", Mathf.Lerp(0.02f, 0.11f, parameters.Param5));
-        PointMaterial?.SetShaderParameter("speed", Mathf.Lerp(0.5f, 12.0f, parameters.Param5));
+        PointMaterial?.SetShaderParameter("metallic", Mathf.Lerp(1.0f, 0.0f, parameters.Param1));
+        PointMaterial?.SetShaderParameter("roughness", Mathf.Lerp(0.0f, 1.0f, parameters.Param1));
         MaxDepth = Mathf.RoundToInt(Mathf.Lerp(3, 9, parameters.Param2));
-        //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
-        PointDensity = Mathf.Lerp(10f, 250f, parameters.Param3);
-        PointRadius = Mathf.Lerp(0.04f, 0.012f, parameters.Param3);
         LengthDecay = Mathf.Lerp(0.75f, 0.975f, parameters.Param2);
+        //BranchCount = Mathf.RoundToInt(Mathf.Lerp(2, 3, parameters.Param3));
+        PointDensity = Mathf.Lerp(10f, 300f, parameters.Param3);
+        PointRadius = Mathf.Lerp(0.04f, 0.01f, parameters.Param3);
         BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
         Randomness = Mathf.Lerp(0.5f, 0.0f, parameters.Param4);
+        PointMaterial?.SetShaderParameter("speed", Mathf.Lerp(0.5f, 12.0f, parameters.Param5));
+        PointMaterial?.SetShaderParameter("amplitude", Mathf.Lerp(0.01f, 0.05f, parameters.Param5));
         
         Generate();
     }
