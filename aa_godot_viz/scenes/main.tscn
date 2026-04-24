@@ -29,17 +29,16 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 4
 ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
-glow_intensity = 2.88
+glow_normalized = true
+glow_intensity = 1.0
 glow_bloom = 0.42
-glow_blend_mode = 2
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
+volumetric_fog_density = 0.0478
+volumetric_fog_length = 60.5
 volumetric_fog_sky_affect = 0.0
+volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
@@ -129,25 +128,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 light_color = Color(0.72225624, 0.7222563, 0.7222563, 1)
 light_energy = 10.304
 light_indirect_energy = 0.4
-light_size = 0.13
+light_size = 0.073
 light_specular = 0.0
 shadow_enabled = true
 shadow_blur = 2.535
-omni_range = 4096.0
+omni_range = 111.754
 omni_attenuation = 2.0
 script = ExtResource("15_muem4")
 _coldColor = Color(0.091718696, 0.76841474, 0.9639973, 1)
 _warmColor = Color(0.99877805, 0.52347493, 0.31373435, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Bubble" unique_id=1300690305]
-transform = Transform3D(-0.7716245, 0.005550759, 0.636054, 0, 0.99996185, -0.008726534, -0.6360782, -0.0067336084, -0.7715951, 18.25, 2.799, -20.328)
+transform = Transform3D(-0.73224634, -0.2908329, 0.6158176, -0.16811706, 0.95343924, 0.25037998, -0.6599634, 0.07981039, -0.7470464, 18.25, 11.559, -20.328)
+light_color = Color(0.9468017, 0.5247938, 0.40312833, 1)
 light_energy = 20.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.12
 light_specular = 6.971
 shadow_enabled = true
-shadow_blur = 1.2
-spot_range = 48.946518
-spot_angle = 10.95
+spot_range = 144.596
+spot_angle = 23.44
+spot_angle_attenuation = 1.6245036
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Bubble" unique_id=1655822491]
+transform = Transform3D(0.69885397, 0.3162019, -0.6415756, -0.16649729, 0.94425297, 0.28401533, 0.6956159, -0.09166466, 0.7125419, -18.25, 11.559, 20.328)
+light_color = Color(0.40537897, 0.6723568, 0.87198997, 1)
+light_energy = 20.0
+light_volumetric_fog_energy = 0.12
+light_specular = 6.971
+shadow_enabled = true
+spot_range = 144.596
+spot_angle = 23.44
+spot_angle_attenuation = 1.6245036
 
 [node name="sparks" parent="." unique_id=795322719 instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.358566)
