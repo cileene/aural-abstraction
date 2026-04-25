@@ -46,7 +46,8 @@ folder_colors={
 "res://materials/": "yellow",
 "res://prefabs/": "teal",
 "res://scenes/": "red",
-"res://scripts/": "purple"
+"res://scripts/": "purple",
+"res://sounds/": "green"
 }
 
 [input]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dlwo0d1btpxt3"
+path="res://.godot/imported/drms Theatre_41.mp3-e42f6b02c2dc58f57fa97697b380ef34.mp3str"
+
+[deps]
+
+source_file="res://sounds/drms/drms Theatre_41.mp3"
+dest_files=["res://.godot/imported/drms Theatre_41.mp3-e42f6b02c2dc58f57fa97697b380ef34.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

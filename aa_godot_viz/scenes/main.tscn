@@ -10,7 +10,15 @@
 [ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
 [ext_resource type="Script" uid="uid://dg2gme35kokte" path="res://scripts/SoundController.cs" id="11_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://btns0hb5y1vrt" path="res://sounds/drms/drms Dixon_Studio_Theatre.mp3" id="12_0ld40"]
+[ext_resource type="AudioStream" uid="uid://6rmyce8tnp5n" path="res://sounds/drms/drms Genesis_6_Studio.mp3" id="13_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://mmr7kusoeu8v" path="res://sounds/drms/drms Hofmann_Lime_Kiln.mp3" id="14_yc10j"]
+[ext_resource type="AudioStream" uid="uid://dywlrqwwlcay4" path="res://sounds/drms/drms Spring_Lane_Building.mp3" id="15_jscy8"]
 [ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/LightColorController.cs" id="15_muem4"]
+[ext_resource type="AudioStream" uid="uid://dw3rdmi82xwnp" path="res://sounds/drms/drms Stairway_University_York.mp3" id="16_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://d3hrdvr32e4eh" path="res://sounds/drms/drms St_Margarets_Church.mp3" id="17_y6deb"]
+[ext_resource type="AudioStream" uid="uid://dlwo0d1btpxt3" path="res://sounds/drms/drms Theatre_41.mp3" id="18_og1vs"]
+[ext_resource type="AudioStream" uid="uid://bln73ppmt8mgo" path="res://sounds/drms/drms Ursina_Del_Arte.mp3" id="19_2wyq8"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -120,3 +128,4 @@ script = ExtResource("10_eb6dy")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=481607183]
 script = ExtResource("11_ya4ey")
+_audioStreams = Array[AudioStream]([ExtResource("12_0ld40"), ExtResource("13_gqmmt"), ExtResource("14_yc10j"), ExtResource("15_jscy8"), ExtResource("16_pm3ni"), ExtResource("17_y6deb"), ExtResource("18_og1vs"), ExtResource("19_2wyq8")])
