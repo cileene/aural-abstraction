@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
+[ext_resource type="Script" uid="uid://dg2gme35kokte" path="res://scripts/SoundController.cs" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/LightColorController.cs" id="15_muem4"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
@@ -114,3 +115,8 @@ spot_range = 144.596
 spot_angle = 13.94
 spot_angle_attenuation = 1.5157145
 script = ExtResource("10_eb6dy")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1268301196]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=481607183]
+script = ExtResource("11_ya4ey")

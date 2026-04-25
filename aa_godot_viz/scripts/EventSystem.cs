@@ -14,6 +14,7 @@ public static class EventSystem
     public static event Action ImpulseSent;
     public static event Action PlaySound;
     public static event Action<bool> NextSound;
+    public static event Action<int> CurrentSoundIndexChanged;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -44,5 +45,11 @@ public static class EventSystem
     {
         NextSound?.Invoke(forward);
         GD.Print(forward ? "EventSystem: Raised NextSound (forward)" : "EventSystem: Raised NextSound (backward)");
+    }
+    
+    public static void RaiseCurrentSoundIndexChanged(int index)
+    {
+        CurrentSoundIndexChanged?.Invoke(index);
+        GD.Print($"EventSystem: Raised CurrentSoundIndexChanged | New Index: {index}");
     }
 }
