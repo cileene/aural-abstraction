@@ -4,12 +4,6 @@ namespace aa_godot_viz.scripts;
 
 public partial class SceneController : Node
 {
-    [Export] private TreeGenerator3D _treeGenerator;
-    [Export] private Node3D _bubble;
-    [Export] private VBoxContainer _uI;
-    [Export] private Camera3D _camera;
-    [Export] private WorldEnvironment _worldEnvironment;
-
     [ExportCategory("Parameters")]
     [Export(PropertyHint.Range, "0,1")] private float _color = 0.5f;
     [Export(PropertyHint.Range, "0,1")] private float _spatiality = 0.5f;

@@ -12,6 +12,8 @@ public static class EventSystem
     public static event Action<Parameters> SetParameters;
     public static event Action<_SceneConfig> SetSceneConfig;
     public static event Action ImpulseSent;
+    public static event Action PlaySound;
+    public static event Action<bool> NextSound;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -30,5 +32,17 @@ public static class EventSystem
     {
         ImpulseSent?.Invoke();
         GD.Print("EventSystem: Raised ImpulseSent");
+    }
+    
+    public static void RaisePlaySound()
+    {
+        PlaySound?.Invoke();
+        GD.Print("EventSystem: Raised PlaySound");
+    }
+    
+    public static void RaiseNextSound(bool forward)
+    {
+        NextSound?.Invoke(forward);
+        GD.Print(forward ? "EventSystem: Raised NextSound (forward)" : "EventSystem: Raised NextSound (backward)");
     }
 }

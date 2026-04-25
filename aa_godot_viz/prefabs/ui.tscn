@@ -22,15 +22,15 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_8bix8")
 _colorSlider = NodePath("1/ColorSlider")
-_colorValue = NodePath("1/HBoxContainer/SpinBox")
+_colorValue = NodePath("1/HBoxContainer/ColorSpinBox")
 _spatialitySlider = NodePath("2/SpatialitySlider")
-_spatialityValue = NodePath("2/HBoxContainer/SpinBox")
+_spatialityValue = NodePath("2/HBoxContainer/SpatialitySpinBox")
 _compositionSlider = NodePath("3/CompositionSlider")
-_compositionValue = NodePath("3/HBoxContainer/SpinBox")
+_compositionValue = NodePath("3/HBoxContainer/CompositionSpinBox")
 _shapeSlider = NodePath("4/ShapeSlider")
-_shapeValue = NodePath("4/HBoxContainer/SpinBox")
+_shapeValue = NodePath("4/HBoxContainer/ShapeSpinBox")
 _materialSlider = NodePath("5/MaterialSlider")
-_materialValue = NodePath("5/HBoxContainer/SpinBox")
+_materialValue = NodePath("5/HBoxContainer/MaterialSpinBox")
 
 [node name="1" type="VBoxContainer" parent="." unique_id=1678938413]
 custom_minimum_size = Vector2(0, 75)
@@ -55,7 +55,7 @@ theme = SubResource("Theme_tbgi4")
 text = "Cold"
 uppercase = true
 
-[node name="SpinBox" type="SpinBox" parent="1/HBoxContainer" unique_id=1304022102]
+[node name="ColorSpinBox" type="SpinBox" parent="1/HBoxContainer" unique_id=1304022102]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -103,7 +103,7 @@ theme = SubResource("Theme_tbgi4")
 text = "Intimate"
 uppercase = true
 
-[node name="SpinBox" type="SpinBox" parent="2/HBoxContainer" unique_id=133926535]
+[node name="SpatialitySpinBox" type="SpinBox" parent="2/HBoxContainer" unique_id=133926535]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -151,7 +151,7 @@ theme = SubResource("Theme_tbgi4")
 text = "Diffuse"
 uppercase = true
 
-[node name="SpinBox" type="SpinBox" parent="3/HBoxContainer" unique_id=876326429]
+[node name="CompositionSpinBox" type="SpinBox" parent="3/HBoxContainer" unique_id=876326429]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -199,7 +199,7 @@ theme = SubResource("Theme_tbgi4")
 text = "Organic"
 uppercase = true
 
-[node name="SpinBox" type="SpinBox" parent="4/HBoxContainer" unique_id=605132169]
+[node name="ShapeSpinBox" type="SpinBox" parent="4/HBoxContainer" unique_id=605132169]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -247,7 +247,7 @@ theme = SubResource("Theme_tbgi4")
 text = "Smooth"
 uppercase = true
 
-[node name="SpinBox" type="SpinBox" parent="5/HBoxContainer" unique_id=103470525]
+[node name="MaterialSpinBox" type="SpinBox" parent="5/HBoxContainer" unique_id=103470525]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
