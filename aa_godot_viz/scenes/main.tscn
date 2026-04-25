@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cdej8ofkuxdxg" path="res://scripts/EnvironmentController.cs" id="3_trceg"]
 [ext_resource type="Script" uid="uid://dpdybjep3xt3i" path="res://scripts/CameraController.cs" id="4_choun"]
 [ext_resource type="PackedScene" path="res://prefabs/tree.tscn" id="4_jyhfs"]
+[ext_resource type="Material" uid="uid://bmcatn0ugxjj" path="res://materials/point_mat.tres" id="6_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dkbjslvsnnok6" path="res://prefabs/ui.tscn" id="6_tefeu"]
-[ext_resource type="Shader" path="res://materials/godot_shaders/PointCloudWobble.gdshader" id="6_ya4ey"]
 [ext_resource type="PackedScene" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://d3hrdvr32e4eh" path="res://sounds/drms/drms St_Margarets_Church.mp3" id="17_y6deb"]
 [ext_resource type="AudioStream" uid="uid://dlwo0d1btpxt3" path="res://sounds/drms/drms Theatre_41.mp3" id="18_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bln73ppmt8mgo" path="res://sounds/drms/drms Ursina_Del_Arte.mp3" id="19_2wyq8"]
+[ext_resource type="Script" uid="uid://cj40f7c0rgijd" path="res://scripts/AudioAnalyzer.cs" id="20_gqmmt"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -37,19 +38,6 @@ volumetric_fog_length = 60.5
 volumetric_fog_sky_affect = 0.0
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eb6dy"]
-render_priority = 0
-shader = ExtResource("6_ya4ey")
-shader_parameter/amplitude = 0.0
-shader_parameter/speed = 9.082000431395
-shader_parameter/cold_root = Color(0.14901961, 0.2509804, 0.5019608, 1)
-shader_parameter/cold_tip = Color(0.2509804, 0.54901963, 0.6509804, 1)
-shader_parameter/warm_root = Color(0.38, 0.22, 0.09, 1)
-shader_parameter/warm_tip = Color(0.8520567, 0.29494625, 0, 1)
-shader_parameter/param1 = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 1.0
 
 [node name="SceneController" type="Node3D" unique_id=1557778390]
 script = ExtResource("1_0wfyh")
@@ -79,7 +67,7 @@ TrunkLength = 1.636
 TrunkRadius = 0.722
 PointDensity = 160.0
 PointRadius = 0.015
-PointMaterial = SubResource("ShaderMaterial_eb6dy")
+PointMaterial = ExtResource("6_gqmmt")
 
 [node name="Bubble" parent="." unique_id=864385922 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
@@ -129,3 +117,9 @@ script = ExtResource("10_eb6dy")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=481607183]
 script = ExtResource("11_ya4ey")
 _audioStreams = Array[AudioStream]([ExtResource("12_0ld40"), ExtResource("13_gqmmt"), ExtResource("14_yc10j"), ExtResource("15_jscy8"), ExtResource("16_pm3ni"), ExtResource("17_y6deb"), ExtResource("18_og1vs"), ExtResource("19_2wyq8")])
+
+[node name="AudioAnalyzer" type="Node" parent="." unique_id=187367018]
+script = ExtResource("20_gqmmt")
+PointMaterial = ExtResource("6_gqmmt")
+Gain = 3.0
+Smoothing = 0.2

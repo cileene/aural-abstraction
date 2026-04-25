@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms Ursina_Del_Arte.mp3-a564abd487a228c5bd9e
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

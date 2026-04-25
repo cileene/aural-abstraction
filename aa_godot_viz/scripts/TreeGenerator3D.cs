@@ -86,8 +86,8 @@ public partial class TreeGenerator3D : Node3D
         PointRadius = Mathf.Lerp(0.04f, 0.01f, parameters.Param3);
         BranchAngle = Mathf.Lerp(15f, 45f, parameters.Param4);
         Randomness = Mathf.Lerp(0.5f, 0.0f, parameters.Param4);
-        PointMaterial?.SetShaderParameter("speed", Mathf.Lerp(0.5f, 12.0f, parameters.Param5));
-        PointMaterial?.SetShaderParameter("amplitude", Mathf.Lerp(0.01f, 0.05f, parameters.Param5));
+        PointMaterial?.SetShaderParameter("speed", Mathf.Lerp(0.5f, 20.0f, parameters.Param5));
+        PointMaterial?.SetShaderParameter("amplitude", Mathf.Lerp(0.25f, 1.0f, parameters.Param5));
         
         Generate();
     }

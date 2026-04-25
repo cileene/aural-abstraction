@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms Spring_Lane_Building.mp3-f1e0553c543b48f
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

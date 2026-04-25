@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms Hofmann_Lime_Kiln.mp3-0f3da2a822ca77a713
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

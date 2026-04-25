@@ -1,16 +1,20 @@
+using System;
+using System.IO;
 using Godot;
 
 namespace aa_godot_viz.scripts;
 
 public partial class DataManager : Node
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    private string _filePath;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public override void _Ready()
+    {
+        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        string dir = ProjectSettings.GlobalizePath("user://");
+        _filePath = Path.Combine(dir, $"{timestamp}.csv");
+
+        File.WriteAllText(_filePath, "");
+        GD.Print($"DataManager: logging to {_filePath}");
+    }
 }

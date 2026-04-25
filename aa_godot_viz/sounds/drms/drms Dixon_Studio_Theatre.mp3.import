@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms Dixon_Studio_Theatre.mp3-1758e993fcfd2ef
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

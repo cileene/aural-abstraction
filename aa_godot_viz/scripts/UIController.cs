@@ -4,6 +4,7 @@ namespace aa_godot_viz.scripts;
 
 public partial class UIController : VBoxContainer
 {
+	[Export] private Label _soundLabel;
 	[Export] private HSlider _colorSlider;
 	[Export] private SpinBox _colorValue;
 	[Export] private HSlider _spatialitySlider;
@@ -19,6 +20,11 @@ public partial class UIController : VBoxContainer
 
 	private float _color = 0.5f, _spatiality = 0.5f, _composition = 0.5f, _shape = 0.5f, _material = 0.5f;
 	private Label _fpsLabel;
+
+	public override void _EnterTree()
+	{
+		EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
+	}
 
 	public override void _Ready()
 	{
@@ -60,6 +66,7 @@ public partial class UIController : VBoxContainer
 
 	public override void _ExitTree()
 	{
+		EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
 		_fpsLabel?.QueueFree();
 	}
 
@@ -81,5 +88,10 @@ public partial class UIController : VBoxContainer
 			Param4 = _shape,
 			Param5 = _material
 		});
+	}
+	
+	private void OnCurrentSoundIndexChanged(int index)
+	{
+		_soundLabel.Text = $"{index + 1}";
 	}
 }

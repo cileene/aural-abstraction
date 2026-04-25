@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms Theatre_41.mp3-e42f6b02c2dc58f57fa97697b
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

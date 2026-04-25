@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drms St_Margarets_Church.mp3-b9f4a5a3c4284124
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

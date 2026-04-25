@@ -2,6 +2,7 @@ shader_type spatial;
 //render_mode unshaded, cull_disabled;
 
 uniform float amplitude : hint_range(0.0, 0.15) = 0.016;
+uniform float audio_amplitude : hint_range(0.0, 1.0) = 0.0;
 uniform float speed : hint_range(0.0, 100.0) = 1.2;
 
 // Cold → Warm palette. COLOR.a carries depth (0 = root, 1 = tip).
@@ -22,10 +23,11 @@ void vertex() {
 	vec3 base = MODEL_MATRIX[3].xyz;
     float phase = hash(base) * 6.2832; // map [0,1] → [0, 2π]
 
+    float total_amplitude = audio_amplitude * amplitude;
     VERTEX += vec3(
-        sin(TIME * speed       + phase)        * amplitude,
-        sin(TIME * speed * 0.8 + phase * 1.3)  * amplitude * 0.6,
-        cos(TIME * speed * 0.9 + phase)        * amplitude
+        sin(TIME * speed       + phase)        * total_amplitude,
+        sin(TIME * speed * 0.8 + phase * 1.3)  * total_amplitude * 0.6,
+        cos(TIME * speed * 0.9 + phase)        * total_amplitude
     );
 }
 
