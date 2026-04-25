@@ -16,7 +16,7 @@ public partial class SpotLightController : SpotLight3D
 
 	private void OnSetParameters(Parameters parameters)
 	{
-		LightEnergy = Mathf.Lerp(2.0f, 25.0f, parameters.Param1);
+		LightEnergy = Mathf.Lerp(4.0f, 25.0f, parameters.Param1);
 		ShadowBlur = Mathf.Lerp(5.0f, 0.0f, parameters.Param4);
 	}
 }

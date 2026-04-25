@@ -21,9 +21,9 @@ config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
-[autoload]
+[audio]
 
-FmodManager="*uid://cds10pm7hwn3p"
+buses/default_bus_layout="uid://bk6t4lfqgfgsd"
 
 [display]
 
@@ -38,7 +38,7 @@ project/assembly_name="aa_godot_viz"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/rider-plugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/rider-plugin/plugin.cfg")
 
 [file_customization]
 

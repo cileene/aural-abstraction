@@ -1,30 +1,14 @@
 [gd_scene format=3 uid="uid://f3cedgdj3cjk"]
 
 [ext_resource type="Script" uid="uid://brhni1ol7hu5t" path="res://scripts/SceneController.cs" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://f8juhu55iutx" path="res://prefabs/test_cube.tscn" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://b1iowxps7vpty" path="res://scripts/PlayOnMousePress.gd" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://cdej8ofkuxdxg" path="res://scripts/EnvironmentController.cs" id="3_trceg"]
 [ext_resource type="PackedScene" uid="uid://b03lqryki3my2" path="res://prefabs/tree.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://t50lfrdfx2sx" path="res://prefabs/sparks.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://by42x086ymje" path="res://prefabs/ui.tscn" id="6_tefeu"]
 [ext_resource type="Shader" uid="uid://de57uy082n3vb" path="res://materials/godot_shaders/PointCloudWobble.gdshader" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://drjg8q26oys0g" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://bv6swk25wcqfi" path="res://prefabs/bubble_system.tscn" id="8_tipki"]
-[ext_resource type="Script" uid="uid://cy5tvs530t5db" path="res://scripts/LightSender.cs" id="9_85g3d"]
 [ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
 [ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/LightColorController.cs" id="15_muem4"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sugp2"]
-noise_type = 2
-frequency = 0.5134
-fractal_type = 0
-fractal_octaves = 4
-fractal_gain = 1.17
-fractal_weighted_strength = 0.4
-cellular_distance_function = 1
-cellular_jitter = 1.05
-cellular_return_type = 0
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -43,14 +27,6 @@ volumetric_fog_length = 60.5
 volumetric_fog_sky_affect = 0.0
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
-shading_mode = 0
-albedo_color = Color(7.9112988, 7.9112988, 7.9112988, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
-material = SubResource("StandardMaterial3D_choun")
-height = 30.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eb6dy"]
 render_priority = 0
@@ -72,11 +48,6 @@ _bubble = NodePath("Bubble")
 _uI = NodePath("UI")
 _camera = NodePath("Camera3D")
 _worldEnvironment = NodePath("WorldEnvironment")
-_noise = SubResource("FastNoiseLite_sugp2")
-_cube = ExtResource("2_0wfyh")
-_lightSpeed = 2.5
-_lightIntensity = 10.0
-_lightColor = Color(0.9567047, 0.8492857, 0.64962953, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
@@ -88,22 +59,6 @@ current = true
 fov = 80.0
 
 [node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]
-
-[node name="FootSteps" type="FmodEventEmitter2D" parent="." unique_id=123119990]
-event_name = "event:/Footsteps/Loop"
-event_guid = "{6a02cf4e-fe4a-46c0-aaf0-5a167837e52a}"
-script = ExtResource("3_sugp2")
-
-[node name="FmodListener2D" type="FmodListener2D" parent="." unique_id=1257144794]
-
-[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1967251096]
-bank_paths = ["res://fmod//Master.bank", "res://fmod//Master.strings.bank"]
-
-[node name="BigBubble" type="CSGMesh3D" parent="." unique_id=842620577]
-transform = Transform3D(0.603208, 0, 0.79758394, 0, 1, 0, -0.79758394, 0, 0.603208, 11.934818, 1, 8.5078535)
-visible = false
-flip_faces = true
-mesh = SubResource("SphereMesh_o6xl0")
 
 [node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
@@ -118,10 +73,6 @@ TrunkRadius = 0.722
 PointDensity = 160.0
 PointRadius = 0.015
 PointMaterial = SubResource("ShaderMaterial_eb6dy")
-
-[node name="Sparks" parent="." unique_id=41806041 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.412, -5, 8.329)
-visible = false
 
 [node name="Bubble" parent="." unique_id=864385922 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
@@ -165,10 +116,3 @@ spot_range = 144.596
 spot_angle = 13.94
 spot_angle_attenuation = 1.5157145
 script = ExtResource("10_eb6dy")
-
-[node name="sparks" parent="." unique_id=795322719 instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.936855, -7.5848956, 7.358566)
-visible = false
-
-[node name="LightSender" type="Node" parent="." unique_id=655582616]
-script = ExtResource("9_85g3d")
