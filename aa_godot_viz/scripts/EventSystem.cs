@@ -15,6 +15,9 @@ public static class EventSystem
     public static event Action PlaySound;
     public static event Action<bool> NextSound;
     public static event Action<int> CurrentSoundIndexChanged;
+    public static event Action<int> SoundsInitialized;
+    public static event Action<Parameters> ParametersRestored;
+    public static event Action SliderReleased;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -51,5 +54,22 @@ public static class EventSystem
     {
         CurrentSoundIndexChanged?.Invoke(index);
         GD.Print($"EventSystem: Raised CurrentSoundIndexChanged | New Index: {index}");
+    }
+
+    public static void RaiseSoundsInitialized(int count)
+    {
+        SoundsInitialized?.Invoke(count);
+        GD.Print($"EventSystem: Raised SoundsInitialized | Count: {count}");
+    }
+
+    public static void RaiseSliderReleased()
+    {
+        SliderReleased?.Invoke();
+    }
+
+    public static void RaiseParametersRestored(Parameters parameters)
+    {
+        ParametersRestored?.Invoke(parameters);
+        GD.Print($"EventSystem: Raised ParametersRestored | Color:{parameters.Param1:F3} Spatiality:{parameters.Param2:F3} Composition:{parameters.Param3:F3} Shape:{parameters.Param4:F3} Material:{parameters.Param5:F3}");
     }
 }

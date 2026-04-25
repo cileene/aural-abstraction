@@ -24,6 +24,7 @@ public partial class UIController : VBoxContainer
 	public override void _EnterTree()
 	{
 		EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
+		EventSystem.ParametersRestored += OnParametersRestored;
 	}
 
 	public override void _Ready()
@@ -57,6 +58,8 @@ public partial class UIController : VBoxContainer
 			spinBox.SetValueNoSignal(v);
 		};
 
+		slider.DragEnded += _ => EventSystem.RaiseSliderReleased();
+
 		spinBox.ValueChanged += v =>
 		{
 			slider.SetValueNoSignal(v);
@@ -67,6 +70,7 @@ public partial class UIController : VBoxContainer
 	public override void _ExitTree()
 	{
 		EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
+		EventSystem.ParametersRestored -= OnParametersRestored;
 		_fpsLabel?.QueueFree();
 	}
 
@@ -93,5 +97,22 @@ public partial class UIController : VBoxContainer
 	private void OnCurrentSoundIndexChanged(int index)
 	{
 		_soundLabel.Text = $"{index + 1}";
+	}
+
+	private void OnParametersRestored(Parameters p)
+	{
+		_color       = p.Param1;
+		_spatiality  = p.Param2;
+		_composition = p.Param3;
+		_shape       = p.Param4;
+		_material    = p.Param5;
+
+		_colorSlider.SetValueNoSignal(_color);             _colorValue.SetValueNoSignal(_color);
+		_spatialitySlider.SetValueNoSignal(_spatiality);   _spatialityValue.SetValueNoSignal(_spatiality);
+		_compositionSlider.SetValueNoSignal(_composition); _compositionValue.SetValueNoSignal(_composition);
+		_shapeSlider.SetValueNoSignal(_shape);             _shapeValue.SetValueNoSignal(_shape);
+		_materialSlider.SetValueNoSignal(_material);       _materialValue.SetValueNoSignal(_material);
+
+		RaiseParameters();
 	}
 }

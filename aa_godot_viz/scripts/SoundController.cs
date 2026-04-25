@@ -14,8 +14,11 @@ public partial class SoundController : AudioStreamPlayer3D
         EventSystem.PlaySound += OnPlaySound;
         EventSystem.NextSound += OnNextSound;
 
-        if (_audioStreams is { Length: > 0 }) 
+        if (_audioStreams is { Length: > 0 })
+        {
             Stream = _audioStreams[0];
+            EventSystem.RaiseSoundsInitialized(_audioStreams.Length);
+        }
     }
 
     public override void _ExitTree()

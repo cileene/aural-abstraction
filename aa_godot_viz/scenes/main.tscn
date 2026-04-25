@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dlwo0d1btpxt3" path="res://sounds/drms/drms Theatre_41.mp3" id="18_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bln73ppmt8mgo" path="res://sounds/drms/drms Ursina_Del_Arte.mp3" id="19_2wyq8"]
 [ext_resource type="Script" uid="uid://cj40f7c0rgijd" path="res://scripts/AudioAnalyzer.cs" id="20_gqmmt"]
+[ext_resource type="Script" uid="uid://dyiubcpscgqi8" path="res://scripts/DataManager.cs" id="21_yc10j"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -123,3 +124,6 @@ script = ExtResource("20_gqmmt")
 PointMaterial = ExtResource("6_gqmmt")
 Gain = 3.0
 Smoothing = 0.2
+
+[node name="DataManager" type="Node" parent="." unique_id=1512556255]
+script = ExtResource("21_yc10j")
