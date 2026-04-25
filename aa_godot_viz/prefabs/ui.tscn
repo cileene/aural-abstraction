@@ -9,17 +9,18 @@ default_font_size = 20
 
 [node name="UI" type="VBoxContainer" unique_id=1090373297 node_paths=PackedStringArray("_soundLabel", "_colorSlider", "_colorValue", "_spatialitySlider", "_spatialityValue", "_compositionSlider", "_compositionValue", "_shapeSlider", "_shapeValue", "_materialSlider", "_materialValue")]
 custom_minimum_size = Vector2(800, 0)
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 1.011
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 1.011
 anchor_bottom = 1.0
-offset_left = -1000.0
-offset_top = -440.0
-offset_right = -52.0
-offset_bottom = -49.0
+offset_left = -709.12
+offset_top = -315.0
+offset_right = 238.87988
+offset_bottom = 166.0
 grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_8bix8")
 _soundLabel = NodePath("sound")
 _colorSlider = NodePath("1/ColorSlider")
