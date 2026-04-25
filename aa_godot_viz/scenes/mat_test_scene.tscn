@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://20advsmn33db"]
+[gd_scene format=3 uid="uid://bfog0ycq6b6pl"]
 
 [ext_resource type="Shader" uid="uid://dk3ypn052v3nl" path="res://materials/godot_shaders/blend_three.gdshader" id="1_p1sy2"]
 [ext_resource type="Texture2D" uid="uid://m6fdleal0qqd" path="res://materials/ingrid/1/1a.png" id="2_g6whr"]

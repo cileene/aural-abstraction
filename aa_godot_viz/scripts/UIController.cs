@@ -103,6 +103,7 @@ public partial class UIController : VBoxContainer
 		_compositionSlider.Value = GD.Randf();
 		_shapeSlider.Value       = GD.Randf();
 		_materialSlider.Value    = GD.Randf();
+		EventSystem.RaiseSliderReleased();
 	}
 
 	private void OnCurrentSoundIndexChanged(int index)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dq818yihfh06f"]
 
 [ext_resource type="Script" uid="uid://bx27n80fmvsl5" path="res://scripts/_PointCloudDemo.cs" id="1_rw77o"]
-[ext_resource type="Shader" path="res://materials/godot_shaders/water.gdshader" id="2_tku0r"]
+[ext_resource type="Shader" uid="uid://ibc1ivsy2edc" path="res://materials/godot_shaders/water.gdshader" id="2_tku0r"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u1a74"]
 noise_type = 2

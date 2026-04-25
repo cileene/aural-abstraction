@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://drjg8q26oys0g"]
+[gd_scene format=3 uid="uid://c71r6l64npe8q"]
 
 [ext_resource type="Shader" uid="uid://ibc1ivsy2edc" path="res://materials/godot_shaders/water.gdshader" id="1_shsib"]
 

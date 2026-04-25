@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://t50lfrdfx2sx"]
+[gd_scene format=3 uid="uid://b1ga3oprtttbo"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ixfb0"]
 gravity = Vector3(0, 1.8, 0)
