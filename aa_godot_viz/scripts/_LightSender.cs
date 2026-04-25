@@ -2,7 +2,7 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-public partial class LightSender : Node
+public partial class _LightSender : Node
 {
     private Camera3D _camera;
     private float _speed, _lifetime, _intensity, _range;
@@ -21,7 +21,7 @@ public partial class LightSender : Node
         EventSystem.ImpulseSent -= OnImpulseSent;
     }
 
-    private void OnSetSceneConfig(SceneConfig config)
+    private void OnSetSceneConfig(_SceneConfig config)
     {
         _camera = config.Camera;
         _speed = config.LightSpeed;

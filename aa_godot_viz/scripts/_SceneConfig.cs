@@ -2,7 +2,7 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-public class SceneConfig
+public class _SceneConfig
 {
         public TreeGenerator3D TreeGenerator;
         public Node3D Bubble;

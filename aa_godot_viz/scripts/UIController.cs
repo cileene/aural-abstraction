@@ -42,7 +42,7 @@ public partial class UIController : VBoxContainer
 	{
 		spinBox.MinValue = slider.MinValue;
 		spinBox.MaxValue = slider.MaxValue;
-		spinBox.Step = slider.Step > 0 ? slider.Step : 0.01;
+		spinBox.Step = slider.Step > 0 ? slider.Step : 0.1;
 		spinBox.Value = slider.Value;
 
 		slider.ValueChanged += v =>

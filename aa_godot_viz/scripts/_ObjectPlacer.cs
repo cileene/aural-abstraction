@@ -2,7 +2,7 @@ using Godot;
 
 namespace aa_godot_viz.scripts;
 
-public partial class ObjectPlacer : Node
+public partial class _ObjectPlacer : Node
 {
     private FastNoiseLite _noise;
     private PackedScene _cube;
@@ -21,7 +21,7 @@ public partial class ObjectPlacer : Node
         EventSystem.ImpulseSent -= OnImpulseSent;
     }
 
-    private void OnSetSceneConfig(SceneConfig config)
+    private void OnSetSceneConfig(_SceneConfig config)
     {
         _noise = config.Noise;
         _cube = config.Cube;

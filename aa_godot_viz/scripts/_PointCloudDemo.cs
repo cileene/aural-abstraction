@@ -4,7 +4,7 @@ namespace aa_godot_viz.scripts;
 
 // Renders a point cloud using MultiMesh — all instances share one draw call,
 // so this scales to tens of thousands of points without per-object overhead.
-public partial class PointCloudDemo : Node3D
+public partial class _PointCloudDemo : Node3D
 {
     [Export] public int PointCount = 10000;
     [Export] public float Spread = 5f;
