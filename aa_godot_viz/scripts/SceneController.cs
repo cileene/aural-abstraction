@@ -37,5 +37,9 @@ public partial class SceneController : Node
         {
             EventSystem.RaiseNextSound(false);
         }
+        else if (@event.IsActionPressed("Randomize"))
+        {
+            EventSystem.RaiseRandomize();
+        }
     }
 }

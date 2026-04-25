@@ -18,6 +18,7 @@ public static class EventSystem
     public static event Action<int> SoundsInitialized;
     public static event Action<Parameters> ParametersRestored;
     public static event Action SliderReleased;
+    public static event Action Randomize;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -71,5 +72,11 @@ public static class EventSystem
     {
         ParametersRestored?.Invoke(parameters);
         GD.Print($"EventSystem: Raised ParametersRestored | Color:{parameters.Param1:F3} Spatiality:{parameters.Param2:F3} Composition:{parameters.Param3:F3} Shape:{parameters.Param4:F3} Material:{parameters.Param5:F3}");
+    }
+    
+    public static void RaiseRandomize()
+    {
+        Randomize?.Invoke();
+        GD.Print("EventSystem: Raised Randomize");
     }
 }

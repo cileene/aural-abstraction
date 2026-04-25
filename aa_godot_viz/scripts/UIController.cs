@@ -25,6 +25,7 @@ public partial class UIController : VBoxContainer
 	{
 		EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
 		EventSystem.ParametersRestored += OnParametersRestored;
+		EventSystem.Randomize += OnRandomize;
 	}
 
 	public override void _Ready()
@@ -71,6 +72,7 @@ public partial class UIController : VBoxContainer
 	{
 		EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
 		EventSystem.ParametersRestored -= OnParametersRestored;
+		EventSystem.Randomize -= OnRandomize;
 		_fpsLabel?.QueueFree();
 	}
 
@@ -94,6 +96,15 @@ public partial class UIController : VBoxContainer
 		});
 	}
 	
+	private void OnRandomize()
+	{
+		_colorSlider.Value       = GD.Randf();
+		_spatialitySlider.Value  = GD.Randf();
+		_compositionSlider.Value = GD.Randf();
+		_shapeSlider.Value       = GD.Randf();
+		_materialSlider.Value    = GD.Randf();
+	}
+
 	private void OnCurrentSoundIndexChanged(int index)
 	{
 		_soundLabel.Text = $"{index + 1}";
