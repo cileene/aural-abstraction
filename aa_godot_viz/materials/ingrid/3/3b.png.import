@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://7h5yi21kvbqw"
 path.s3tc="res://.godot/imported/3b.png-709241a2c2c791f7b17118fd49d4715c.s3tc.ctex"
+path.etc2="res://.godot/imported/3b.png-709241a2c2c791f7b17118fd49d4715c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://materials/ingrid/3/3b.png"
-dest_files=["res://.godot/imported/3b.png-709241a2c2c791f7b17118fd49d4715c.s3tc.ctex"]
+dest_files=["res://.godot/imported/3b.png-709241a2c2c791f7b17118fd49d4715c.s3tc.ctex", "res://.godot/imported/3b.png-709241a2c2c791f7b17118fd49d4715c.etc2.ctex"]
 
 [params]
 

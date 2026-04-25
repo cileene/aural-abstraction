@@ -15,10 +15,12 @@ General/should_load_by_name=true
 
 [application]
 
-config/name="aa_godot_viz"
+config/name="Aural Abstraction"
+config/version="0.5.0"
 run/main_scene="uid://f3cedgdj3cjk"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=60
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [audio]
@@ -98,3 +100,4 @@ Randomize={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true
