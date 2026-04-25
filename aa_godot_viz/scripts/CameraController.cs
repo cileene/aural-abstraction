@@ -16,6 +16,6 @@ public partial class CameraController : Camera3D
 	
 	private void OnSetParameters(Parameters parameters)
 	{
-		Fov = Mathf.Lerp(40f, 110f, parameters.Param2); // Spatiality controls zoom
+		Fov = Mathf.Lerp(40f, 110f, parameters.Param2);
 	}
 }
