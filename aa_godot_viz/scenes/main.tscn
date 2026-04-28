@@ -27,6 +27,8 @@ background_mode = 1
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 4
+tonemap_exposure = 1.2
+tonemap_agx_contrast = 1.5
 ssr_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
@@ -44,7 +46,9 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 script = ExtResource("1_0wfyh")
 
 [node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]
-offset_top = -480.0
+offset_left = -739.0
+offset_top = -404.0
+ShowFps = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=247857469]
 environment = SubResource("Environment_0wfyh")
@@ -86,8 +90,8 @@ shadow_blur = 2.958
 omni_range = 43.443
 omni_attenuation = 2.0
 script = ExtResource("15_muem4")
-_coldColor = Color(0.091718696, 0.76841474, 0.9639973, 1)
-_warmColor = Color(0.99877805, 0.52347493, 0.31373435, 1)
+_coldColor = Color(0.29780897, 0.7456929, 0.9977767, 1)
+_warmColor = Color(0.8666667, 0.61960787, 0.24705882, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Bubble" unique_id=1300690305]
 transform = Transform3D(-0.73224634, -0.2908329, 0.6158176, -0.16811706, 0.95343924, 0.25037998, -0.6599634, 0.07981039, -0.7470464, 18.25, 11.559, -20.328)

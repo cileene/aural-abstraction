@@ -36,8 +36,8 @@ _materialValue = NodePath("5/HBoxContainer/MaterialSpinBox")
 
 [node name="sound" type="Label" parent="." unique_id=2073038574]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "1"
+theme_override_font_sizes/font_size = 40
+text = "0"
 horizontal_alignment = 2
 
 [node name="1" type="VBoxContainer" parent="." unique_id=1678938413]
@@ -49,7 +49,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 theme_override_font_sizes/font_size = 22
-text = "COLOR"
+text = "1"
 horizontal_alignment = 1
 uppercase = true
 
@@ -58,6 +58,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="1/HBoxContainer" unique_id=1972087832]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -73,6 +74,7 @@ alignment = 1
 select_all_on_focus = true
 
 [node name="Label3" type="Label" parent="1/HBoxContainer" unique_id=1178535355]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -100,7 +102,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 theme_override_font_sizes/font_size = 22
-text = "Spatiality"
+text = "2"
 horizontal_alignment = 1
 uppercase = true
 
@@ -109,6 +111,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="2/HBoxContainer" unique_id=766781978]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -124,6 +127,7 @@ alignment = 1
 select_all_on_focus = true
 
 [node name="Label3" type="Label" parent="2/HBoxContainer" unique_id=1696135750]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -151,7 +155,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 theme_override_font_sizes/font_size = 22
-text = "Composition"
+text = "3"
 horizontal_alignment = 1
 uppercase = true
 
@@ -160,6 +164,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="3/HBoxContainer" unique_id=982298461]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -175,6 +180,7 @@ alignment = 1
 select_all_on_focus = true
 
 [node name="Label3" type="Label" parent="3/HBoxContainer" unique_id=309080769]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -202,7 +208,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 theme_override_font_sizes/font_size = 22
-text = "Shape"
+text = "4"
 horizontal_alignment = 1
 uppercase = true
 
@@ -211,6 +217,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="4/HBoxContainer" unique_id=1404191360]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -226,6 +233,7 @@ alignment = 1
 select_all_on_focus = true
 
 [node name="Label3" type="Label" parent="4/HBoxContainer" unique_id=667295560]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -253,7 +261,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
 theme_override_font_sizes/font_size = 22
-text = "Material"
+text = "5"
 horizontal_alignment = 1
 uppercase = true
 
@@ -262,6 +270,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="5/HBoxContainer" unique_id=1646330795]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")
@@ -277,6 +286,7 @@ alignment = 1
 select_all_on_focus = true
 
 [node name="Label3" type="Label" parent="5/HBoxContainer" unique_id=443391780]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tbgi4")

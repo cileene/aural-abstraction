@@ -108,7 +108,7 @@ public partial class UIController : VBoxContainer
 
 	private void OnCurrentSoundIndexChanged(int index)
 	{
-		_soundLabel.Text = $"{index + 1}";
+		_soundLabel.Text = $"{index}";
 	}
 
 	private void OnParametersRestored(Parameters p)

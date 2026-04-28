@@ -18,6 +18,7 @@ public partial class SoundController : AudioStreamPlayer3D
         {
             Stream = _audioStreams[0];
             EventSystem.RaiseSoundsInitialized(_audioStreams.Length);
+            EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
         }
     }
 
