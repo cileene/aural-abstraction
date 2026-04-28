@@ -5,6 +5,8 @@ namespace aa_godot_viz.scripts;
 public partial class UIController : VBoxContainer
 {
 	[Export] private Label _soundLabel;
+	[Export] private SpinBox _minSoundSpinBox;
+	[Export] private SpinBox _maxSoundSpinBox;
 	[Export] private HSlider _colorSlider;
 	[Export] private SpinBox _colorValue;
 	[Export] private HSlider _spatialitySlider;
@@ -26,10 +28,16 @@ public partial class UIController : VBoxContainer
 		EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
 		EventSystem.ParametersRestored += OnParametersRestored;
 		EventSystem.Randomize += OnRandomize;
+		EventSystem.SoundsInitialized += OnSoundsInitialized;
 	}
 
 	public override void _Ready()
 	{
+		_minSoundSpinBox.Step = 1;
+		_maxSoundSpinBox.Step = 1;
+		_minSoundSpinBox.ValueChanged += _ => RaiseSoundRange();
+		_maxSoundSpinBox.ValueChanged += _ => RaiseSoundRange();
+
 		BindSlider(_colorSlider,      _colorValue,      v => { _color = v;       RaiseParameters(); });
 		BindSlider(_spatialitySlider, _spatialityValue, v => { _spatiality = v;  RaiseParameters(); });
 		BindSlider(_compositionSlider,_compositionValue,v => { _composition = v; RaiseParameters(); });
@@ -73,6 +81,7 @@ public partial class UIController : VBoxContainer
 		EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
 		EventSystem.ParametersRestored -= OnParametersRestored;
 		EventSystem.Randomize -= OnRandomize;
+		EventSystem.SoundsInitialized -= OnSoundsInitialized;
 		_fpsLabel?.QueueFree();
 	}
 
@@ -104,6 +113,21 @@ public partial class UIController : VBoxContainer
 		_shapeSlider.Value       = GD.Randf();
 		_materialSlider.Value    = GD.Randf();
 		EventSystem.RaiseSliderReleased();
+	}
+
+	private void OnSoundsInitialized(int count)
+	{
+ 		_minSoundSpinBox.MaxValue = count - 1;
+		_maxSoundSpinBox.MaxValue = count - 1;
+		_maxSoundSpinBox.SetValueNoSignal(count - 1);
+	}
+
+	private void RaiseSoundRange()
+	{
+		int min = (int)_minSoundSpinBox.Value;
+		int max = (int)_maxSoundSpinBox.Value;
+		if (min > max) return;
+		EventSystem.RaiseSoundRangeChanged(min, max);
 	}
 
 	private void OnCurrentSoundIndexChanged(int index)

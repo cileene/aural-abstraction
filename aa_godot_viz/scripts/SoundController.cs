@@ -7,16 +7,20 @@ public partial class SoundController : AudioStreamPlayer3D
     [ExportCategory("Sounds")] [Export] private AudioStream[] _audioStreams;
 
     private int _currentSoundIndex = 0;
+    private int _minIndex = 0;
+    private int _maxIndex = 0;
 
     public override void _Ready()
     {
         EventSystem.SetParameters += OnSetParameters;
         EventSystem.PlaySound += OnPlaySound;
         EventSystem.NextSound += OnNextSound;
+        EventSystem.SoundRangeChanged += OnSoundRangeChanged;
 
         if (_audioStreams is { Length: > 0 })
         {
-            Stream = _audioStreams[0];
+            _maxIndex = _audioStreams.Length - 1;
+            Stream = _audioStreams[_currentSoundIndex];
             EventSystem.RaiseSoundsInitialized(_audioStreams.Length);
             EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
         }
@@ -27,6 +31,19 @@ public partial class SoundController : AudioStreamPlayer3D
         EventSystem.SetParameters -= OnSetParameters;
         EventSystem.PlaySound -= OnPlaySound;
         EventSystem.NextSound -= OnNextSound;
+        EventSystem.SoundRangeChanged -= OnSoundRangeChanged;
+    }
+
+    private void OnSoundRangeChanged(int min, int max)
+    {
+        _minIndex = Mathf.Clamp(min, 0, _audioStreams.Length - 1);
+        _maxIndex = Mathf.Clamp(max, _minIndex, _audioStreams.Length - 1);
+        _currentSoundIndex = _minIndex;
+        bool wasPlaying = Playing;
+        Stop();
+        Stream = _audioStreams[_currentSoundIndex];
+        EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
+        if (wasPlaying) Play();
     }
 
     private void OnSetParameters(Parameters parameters)
@@ -47,11 +64,11 @@ public partial class SoundController : AudioStreamPlayer3D
             return;
         }
 
-        int n = _audioStreams.Length;
+        int rangeSize = _maxIndex - _minIndex + 1;
         if (next)
-            _currentSoundIndex = (_currentSoundIndex + 1) % n;
+            _currentSoundIndex = _minIndex + (_currentSoundIndex - _minIndex + 1) % rangeSize;
         else
-            _currentSoundIndex = (_currentSoundIndex - 1 + n) % n;
+            _currentSoundIndex = _minIndex + (_currentSoundIndex - _minIndex - 1 + rangeSize) % rangeSize;
 
         bool wasPlaying = Playing;
         Stop();

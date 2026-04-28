@@ -12,6 +12,8 @@ public partial class DataManager : Node
     private float[,] _grid; // [soundIndex, paramIndex]
     private int _soundCount;
     private int _currentSoundIndex;
+    private int _minIndex = 0;
+    private int _maxIndex = 0;
     private Parameters _currentParams = new() { Param1 = 0.5f, Param2 = 0.5f, Param3 = 0.5f, Param4 = 0.5f, Param5 = 0.5f };
 
     private static readonly string[] ParamNames = { "Color", "Spatiality", "Composition", "Shape", "Material" };
@@ -22,6 +24,7 @@ public partial class DataManager : Node
         EventSystem.SetParameters += OnSetParameters;
         EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
         EventSystem.SliderReleased += OnSliderReleased;
+        EventSystem.SoundRangeChanged += OnSoundRangeChanged;
     }
 
     public override void _ExitTree()
@@ -30,6 +33,7 @@ public partial class DataManager : Node
         EventSystem.SetParameters -= OnSetParameters;
         EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
         EventSystem.SliderReleased -= OnSliderReleased;
+        EventSystem.SoundRangeChanged -= OnSoundRangeChanged;
     }
 
     public override void _Ready()
@@ -43,13 +47,20 @@ public partial class DataManager : Node
     private void OnSoundsInitialized(int count)
     {
         _soundCount = count;
+        _maxIndex = count - 1;
         _grid = new float[count, 5];
         for (int s = 0; s < count; s++)
             for (int p = 0; p < 5; p++)
                 _grid[s, p] = 0.5f;
 
         WriteCSV();
-        GD.Print($"DataManager: file created at {_filePath}");
+    }
+
+    private void OnSoundRangeChanged(int min, int max)
+    {
+        _minIndex = min;
+        _maxIndex = max;
+        WriteCSV();
     }
 
     private void OnSetParameters(Parameters parameters)
@@ -101,17 +112,15 @@ public partial class DataManager : Node
 
         var sb = new StringBuilder();
 
-        // Header row: empty cell + one column per sound.
-        sb.Append("Parameter");
-        for (int s = 0; s < _soundCount; s++)
-            sb.Append($",Sound {s + 1}");
+        sb.Append("Sound");
+        foreach (string name in ParamNames)
+            sb.Append($",{name}");
         sb.AppendLine();
 
-        // One row per parameter.
-        for (int p = 0; p < 5; p++)
+        for (int s = _minIndex; s <= _maxIndex; s++)
         {
-            sb.Append(ParamNames[p]);
-            for (int s = 0; s < _soundCount; s++)
+            sb.Append(s);
+            for (int p = 0; p < 5; p++)
                 sb.Append($",{_grid[s, p].ToString("F3", CultureInfo.InvariantCulture)}");
             sb.AppendLine();
         }

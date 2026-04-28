@@ -19,6 +19,7 @@ public static class EventSystem
     public static event Action<Parameters> ParametersRestored;
     public static event Action SliderReleased;
     public static event Action Randomize;
+    public static event Action<int, int> SoundRangeChanged;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -78,5 +79,11 @@ public static class EventSystem
     {
         Randomize?.Invoke();
         GD.Print("EventSystem: Raised Randomize");
+    }
+
+    public static void RaiseSoundRangeChanged(int min, int max)
+    {
+        SoundRangeChanged?.Invoke(min, max);
+        GD.Print($"EventSystem: Raised SoundRangeChanged | Min: {min} Max: {max}");
     }
 }
