@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bmcatn0ugxjj"]
+
+[ext_resource type="Shader" uid="uid://de57uy082n3vb" path="res://materials/godot_shaders/PointCloudWobble.gdshader" id="1_8l13j"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8l13j")
+shader_parameter/amplitude = 0.0
+shader_parameter/audio_amplitude = 0.0
+shader_parameter/speed = 9.082000431395
+shader_parameter/cold_root = Color(0.14901961, 0.2509804, 0.5019608, 1)
+shader_parameter/cold_tip = Color(0.2509804, 0.54901963, 0.6509804, 1)
+shader_parameter/warm_root = Color(0.38, 0.22, 0.09, 1)
+shader_parameter/warm_tip = Color(0.7914555, 0.3643645, 0, 1)
+shader_parameter/param1 = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0

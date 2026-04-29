@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3hrdvr32e4eh"
+path="res://.godot/imported/drms St_Margarets_Church.mp3-b9f4a5a3c4284124ac52ba28f7485121.mp3str"
+
+[deps]
+
+source_file="res://sounds/drms/drms St_Margarets_Church.mp3"
+dest_files=["res://.godot/imported/drms St_Margarets_Church.mp3-b9f4a5a3c4284124ac52ba28f7485121.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

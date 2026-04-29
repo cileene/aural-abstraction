@@ -3,14 +3,12 @@ _Interactive Sound Systems_ 4th Semester Medialogy project at Aalborg University
 Spring 2026.
 
 ## Brief
-We investigate whether acoustic impulse responses, captured using a custom physical prototype, can be used to infer and abstract spatial characteristics of a room. The resulting parameters are mapped to a visual representation, an _aural abstraction_, which treats sound as a sensing mechanism for spatial perception. 
+We investigate whether acoustic impulse responses can be used to infer and abstract spatial characteristics of a room. The resulting parameters are mapped to a visual representation, an _aural abstraction_, which treats sound as a sensing mechanism for spatial perception. 
 
 ## Parts
 Each part will have its own folder in the root directory.
 
-- Physical prototype
-- Embedded programming
-- Signal processing / analysis
+- Signal processing / analysis (python)
 - Unity / Godot visualization
 
 ## Team

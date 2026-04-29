@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dq818yihfh06f"]
+
+[ext_resource type="Script" uid="uid://bx27n80fmvsl5" path="res://scripts/_PointCloudDemo.cs" id="1_rw77o"]
+[ext_resource type="Shader" uid="uid://ibc1ivsy2edc" path="res://materials/godot_shaders/water.gdshader" id="2_tku0r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u1a74"]
+noise_type = 2
+frequency = 0.0033
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3kcm7"]
+noise = SubResource("FastNoiseLite_u1a74")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kexo2"]
+noise_type = 2
+frequency = 0.0093
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w4rsi"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_kexo2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa0ni"]
+render_priority = 0
+shader = ExtResource("2_tku0r")
+shader_parameter/normal1tex = SubResource("NoiseTexture2D_3kcm7")
+shader_parameter/normal2tex = SubResource("NoiseTexture2D_w4rsi")
+shader_parameter/speed1 = Vector2(1.14, 0)
+shader_parameter/speed2 = Vector2(0, 0.01)
+shader_parameter/strength = 7.11
+shader_parameter/distortion = 1.58
+shader_parameter/water_color = Color(4.283637e-06, 0.4439385, 0.57477844, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tku0r"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_u1a74"]
+sky_material = SubResource("ProceduralSkyMaterial_tku0r")
+
+[sub_resource type="Environment" id="Environment_3kcm7"]
+background_mode = 1
+sky = SubResource("Sky_u1a74")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_sky_affect = 0.0
+
+[node name="PointCloudScene" type="Node3D" unique_id=2065912470]
+script = ExtResource("1_rw77o")
+_sizeMultiply = 2.0
+PointMaterial = SubResource("ShaderMaterial_qa0ni")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1469095464]
+environment = SubResource("Environment_3kcm7")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1882757775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0052564)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2016829686]
+light_energy = 9.751
+shadow_enabled = true
+omni_range = 4096.0
+omni_attenuation = 2.0

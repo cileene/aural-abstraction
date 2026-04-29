@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c71r6l64npe8q"]
+
+[ext_resource type="Shader" uid="uid://ibc1ivsy2edc" path="res://materials/godot_shaders/water.gdshader" id="1_shsib"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_shsib"]
+noise_type = 2
+seed = 38
+frequency = 0.0028
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qbnvy"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_shsib")
+seamless = true
+as_normal_map = true
+bump_strength = 27.6
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eodmw"]
+noise_type = 2
+frequency = 0.0118
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g6uta"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_eodmw")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tkw31"]
+render_priority = 0
+shader = ExtResource("1_shsib")
+shader_parameter/normal1tex = SubResource("NoiseTexture2D_qbnvy")
+shader_parameter/normal2tex = SubResource("NoiseTexture2D_g6uta")
+shader_parameter/speed1 = Vector2(0.01, 0)
+shader_parameter/speed2 = Vector2(0, 0.01)
+shader_parameter/strength = 1.0
+shader_parameter/distortion = 0.77
+shader_parameter/water_color = Color(3.3691526e-07, 0.20095614, 0.26725382, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tkw31"]
+material = SubResource("ShaderMaterial_tkw31")
+flip_faces = true
+radius = 15.0
+height = 30.0
+radial_segments = 32
+
+[node name="Bubble" type="Node3D" unique_id=864385922]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=545421056]
+mesh = SubResource("SphereMesh_tkw31")

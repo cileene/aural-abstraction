@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6rmyce8tnp5n"
+path="res://.godot/imported/drms Genesis_6_Studio.mp3-e3055d6af1813b62436c2af965b2a7e6.mp3str"
+
+[deps]
+
+source_file="res://sounds/drms/drms Genesis_6_Studio.mp3"
+dest_files=["res://.godot/imported/drms Genesis_6_Studio.mp3-e3055d6af1813b62436c2af965b2a7e6.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

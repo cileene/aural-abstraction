@@ -1,0 +1,337 @@
+[gd_scene format=3 uid="uid://dkbjslvsnnok6"]
+
+[ext_resource type="Script" uid="uid://cvypjxy1u8uc5" path="res://scripts/UIController.cs" id="1_8bix8"]
+
+[sub_resource type="Theme" id="Theme_tbgi4"]
+default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_vcts4"]
+
+[node name="UI" type="VBoxContainer" unique_id=1090373297 node_paths=PackedStringArray("_soundLabel", "_minSoundSpinBox", "_maxSoundSpinBox", "_colorSlider", "_colorValue", "_spatialitySlider", "_spatialityValue", "_compositionSlider", "_compositionValue", "_shapeSlider", "_shapeValue", "_materialSlider", "_materialValue")]
+custom_minimum_size = Vector2(800, 0)
+anchors_preset = -1
+anchor_left = 1.011
+anchor_top = 1.0
+anchor_right = 1.011
+anchor_bottom = 1.0
+offset_left = -709.12
+offset_top = -1070.0
+offset_right = 238.87988
+offset_bottom = 464.28564
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+alignment = 2
+script = ExtResource("1_8bix8")
+_soundLabel = NodePath("sound")
+_minSoundSpinBox = NodePath("range/MinSpinBox")
+_maxSoundSpinBox = NodePath("range/MaxSpinBox")
+_colorSlider = NodePath("1/ColorSlider")
+_colorValue = NodePath("1/HBoxContainer/ColorSpinBox")
+_spatialitySlider = NodePath("2/SpatialitySlider")
+_spatialityValue = NodePath("2/HBoxContainer/SpatialitySpinBox")
+_compositionSlider = NodePath("3/CompositionSlider")
+_compositionValue = NodePath("3/HBoxContainer/CompositionSpinBox")
+_shapeSlider = NodePath("4/ShapeSlider")
+_shapeValue = NodePath("4/HBoxContainer/ShapeSpinBox")
+_materialSlider = NodePath("5/MaterialSlider")
+_materialValue = NodePath("5/HBoxContainer/MaterialSpinBox")
+
+[node name="sound" type="Label" parent="." unique_id=2073038574]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 2
+
+[node name="range" type="HBoxContainer" parent="." unique_id=123456001]
+layout_mode = 2
+alignment = 2
+
+[node name="MinLabel" type="Label" parent="range" unique_id=123456002]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "min"
+
+[node name="MinSpinBox" type="SpinBox" parent="range" unique_id=123456003]
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MaxLabel" type="Label" parent="range" unique_id=123456004]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "max"
+
+[node name="MaxSpinBox" type="SpinBox" parent="range" unique_id=123456005]
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="1" type="VBoxContainer" parent="." unique_id=1678938413]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="1" unique_id=1279774299]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 22
+text = "1"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="1" unique_id=166293803]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="1/HBoxContainer" unique_id=1972087832]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Cold"
+uppercase = true
+
+[node name="ColorSpinBox" type="SpinBox" parent="1/HBoxContainer" unique_id=1304022102]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="1/HBoxContainer" unique_id=1178535355]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Warm"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="ColorSlider" type="HSlider" parent="1" unique_id=1111931762]
+layout_mode = 2
+theme = SubResource("Theme_vcts4")
+max_value = 1.0
+step = 0.001
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="2" type="VBoxContainer" parent="." unique_id=75433263]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="2" unique_id=2064994188]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 22
+text = "2"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="2" unique_id=711685436]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="2/HBoxContainer" unique_id=766781978]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Intimate"
+uppercase = true
+
+[node name="SpatialitySpinBox" type="SpinBox" parent="2/HBoxContainer" unique_id=133926535]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="2/HBoxContainer" unique_id=1696135750]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Distant"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="SpatialitySlider" type="HSlider" parent="2" unique_id=243621710]
+layout_mode = 2
+theme = SubResource("Theme_vcts4")
+max_value = 1.0
+step = 0.001
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="3" type="VBoxContainer" parent="." unique_id=1804032301]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="3" unique_id=1183427946]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 22
+text = "3"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="3" unique_id=1985490858]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="3/HBoxContainer" unique_id=982298461]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Diffuse"
+uppercase = true
+
+[node name="CompositionSpinBox" type="SpinBox" parent="3/HBoxContainer" unique_id=876326429]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="3/HBoxContainer" unique_id=309080769]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Dense"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="CompositionSlider" type="HSlider" parent="3" unique_id=1056583552]
+layout_mode = 2
+theme = SubResource("Theme_vcts4")
+max_value = 1.0
+step = 0.001
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="4" type="VBoxContainer" parent="." unique_id=1877125448]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="4" unique_id=1813618257]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 22
+text = "4"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="4" unique_id=435978400]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="4/HBoxContainer" unique_id=1404191360]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Organic"
+uppercase = true
+
+[node name="ShapeSpinBox" type="SpinBox" parent="4/HBoxContainer" unique_id=605132169]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="4/HBoxContainer" unique_id=667295560]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Fragmented"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="ShapeSlider" type="HSlider" parent="4" unique_id=1324329922]
+layout_mode = 2
+theme = SubResource("Theme_vcts4")
+max_value = 1.0
+step = 0.001
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="5" type="VBoxContainer" parent="." unique_id=1601131212]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="5" unique_id=430533118]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 22
+text = "5"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="5" unique_id=868691405]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="5/HBoxContainer" unique_id=1646330795]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Smooth"
+uppercase = true
+
+[node name="MaterialSpinBox" type="SpinBox" parent="5/HBoxContainer" unique_id=103470525]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label3" type="Label" parent="5/HBoxContainer" unique_id=443391780]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_tbgi4")
+theme_override_font_sizes/font_size = 18
+text = "Noisy"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="MaterialSlider" type="HSlider" parent="5" unique_id=2097730917]
+layout_mode = 2
+theme = SubResource("Theme_vcts4")
+max_value = 1.0
+step = 0.001
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="Container2" type="Control" parent="." unique_id=156772738]
+custom_minimum_size = Vector2(0, 41.92)
+layout_mode = 2
