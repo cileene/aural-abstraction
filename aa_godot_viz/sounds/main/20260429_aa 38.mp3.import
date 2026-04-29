@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://baq0gvfv31j72"
+path="res://.godot/imported/20260429_aa 38.mp3-3ff75be69cdc667dcdc0b2e8a4feba9a.mp3str"
+
+[deps]
+
+source_file="res://sounds/main/20260429_aa 38.mp3"
+dest_files=["res://.godot/imported/20260429_aa 38.mp3-3ff75be69cdc667dcdc0b2e8a4feba9a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
