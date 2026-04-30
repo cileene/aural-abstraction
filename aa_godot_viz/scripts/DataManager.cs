@@ -119,7 +119,7 @@ public partial class DataManager : Node
 
         for (int s = _minIndex; s <= _maxIndex; s++)
         {
-            sb.Append(s);
+            sb.Append(s.ToString("D2"));
             for (int p = 0; p < 5; p++)
                 sb.Append($",{_grid[s, p].ToString("F3", CultureInfo.InvariantCulture)}");
             sb.AppendLine();

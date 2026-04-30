@@ -70,10 +70,11 @@ public partial class SoundController : AudioStreamPlayer3D
         else
             _currentSoundIndex = _minIndex + (_currentSoundIndex - _minIndex - 1 + rangeSize) % rangeSize;
 
+        float pos = GetPlaybackPosition();
         bool wasPlaying = Playing;
         Stop();
         Stream = _audioStreams[_currentSoundIndex];
         EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
-        if (wasPlaying) Play();
+        if (wasPlaying) Play(pos);
     }
 }
