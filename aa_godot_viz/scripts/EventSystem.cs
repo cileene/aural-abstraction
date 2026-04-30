@@ -19,7 +19,7 @@ public static class EventSystem
     public static event Action<Parameters> ParametersRestored;
     public static event Action SliderReleased;
     public static event Action Randomize;
-    public static event Action<int, int> SoundRangeChanged;
+    public static event Action<int[]> ActiveSoundsChanged;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -39,19 +39,19 @@ public static class EventSystem
         ImpulseSent?.Invoke();
         GD.Print("EventSystem: Raised ImpulseSent");
     }
-    
+
     public static void RaisePlaySound()
     {
         PlaySound?.Invoke();
         GD.Print("EventSystem: Raised PlaySound");
     }
-    
+
     public static void RaiseNextSound(bool forward)
     {
         NextSound?.Invoke(forward);
         GD.Print(forward ? "EventSystem: Raised NextSound (forward)" : "EventSystem: Raised NextSound (backward)");
     }
-    
+
     public static void RaiseCurrentSoundIndexChanged(int index)
     {
         CurrentSoundIndexChanged?.Invoke(index);
@@ -74,16 +74,16 @@ public static class EventSystem
         ParametersRestored?.Invoke(parameters);
         GD.Print($"EventSystem: Raised ParametersRestored | Color:{parameters.Param1:F3} Spatiality:{parameters.Param2:F3} Composition:{parameters.Param3:F3} Shape:{parameters.Param4:F3} Material:{parameters.Param5:F3}");
     }
-    
+
     public static void RaiseRandomize()
     {
         Randomize?.Invoke();
         GD.Print("EventSystem: Raised Randomize");
     }
 
-    public static void RaiseSoundRangeChanged(int min, int max)
+    public static void RaiseActiveSoundsChanged(int[] sounds)
     {
-        SoundRangeChanged?.Invoke(min, max);
-        GD.Print($"EventSystem: Raised SoundRangeChanged | Min: {min} Max: {max}");
+        ActiveSoundsChanged?.Invoke(sounds);
+        GD.Print($"EventSystem: Raised ActiveSoundsChanged | [{string.Join(", ", sounds)}]");
     }
 }

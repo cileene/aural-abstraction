@@ -10,10 +10,8 @@ public partial class DataManager : Node
 {
     private string _filePath;
     private float[,] _grid; // [soundIndex, paramIndex]
-    private int _soundCount;
+    private int[] _activeSounds;
     private int _currentSoundIndex;
-    private int _minIndex = 0;
-    private int _maxIndex = 0;
     private Parameters _currentParams = new() { Param1 = 0.5f, Param2 = 0.5f, Param3 = 0.5f, Param4 = 0.5f, Param5 = 0.5f };
 
     private static readonly string[] ParamNames = { "Color", "Spatiality", "Composition", "Shape", "Material" };
@@ -24,7 +22,7 @@ public partial class DataManager : Node
         EventSystem.SetParameters += OnSetParameters;
         EventSystem.CurrentSoundIndexChanged += OnCurrentSoundIndexChanged;
         EventSystem.SliderReleased += OnSliderReleased;
-        EventSystem.SoundRangeChanged += OnSoundRangeChanged;
+        EventSystem.ActiveSoundsChanged += OnActiveSoundsChanged;
     }
 
     public override void _ExitTree()
@@ -33,7 +31,7 @@ public partial class DataManager : Node
         EventSystem.SetParameters -= OnSetParameters;
         EventSystem.CurrentSoundIndexChanged -= OnCurrentSoundIndexChanged;
         EventSystem.SliderReleased -= OnSliderReleased;
-        EventSystem.SoundRangeChanged -= OnSoundRangeChanged;
+        EventSystem.ActiveSoundsChanged -= OnActiveSoundsChanged;
     }
 
     public override void _Ready()
@@ -46,20 +44,15 @@ public partial class DataManager : Node
 
     private void OnSoundsInitialized(int count)
     {
-        _soundCount = count;
-        _maxIndex = count - 1;
         _grid = new float[count, 5];
         for (int s = 0; s < count; s++)
             for (int p = 0; p < 5; p++)
                 _grid[s, p] = 0.5f;
-
-        WriteCSV();
     }
 
-    private void OnSoundRangeChanged(int min, int max)
+    private void OnActiveSoundsChanged(int[] sounds)
     {
-        _minIndex = min;
-        _maxIndex = max;
+        _activeSounds = sounds;
         WriteCSV();
     }
 
@@ -72,12 +65,10 @@ public partial class DataManager : Node
     {
         if (_grid == null) return;
 
-        // Save current params for the sound we're leaving.
         SaveParams(_currentSoundIndex);
 
         _currentSoundIndex = newIndex;
 
-        // Restore stored params for the new sound.
         var restored = new Parameters
         {
             Param1 = _grid[newIndex, 0],
@@ -108,7 +99,7 @@ public partial class DataManager : Node
 
     private void WriteCSV()
     {
-        if (_grid == null || _filePath == null) return;
+        if (_grid == null || _filePath == null || _activeSounds == null) return;
 
         var sb = new StringBuilder();
 
@@ -117,7 +108,7 @@ public partial class DataManager : Node
             sb.Append($",{name}");
         sb.AppendLine();
 
-        for (int s = _minIndex; s <= _maxIndex; s++)
+        foreach (int s in _activeSounds)
         {
             sb.Append(s.ToString("D2"));
             for (int p = 0; p < 5; p++)

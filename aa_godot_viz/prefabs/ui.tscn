@@ -7,7 +7,7 @@ default_font_size = 20
 
 [sub_resource type="Theme" id="Theme_vcts4"]
 
-[node name="UI" type="VBoxContainer" unique_id=1090373297 node_paths=PackedStringArray("_soundLabel", "_minSoundSpinBox", "_maxSoundSpinBox", "_colorSlider", "_colorValue", "_spatialitySlider", "_spatialityValue", "_compositionSlider", "_compositionValue", "_shapeSlider", "_shapeValue", "_materialSlider", "_materialValue")]
+[node name="UI" type="VBoxContainer" unique_id=1090373297 node_paths=PackedStringArray("_soundLabel", "_minSoundSpinBox", "_maxSoundSpinBox", "_testerSpinBox", "_colorSlider", "_colorValue", "_spatialitySlider", "_spatialityValue", "_compositionSlider", "_compositionValue", "_shapeSlider", "_shapeValue", "_materialSlider", "_materialValue")]
 custom_minimum_size = Vector2(800, 0)
 anchors_preset = -1
 anchor_left = 1.011
@@ -26,6 +26,7 @@ script = ExtResource("1_8bix8")
 _soundLabel = NodePath("sound")
 _minSoundSpinBox = NodePath("range/MinSpinBox")
 _maxSoundSpinBox = NodePath("range/MaxSpinBox")
+_testerSpinBox = NodePath("range/TestSpinBox")
 _colorSlider = NodePath("1/ColorSlider")
 _colorValue = NodePath("1/HBoxContainer/ColorSpinBox")
 _spatialitySlider = NodePath("2/SpatialitySlider")
@@ -46,6 +47,16 @@ horizontal_alignment = 2
 [node name="range" type="HBoxContainer" parent="." unique_id=123456001]
 layout_mode = 2
 alignment = 2
+
+[node name="Test" type="Label" parent="range" unique_id=1279662901]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Test"
+
+[node name="TestSpinBox" type="SpinBox" parent="range" unique_id=2016815413]
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
 
 [node name="MinLabel" type="Label" parent="range" unique_id=123456002]
 layout_mode = 2

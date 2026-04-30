@@ -6,48 +6,40 @@ public partial class SoundController : AudioStreamPlayer3D
 {
     [ExportCategory("Sounds")] [Export] private AudioStream[] _audioStreams;
 
-    private int _currentSoundIndex = 0;
-    private int _minIndex = 0;
-    private int _maxIndex = 0;
+    private int[] _activeSounds;
+    private int _pos;
 
     public override void _Ready()
     {
-        EventSystem.SetParameters += OnSetParameters;
         EventSystem.PlaySound += OnPlaySound;
         EventSystem.NextSound += OnNextSound;
-        EventSystem.SoundRangeChanged += OnSoundRangeChanged;
+        EventSystem.ActiveSoundsChanged += OnActiveSoundsChanged;
 
         if (_audioStreams is { Length: > 0 })
         {
-            _maxIndex = _audioStreams.Length - 1;
-            Stream = _audioStreams[_currentSoundIndex];
+            Stream = _audioStreams[0];
             EventSystem.RaiseSoundsInitialized(_audioStreams.Length);
-            EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
+            EventSystem.RaiseCurrentSoundIndexChanged(0);
         }
     }
 
     public override void _ExitTree()
     {
-        EventSystem.SetParameters -= OnSetParameters;
         EventSystem.PlaySound -= OnPlaySound;
         EventSystem.NextSound -= OnNextSound;
-        EventSystem.SoundRangeChanged -= OnSoundRangeChanged;
+        EventSystem.ActiveSoundsChanged -= OnActiveSoundsChanged;
     }
 
-    private void OnSoundRangeChanged(int min, int max)
+    private void OnActiveSoundsChanged(int[] sounds)
     {
-        _minIndex = Mathf.Clamp(min, 0, _audioStreams.Length - 1);
-        _maxIndex = Mathf.Clamp(max, _minIndex, _audioStreams.Length - 1);
-        _currentSoundIndex = _minIndex;
+        if (sounds == null || sounds.Length == 0) return;
+        _activeSounds = sounds;
+        _pos = 0;
         bool wasPlaying = Playing;
         Stop();
-        Stream = _audioStreams[_currentSoundIndex];
-        EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
+        Stream = _audioStreams[_activeSounds[_pos]];
+        EventSystem.RaiseCurrentSoundIndexChanged(_activeSounds[_pos]);
         if (wasPlaying) Play();
-    }
-
-    private void OnSetParameters(Parameters parameters)
-    {
     }
 
     private void OnPlaySound()
@@ -58,23 +50,20 @@ public partial class SoundController : AudioStreamPlayer3D
 
     private void OnNextSound(bool next)
     {
-        if (_audioStreams == null || _audioStreams.Length == 0)
+        if (_activeSounds == null || _activeSounds.Length == 0)
         {
-            GD.PrintErr("SoundController: No audio streams assigned!");
+            GD.PrintErr("SoundController: No active sounds!");
             return;
         }
 
-        int rangeSize = _maxIndex - _minIndex + 1;
-        if (next)
-            _currentSoundIndex = _minIndex + (_currentSoundIndex - _minIndex + 1) % rangeSize;
-        else
-            _currentSoundIndex = _minIndex + (_currentSoundIndex - _minIndex - 1 + rangeSize) % rangeSize;
+        int n = _activeSounds.Length;
+        _pos = next ? (_pos + 1) % n : (_pos - 1 + n) % n;
 
         float pos = GetPlaybackPosition();
         bool wasPlaying = Playing;
         Stop();
-        Stream = _audioStreams[_currentSoundIndex];
-        EventSystem.RaiseCurrentSoundIndexChanged(_currentSoundIndex);
+        Stream = _audioStreams[_activeSounds[_pos]];
+        EventSystem.RaiseCurrentSoundIndexChanged(_activeSounds[_pos]);
         if (wasPlaying) Play(pos);
     }
 }

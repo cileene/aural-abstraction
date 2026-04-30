@@ -7,6 +7,7 @@ public partial class UIController : VBoxContainer
 	[Export] private Label _soundLabel;
 	[Export] private SpinBox _minSoundSpinBox;
 	[Export] private SpinBox _maxSoundSpinBox;
+	[Export] private SpinBox _testerSpinBox;
 	[Export] private HSlider _colorSlider;
 	[Export] private SpinBox _colorValue;
 	[Export] private HSlider _spatialitySlider;
@@ -35,8 +36,13 @@ public partial class UIController : VBoxContainer
 	{
 		_minSoundSpinBox.Step = 1;
 		_maxSoundSpinBox.Step = 1;
-		_minSoundSpinBox.ValueChanged += _ => RaiseSoundRange();
-		_maxSoundSpinBox.ValueChanged += _ => RaiseSoundRange();
+		_minSoundSpinBox.ValueChanged += _ => RaiseActiveSounds();
+		_maxSoundSpinBox.ValueChanged += _ => RaiseActiveSounds();
+
+		_testerSpinBox.Step = 1;
+		_testerSpinBox.MinValue = 0;
+		_testerSpinBox.MaxValue = 5;
+		_testerSpinBox.ValueChanged += _ => RaiseActiveSounds();
 
 		BindSlider(_colorSlider,      _colorValue,      v => { _color = v;       RaiseParameters(); });
 		BindSlider(_spatialitySlider, _spatialityValue, v => { _spatiality = v;  RaiseParameters(); });
@@ -104,7 +110,33 @@ public partial class UIController : VBoxContainer
 			Param5 = _material
 		});
 	}
-	
+
+	private void RaiseActiveSounds()
+	{
+		int min = (int)_minSoundSpinBox.Value;
+		int max = (int)_maxSoundSpinBox.Value;
+		if (min > max) return;
+
+		int tester = (int)_testerSpinBox.Value;
+		int size = max - min + 1;
+		int[] sounds;
+
+		if (tester == 0)
+		{
+			sounds = new int[size];
+			for (int i = 0; i < size; i++)
+				sounds[i] = min + i;
+		}
+		else
+		{
+			sounds = new int[4];
+			for (int k = 0; k < 4; k++)
+				sounds[k] = min + ((tester - 1) * 2 + k) % size;
+		}
+
+		EventSystem.RaiseActiveSoundsChanged(sounds);
+	}
+
 	private void OnRandomize()
 	{
 		_colorSlider.Value       = GD.Randf();
@@ -117,22 +149,15 @@ public partial class UIController : VBoxContainer
 
 	private void OnSoundsInitialized(int count)
 	{
- 		_minSoundSpinBox.MaxValue = count - 1;
+		_minSoundSpinBox.MaxValue = count - 1;
 		_maxSoundSpinBox.MaxValue = count - 1;
 		_maxSoundSpinBox.SetValueNoSignal(count - 1);
-	}
-
-	private void RaiseSoundRange()
-	{
-		int min = (int)_minSoundSpinBox.Value;
-		int max = (int)_maxSoundSpinBox.Value;
-		if (min > max) return;
-		EventSystem.RaiseSoundRangeChanged(min, max);
+		RaiseActiveSounds();
 	}
 
 	private void OnCurrentSoundIndexChanged(int index)
 	{
-		_soundLabel.Text = $"{index}";
+		_soundLabel.Text = $"{index:D2}";
 	}
 
 	private void OnParametersRestored(Parameters p)
