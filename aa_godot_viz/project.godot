@@ -16,7 +16,7 @@ General/should_load_by_name=true
 [application]
 
 config/name="Aural Abstraction"
-config/version="0.5.0"
+config/version="0.5.1"
 run/main_scene="uid://f3cedgdj3cjk"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=60
