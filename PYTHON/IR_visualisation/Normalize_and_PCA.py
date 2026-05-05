@@ -12,7 +12,8 @@ scaler = StandardScaler() #normalize
 X_scaled = scaler.fit_transform(X)
 
 # Reduce dimensions using PCA
-pca = PCA(n_components=0.99)
+pca = PCA(n_components=0.95, svd_solver="full")
+pca.fit(X_scaled)
 X_pca = pca.fit_transform(X_scaled)
 print(X_pca)
 
