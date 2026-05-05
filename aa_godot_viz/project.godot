@@ -16,7 +16,7 @@ General/should_load_by_name=true
 [application]
 
 config/name="Aural Abstraction"
-config/version="0.5.1"
+config/version="0.5.2"
 run/main_scene="uid://f3cedgdj3cjk"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 run/max_fps=60
@@ -31,7 +31,7 @@ buses/default_bus_layout="uid://bk6t4lfqgfgsd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
