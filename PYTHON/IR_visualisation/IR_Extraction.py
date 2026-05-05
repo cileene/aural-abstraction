@@ -11,8 +11,10 @@ import pyfar as pf
 from pyfar.dsp.filter import fractional_octave_bands as fob
 
 
-def load_ir(path): #Returns a normalized impulse response and its sampling rate from a given file path
-    ir, sr = librosa.load(path, sr=None, mono=True)
+def load_ir(path):
+    ir, sr = librosa.load(path, sr=None, mono=False)
+    if ir.ndim > 1:
+        ir = ir[0]  # use W channel only for B-format, or left channel for stereo
     ir = ir / np.max(np.abs(ir))
     return ir, sr
 def compute_edc(ir): #Compute energy decay curve using the formula from the report
@@ -91,7 +93,7 @@ def compute_mel_T20_bands(ir, sr, n_bands=40):
     return results
 """
 
-def compute_T30_octave_band(signal, sr):
+def compute_T20_octave_band(signal, sr):
     pf_signal = pf.Signal(signal, sr)
     filtered_signal = fob(signal = pf_signal, num_fractions = 1,
                            sampling_rate=None, frequency_range=(20, 20000))
@@ -103,8 +105,8 @@ def compute_T30_octave_band(signal, sr):
         band_ir = filtered_signal.time[i, 0, :]  #band, channel, time
         edc_db = compute_edc(band_ir)
         freq = int(center_freqs[i])
-        T30 = compute_rt(edc_db, sr, -5, -25)
-        results[f"oct_band_T30_{freq}hz"] = T30
+        T20 = compute_rt(edc_db, sr, -5, -25)
+        results[f"oct_band_T20_{freq}hz"] = T20
 
     return results
 
@@ -122,13 +124,16 @@ if __name__ == "__main__": # only run when playing in this file
             path = os.path.join(ir_dir, file)
 
             ir, sr = load_ir(path)
+            peak_idx = np.argmax(np.abs(ir))
+            ir_trimmed = ir[peak_idx:]
+
             edc_db = compute_edc(ir)
             rt20 = compute_rt(edc_db, sr, -5, -25)
             rt30 = compute_rt(edc_db, sr, -5, -35)
             EDT = compute_rt(edc_db, sr, 0, -10)
-            C50, C80 = compute_clarity(ir, sr)
-            D50, D80 = compute_definition(ir, sr)
-            t30_octave_band = compute_T30_octave_band(ir, sr)
+            C50, C80 = compute_clarity(ir_trimmed, sr)
+            D50, D80 = compute_definition(ir_trimmed, sr)
+            t20_octave_band = compute_T20_octave_band(ir, sr)
 
             result = {
                 "file": file,
@@ -140,7 +145,7 @@ if __name__ == "__main__": # only run when playing in this file
                 "D50": D50,
                 "D80": D80,
             }
-            result.update(t30_octave_band) 
+            result.update(t20_octave_band)
 
             skip = False
 
