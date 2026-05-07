@@ -4,11 +4,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
-df = pd.read_csv("PCA_and_visual.csv", sep=None, engine="python")
+df = pd.read_csv("Model_Input/PCA_with_params/PCA_with_params.csv", sep=None, engine="python")
 
 pc_cols = [col for col in df.columns if col.startswith("PC")]
 X_input = df[pc_cols]
-Y_output = df[["Size","Texture","Temp"]]
+Y_output = df[["Color","Spatiality","Composition","Shape","Material"]]
 
 X_train, X_test, y_train, y_test = train_test_split(
     X_input,
@@ -18,11 +18,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 model = MLPRegressor(
-    hidden_layer_sizes=(32, 16),
+    hidden_layer_sizes=(16, 8),
     activation="relu",
-    alpha=0.3,
-    learning_rate="adaptive",
-    max_iter=1000,
+    max_iter=50000,
     random_state=42
 )
 
