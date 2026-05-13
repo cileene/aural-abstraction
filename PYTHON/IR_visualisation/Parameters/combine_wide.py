@@ -18,7 +18,11 @@ wide = combined.set_index(["Sound", "_n"])[value_cols].unstack("_n")
 
 # Flatten multi-level columns: (col, 1) → col_1
 wide.columns = [f"{col}_{n}" for col, n in wide.columns]
+
+# Reorder: group by entry number first (col_1, spatiality_1, …, col_2, spatiality_2, …)
+sorted_cols = sorted(wide.columns, key=lambda c: (int(c.rsplit("_", 1)[1]), c.rsplit("_", 1)[0]))
 result = wide.reset_index().sort_values("Sound").reset_index(drop=True)
+result = result[["Sound"] + sorted_cols]
 
 output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "combined_wide.csv")
 result.to_csv(output_path, index=False)
