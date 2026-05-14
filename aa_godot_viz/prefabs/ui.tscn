@@ -45,6 +45,7 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="range" type="HBoxContainer" parent="." unique_id=123456001]
+visible = false
 layout_mode = 2
 alignment = 2
 

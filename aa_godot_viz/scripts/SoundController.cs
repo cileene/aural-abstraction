@@ -4,6 +4,7 @@ namespace aa_godot_viz.scripts;
 
 public partial class SoundController : AudioStreamPlayer3D
 {
+    [ExportCategory("Selected Sounds")] [Export] private int[] _selectedSounds;
     [ExportCategory("Sounds")] [Export] private AudioStream[] _audioStreams;
 
     private int[] _activeSounds;
@@ -17,9 +18,13 @@ public partial class SoundController : AudioStreamPlayer3D
 
         if (_audioStreams is { Length: > 0 })
         {
-            Stream = _audioStreams[0];
+            if (_selectedSounds is { Length: > 0 })
+                _activeSounds = _selectedSounds;
+
+            int initialIndex = _activeSounds is { Length: > 0 } ? _activeSounds[0] : 0;
+            Stream = _audioStreams[initialIndex];
             EventSystem.RaiseSoundsInitialized(_audioStreams.Length);
-            EventSystem.RaiseCurrentSoundIndexChanged(0);
+            EventSystem.RaiseCurrentSoundIndexChanged(initialIndex);
         }
     }
 
@@ -33,7 +38,14 @@ public partial class SoundController : AudioStreamPlayer3D
     private void OnActiveSoundsChanged(int[] sounds)
     {
         if (sounds == null || sounds.Length == 0) return;
-        _activeSounds = sounds;
+
+        int[] next = _selectedSounds is { Length: > 0 }
+            ? System.Array.FindAll(sounds, s => System.Array.IndexOf(_selectedSounds, s) >= 0)
+            : sounds;
+
+        if (next.Length == 0) return;
+
+        _activeSounds = next;
         _pos = 0;
         bool wasPlaying = Playing;
         Stop();

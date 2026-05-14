@@ -167,6 +167,7 @@ script = ExtResource("10_eb6dy")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=481607183]
 script = ExtResource("11_ya4ey")
+_selectedSounds = PackedInt32Array(8, 27, 29)
 _audioStreams = Array[AudioStream]([ExtResource("12_ro3en"), ExtResource("13_od4ux"), ExtResource("14_xhfw6"), ExtResource("15_1epgm"), ExtResource("16_152kg"), ExtResource("17_r4e17"), ExtResource("18_y57op"), ExtResource("19_mlv25"), ExtResource("20_a82wo"), ExtResource("21_gdvew"), ExtResource("22_kjtvk"), ExtResource("23_xrs0c"), ExtResource("24_xljpf"), ExtResource("25_j4bwh"), ExtResource("26_ksmap"), ExtResource("27_ygd8o"), ExtResource("28_2s0kr"), ExtResource("29_xaipn"), ExtResource("30_ndrjj"), ExtResource("31_ih3m7"), ExtResource("32_11yus"), ExtResource("33_b6ruc"), ExtResource("34_155or"), ExtResource("35_vtx2l"), ExtResource("36_63lxy"), ExtResource("37_fjhjs"), ExtResource("38_bfu41"), ExtResource("39_r4ag1"), ExtResource("40_v0wtd"), ExtResource("41_sgvw8"), ExtResource("42_6nfnn"), ExtResource("43_4ue30"), ExtResource("44_k42av"), ExtResource("45_gr8w0"), ExtResource("46_673bd"), ExtResource("47_akjxb"), ExtResource("48_vrx01"), ExtResource("49_1uevf"), ExtResource("50_tc087"), ExtResource("51_73205"), ExtResource("52_0tljd"), ExtResource("53_mgpkq"), ExtResource("54_xmrkg"), ExtResource("55_wvlrk"), ExtResource("56_engxj"), ExtResource("57_raiwf"), ExtResource("58_roort"), ExtResource("59_gm02q"), ExtResource("60_07pt3"), ExtResource("61_37xlc")])
 
 [node name="AudioAnalyzer" type="Node" parent="." unique_id=187367018]
