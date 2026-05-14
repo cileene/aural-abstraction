@@ -52,8 +52,8 @@ public partial class TreeGenerator3D : Node3D
     [ExportGroup("Debug")]
     [Export] public bool ShowCylinderMesh;
 
-    private readonly RandomNumberGenerator _structureRng = new() { Seed = 1337 };
-    private readonly RandomNumberGenerator _pointRng = new() { Seed = 7 };
+    private readonly RandomNumberGenerator _structureRng = new();
+    private readonly RandomNumberGenerator _pointRng = new();
 
     // Accumulated point data before MultiMesh is built.
     private readonly List<Vector3> _positions = new();
