@@ -107,7 +107,7 @@ public partial class TreeGenerator3D : Node3D
         _pointRng.Seed = 7;
         CollectBranch(Transform3D.Identity, TrunkLength, TrunkRadius, 0);
 
-        if (ShowCylinderMesh)
+        if (ShowCylinderMesh) // for debugging
             BuildCylinderMeshes();
         else
             BuildMultiMesh();
@@ -143,7 +143,7 @@ public partial class TreeGenerator3D : Node3D
                 r < (1f - t) * (1f - t) * (1f + 2f * t + 3f * t * t) ? 3 :
                 r < 1f - t * t * t * t ? 2 : 1;
         }
-        float azimuthStep = 360f / count;
+        float azimuthStep = 360f / count; // cylinder edge
 
         for (int i = 0; i < count; i++)
         {
@@ -190,7 +190,7 @@ public partial class TreeGenerator3D : Node3D
         }
     }
 
-    private void BuildCylinderMeshes()
+    private void BuildCylinderMeshes() // old approach
     {
         var mm = new MultiMesh();
         mm.UseColors = true;
@@ -217,7 +217,7 @@ public partial class TreeGenerator3D : Node3D
         AddChild(mmInst);
     }
 
-    private void BuildMultiMesh()
+    private void BuildMultiMesh() // our active approach
     {
         int total = _positions.Count;
         GD.Print($"TreeGenerator: {total} points");
