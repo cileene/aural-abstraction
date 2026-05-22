@@ -68,7 +68,7 @@ The supervised mapping could not be established under the conditions tested. The
 
 ## Authors
 
-Camille H. Haarder, Ingrid Evertsen, Nick L. Jerlung, Sandra E. Bach, Valdemar H. Wessing.
+[Camille H. Haarder](https://github.com/Calcium1000), [Ingrid Evertsen](https://github.com/IngridEvertsen), [Nick L. Jerlung](https://github.com/cileene), [Sandra E. Bach](https://github.com/HandySandy123), [Valdemar H. Wessing](https://github.com/ValdemarWessing).
 Supervised by Razvan Paisa.
 
 ## References
