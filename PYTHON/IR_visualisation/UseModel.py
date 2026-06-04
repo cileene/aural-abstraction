@@ -2,21 +2,24 @@ import joblib
 import os
 import pandas as pd
 import IR_Extraction as IR
+import numpy as np
 
 def extract_features_from_ir(path):
+    # In UseModel.py, replace part of extract_features_from_ir:
     ir, sr = IR.load_ir(path)
+    peak_idx = np.argmax(np.abs(ir))
+    ir_trimmed = ir[peak_idx:]
 
     edc_db = IR.compute_edc(ir)
-
     rt20 = IR.compute_rt(edc_db, sr, -5, -25)
     rt30 = IR.compute_rt(edc_db, sr, -5, -35)
-
     EDT = IR.compute_rt(edc_db, sr, 0, -10)
 
-    c50, c80 = IR.compute_clarity(ir, sr)
-    d50, d80 = IR.compute_definition(ir, sr)
+    # Use trimmed signal for clarity/definition like training did:
+    c50, c80 = IR.compute_clarity(ir_trimmed, sr)
+    d50, d80 = IR.compute_definition(ir_trimmed, sr)
 
-    octave_T30_bands = IR.compute_T30_octave_band(ir, sr)
+    octave_T20_bands = IR.compute_T20_octave_band(ir, sr)
 
     extracted_features = {
         "RT20": rt20,
@@ -27,7 +30,7 @@ def extract_features_from_ir(path):
         "D50": d50,
         "D80": d80
     }
-    extracted_features.update(octave_T30_bands)
+    extracted_features.update(octave_T20_bands)
     
     return extracted_features
 
@@ -48,22 +51,21 @@ if __name__ == "__main__":
     # Convert to features dataframe for scaling and PCA
     df_features = pd.DataFrame([features])
     # make sure it's in the correct order for the model
-    df_features = df_features[[
-        "RT20", "RT30", "EDT", "C50", "C80", "D50", "D80"
-    ]]
 
     # Apply scaler and PCA
     X_scaled = scaler.transform(df_features)
     X_pca = pca.transform(X_scaled)
-
+    print("pca.transform result (first PCs):", X_pca[0][:6])
     # Predict model
     prediction = model.predict(X_pca)[0]
 
     # Store result
     df = pd.DataFrame([{
-        "file": file,
-        "Size": prediction[0],
-        "Texture": prediction[1],
-        "Temp": prediction[2],
+        "filename": file,
+        "color": prediction[0],
+        "spaciality": prediction[1],
+        "composition": prediction[2],
+        "shape": prediction[3],
+        "material": prediction[4],
     }])
     df.to_csv("Predictions.csv", index=False)
