@@ -7,6 +7,10 @@ import numpy as np
 def extract_features_from_ir(path):
     # In UseModel.py, replace part of extract_features_from_ir:
     ir, sr = IR.load_ir(path)
+    if ir.ndim > 1:
+        ir = ir[0]  # use W channel only for B-format, or left channel for stereo
+    ir = ir / np.max(np.abs(ir))
+
     peak_idx = np.argmax(np.abs(ir))
     ir_trimmed = ir[peak_idx:]
 
