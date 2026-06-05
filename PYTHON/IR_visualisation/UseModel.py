@@ -3,6 +3,9 @@ import os
 import pandas as pd
 import IR_Extraction as IR
 import numpy as np
+import socket
+import struct
+
 
 def extract_features_from_ir(path):
     # In UseModel.py, replace part of extract_features_from_ir:
@@ -73,3 +76,16 @@ if __name__ == "__main__":
         "material": prediction[4],
     }])
     df.to_csv("Predictions.csv", index=False)
+
+    SERVER_IP = "127.0.0.1"
+    SERVER_PORT = 5001
+
+    data_to_send = [prediction[0], prediction[1], prediction[2], prediction[3], prediction[4]]
+    packed_bytes = struct.pack("fffff", *data_to_send)
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
+            client.connect((SERVER_IP, SERVER_PORT))
+            client.sendall(packed_bytes)
+            print("data sent")
+    except socket.error as e:
+        print("Socket error")
