@@ -60,5 +60,7 @@ public partial class TcpServer : Node
 
         GD.Print($"TcpServer: Received — {p.Param1:F3} {p.Param2:F3} {p.Param3:F3} {p.Param4:F3} {p.Param5:F3}");
         EventSystem.RaiseSetParameters(p);
+        _peer.DisconnectFromHost();
+        _peer = null;
     }
 }
