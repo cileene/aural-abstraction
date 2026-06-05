@@ -97,11 +97,4 @@ public static class EventSystem
         ToggleMesh?.Invoke();
         GD.Print("EventSystem: Raised ToggleMesh");
     }
-
-    public static event Action ParametersReceived;
-    public static void RaiseParametersReceived()
-    {
-        ParametersReceived?.Invoke();
-        GD.Print("EventSystem: Raised ParametersReceived");
-    }
 }

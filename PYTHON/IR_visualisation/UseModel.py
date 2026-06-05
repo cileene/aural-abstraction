@@ -87,5 +87,6 @@ if __name__ == "__main__":
             client.connect((SERVER_IP, SERVER_PORT))
             client.sendall(packed_bytes)
             print("data sent")
+            print(data_to_send)
     except socket.error as e:
         print("Socket error")

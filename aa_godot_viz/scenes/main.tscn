@@ -64,6 +64,7 @@
 [ext_resource type="AudioStream" uid="uid://tbqurcho1usi" path="res://sounds/main/20260429_aa 47.mp3" id="59_gm02q"]
 [ext_resource type="AudioStream" uid="uid://c431sanaxi6wx" path="res://sounds/main/20260429_aa 48.mp3" id="60_07pt3"]
 [ext_resource type="AudioStream" uid="uid://clhlict1git62" path="res://sounds/main/20260429_aa 49.mp3" id="61_37xlc"]
+[ext_resource type="Script" uid="uid://dxfmmsl1n7uua" path="res://scripts/TcpServer.cs" id="65_xhfw6"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -182,3 +183,6 @@ Gain = 3.5
 
 [node name="DataManager" type="Node" parent="." unique_id=1512556255]
 script = ExtResource("21_yc10j")
+
+[node name="TCPServer" type="Node" parent="." unique_id=145368505]
+script = ExtResource("65_xhfw6")
