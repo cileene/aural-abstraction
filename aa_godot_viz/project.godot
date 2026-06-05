@@ -26,6 +26,7 @@ config/icon="res://icon.svg"
 [audio]
 
 buses/default_bus_layout="uid://bk6t4lfqgfgsd"
+driver/enable_input=true
 
 [display]
 

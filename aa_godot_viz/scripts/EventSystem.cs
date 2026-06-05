@@ -10,7 +10,7 @@ public static class EventSystem
 {
     // EVENTS
     public static event Action<Parameters> SetParameters;
-    public static event Action<_SceneConfig> SetSceneConfig;
+    //public static event Action<_SceneConfig> SetSceneConfig;
     public static event Action ImpulseSent;
     public static event Action PlaySound;
     public static event Action<bool> NextSound;
@@ -28,11 +28,11 @@ public static class EventSystem
         GD.Print($"EventSystem: Raised SetParameters | Color:{parameters.Param1:F3} Spatiality:{parameters.Param2:F3} Composition:{parameters.Param3:F3} Shape:{parameters.Param4:F3} Material:{parameters.Param5:F3}");
     }
 
-    public static void RaiseSetSceneConfig(_SceneConfig config)
-    {
-        SetSceneConfig?.Invoke(config);
-        GD.Print("EventSystem: Raised SetSceneConfig");
-    }
+    // public static void RaiseSetSceneConfig(_SceneConfig config)
+    // {
+    //     SetSceneConfig?.Invoke(config);
+    //     GD.Print("EventSystem: Raised SetSceneConfig");
+    // }
 
     public static void RaiseImpulseSent()
     {

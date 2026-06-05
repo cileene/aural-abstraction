@@ -10,18 +10,31 @@ public partial class AudioAnalyzer : Node
 
     private AudioEffectCapture _capture;
     private float _smoothedRms;
+    private int _micBusIndex;
     private int _effectIndex;
 
     public override void _Ready()
     {
+        _micBusIndex = AudioServer.BusCount;
+        AudioServer.AddBus(_micBusIndex);
+        AudioServer.SetBusName(_micBusIndex, "MicCapture");
+        AudioServer.SetBusVolumeDb(_micBusIndex, -80f);
+
         _capture = new AudioEffectCapture();
-        _effectIndex = AudioServer.GetBusEffectCount(0);
-        AudioServer.AddBusEffect(0, _capture);
+        _effectIndex = AudioServer.GetBusEffectCount(_micBusIndex);
+        AudioServer.AddBusEffect(_micBusIndex, _capture);
+
+        var player = new AudioStreamPlayer();
+        player.Stream = new AudioStreamMicrophone();
+        player.Bus = "MicCapture";
+        AddChild(player);
+        player.Play();
     }
 
     public override void _ExitTree()
     {
-        AudioServer.RemoveBusEffect(0, _effectIndex);
+        AudioServer.RemoveBusEffect(_micBusIndex, _effectIndex);
+        AudioServer.RemoveBus(_micBusIndex);
     }
 
     public override void _Process(double delta)
