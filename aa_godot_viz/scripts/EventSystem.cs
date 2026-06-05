@@ -77,11 +77,11 @@ public static class EventSystem
         GD.Print($"EventSystem: Raised ActiveSoundsChanged | [{string.Join(", ", sounds)}]");
     }
 
-    public static event Action StartDemoMode;
+    public static event Action ToggleDemoMode;
     public static void RaiseStartDemoMode()
     {
-        StartDemoMode?.Invoke();
-        GD.Print("EventSystem: Raised StartDemoMode");
+        ToggleDemoMode?.Invoke();
+        GD.Print("EventSystem: Raised ToggleDemoMode");
     }
 
     public static event Action ToggleUI;

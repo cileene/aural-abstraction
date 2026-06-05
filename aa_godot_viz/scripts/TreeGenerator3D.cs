@@ -64,12 +64,14 @@ public partial class TreeGenerator3D : Node3D
     {
         EventSystem.ImpulseSent += OnImpulseSent;
         EventSystem.SetParameters += OnSetParameters;
+        EventSystem.ToggleMesh += OnToggleMesh;
     }
 
     public override void _ExitTree()
     {
         EventSystem.ImpulseSent -= OnImpulseSent;
         EventSystem.SetParameters -= OnSetParameters;
+        EventSystem.ToggleMesh -= OnToggleMesh;
     }
 
     private void OnImpulseSent() => Generate();
@@ -242,5 +244,12 @@ public partial class TreeGenerator3D : Node3D
         if (PointMaterial != null)
             mmInst.MaterialOverride = PointMaterial;
         AddChild(mmInst);
+    }
+    
+    // Demo method
+    private void OnToggleMesh()
+    {
+        ShowCylinderMesh = !ShowCylinderMesh;
+        Generate();
     }
 }

@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://bmcatn0ugxjj" path="res://materials/point_mat.tres" id="6_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dkbjslvsnnok6" path="res://prefabs/ui.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://c71r6l64npe8q" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
+[ext_resource type="Script" uid="uid://ogsx650bu3kj" path="res://scripts/TreeRotator.cs" id="9_od4ux"]
 [ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
 [ext_resource type="Script" uid="uid://dg2gme35kokte" path="res://scripts/SoundController.cs" id="11_ya4ey"]
@@ -88,6 +89,7 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 script = ExtResource("1_0wfyh")
 
 [node name="UI" parent="." unique_id=1090373297 instance=ExtResource("6_tefeu")]
+visible = false
 offset_left = -715.1201
 offset_top = -1079.0
 offset_right = 262.75977
@@ -106,22 +108,8 @@ current = true
 fov = 80.0
 script = ExtResource("4_choun")
 
-[node name="Tree" parent="." unique_id=8670340 instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69, -6.554, 7.662)
-MaxDepth = 7
-TrunkLean = -5.0
-BranchAngle = 34.75
-LengthDecay = 0.939
-RadiusDecay = 0.619
-Randomness = 0.0
-TrunkLength = 1.636
-TrunkRadius = 0.722
-PointDensity = 160.0
-PointRadius = 0.015
-PointMaterial = ExtResource("6_gqmmt")
-
 [node name="Bubble" parent="." unique_id=864385922 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7207575, -1.613996, 7.605345)
 script = ExtResource("10_a8y0u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Bubble" unique_id=1731770549]
@@ -162,6 +150,24 @@ spot_range = 144.596
 spot_angle = 13.94
 spot_angle_attenuation = 1.5157145
 script = ExtResource("10_eb6dy")
+
+[node name="TreeRotator" type="Node3D" parent="Bubble" unique_id=693590191]
+script = ExtResource("9_od4ux")
+RotationSpeed = 0.09999999999999999
+
+[node name="Tree" parent="Bubble/TreeRotator" unique_id=8670340 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, -1.7484555e-07, 0, 1.7484555e-07, 1, 0, 0, 0, 1, -0.03075695, -4.940004, 0.056655407)
+MaxDepth = 7
+TrunkLean = -5.0
+BranchAngle = 34.75
+LengthDecay = 0.939
+RadiusDecay = 0.619
+Randomness = 0.0
+TrunkLength = 1.636
+TrunkRadius = 0.722
+PointDensity = 160.0
+PointRadius = 0.015
+PointMaterial = ExtResource("6_gqmmt")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1268301196]
 
