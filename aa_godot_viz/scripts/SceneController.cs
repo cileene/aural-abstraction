@@ -41,5 +41,17 @@ public partial class SceneController : Node
         {
             EventSystem.RaiseRandomize();
         }
+        else if (@event.IsActionPressed("Demo"))
+        {
+            EventSystem.RaiseStartDemoMode();
+        }
+        else if (@event.IsActionPressed("UI"))
+        {
+            EventSystem.RaiseToggleUI();
+        }
+        else if (@event.IsActionPressed("Mesh"))
+        {
+            EventSystem.RaiseToggleMesh();
+        }
     }
 }

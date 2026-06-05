@@ -20,6 +20,10 @@ public static class EventSystem
     public static event Action SliderReleased;
     public static event Action Randomize;
     public static event Action<int[]> ActiveSoundsChanged;
+    public static event Action StartDemoMode;
+    public static event Action ToggleUI;
+    public static event Action ToggleMesh;
+    public static event Action ParametersReceived;
 
     // EVENT METHODS
     public static void RaiseSetParameters(Parameters parameters)
@@ -85,5 +89,29 @@ public static class EventSystem
     {
         ActiveSoundsChanged?.Invoke(sounds);
         GD.Print($"EventSystem: Raised ActiveSoundsChanged | [{string.Join(", ", sounds)}]");
+    }
+
+    public static void RaiseStartDemoMode()
+    {
+        StartDemoMode?.Invoke();
+        GD.Print("EventSystem: Raised StartDemoMode");
+    }
+
+    public static void RaiseToggleUI()
+    {
+        ToggleUI?.Invoke();
+        GD.Print("EventSystem: Raised ToggleUI");
+    }
+
+    public static void RaiseToggleMesh()
+    {
+        ToggleMesh?.Invoke();
+        GD.Print("EventSystem: Raised ToggleMesh");
+    }
+    
+    public static void RaiseParametersReceived()
+    {
+        ParametersReceived?.Invoke();
+        GD.Print("EventSystem: Raised ParametersReceived");
     }
 }
