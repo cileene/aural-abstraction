@@ -5,6 +5,9 @@ from scipy.signal import fftconvolve
 import os
 
 
+USE_IPHONE_MIC = True
+
+
 def main(output_path="ir.wav"):
     fs = 48000
     duration = 4.0
@@ -26,8 +29,16 @@ def main(output_path="ir.wav"):
         sweep,
         np.zeros(int(2.0 * fs), dtype=np.float32),
     ])
+    input_device = sd.default.device[0]
+    if USE_IPHONE_MIC:
+        devices = sd.query_devices()
+        match = next((d["index"] for d in devices if "iphone" in d["name"].lower()), None)
+        if match is None:
+            raise RuntimeError("iPhone microphone not found — check Continuity Camera is connected")
+        input_device = match
+
     print("Recording... (stay quiet, keep laptop still)")
-    rec = sd.playrec(play_sig, samplerate=fs, channels=1, dtype=np.float32)
+    rec = sd.playrec(play_sig, samplerate=fs, channels=1, dtype=np.float32, device=(input_device, sd.default.device[1]))
     sd.wait()
     rec = rec[:, 0]
 
