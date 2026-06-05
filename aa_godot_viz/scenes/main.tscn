@@ -172,8 +172,7 @@ _audioStreams = Array[AudioStream]([ExtResource("12_ro3en"), ExtResource("13_od4
 [node name="AudioAnalyzer" type="Node" parent="." unique_id=187367018]
 script = ExtResource("20_gqmmt")
 PointMaterial = ExtResource("6_gqmmt")
-Gain = 0.4
-Smoothing = 0.3
+Gain = 3.5
 
 [node name="DataManager" type="Node" parent="." unique_id=1512556255]
 script = ExtResource("21_yc10j")

@@ -30,6 +30,7 @@ public partial class UIController : VBoxContainer
 		EventSystem.ParametersRestored += OnParametersRestored;
 		EventSystem.Randomize += OnRandomize;
 		EventSystem.SoundsInitialized += OnSoundsInitialized;
+		EventSystem.ToggleUI += () => Visible = !Visible;
 	}
 
 	public override void _Ready()
