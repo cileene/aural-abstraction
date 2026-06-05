@@ -5,6 +5,7 @@ import IR_Extraction as IR
 import numpy as np
 import socket
 import struct
+import CaptureIR
 
 
 def extract_features_from_ir(path):
@@ -43,6 +44,8 @@ def extract_features_from_ir(path):
 
 if __name__ == "__main__":
 
+    CaptureIR.main(output_path=os.path.join("IR_Deploy", "ir.wav"))
+
     # Load trained tools
     scaler = joblib.load("scaler.pkl")
     pca = joblib.load("pca.pkl")
@@ -50,7 +53,7 @@ if __name__ == "__main__":
 
     results = [] #create list to store results
 
-    file = os.listdir("IR_Deploy")[0]
+    file = "ir.wav"
     full_path = os.path.join("IR_Deploy", file)
 
     features = extract_features_from_ir(full_path) #extract the features
