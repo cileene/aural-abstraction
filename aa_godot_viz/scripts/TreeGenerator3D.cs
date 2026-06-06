@@ -164,6 +164,7 @@ public partial class TreeGenerator3D : Node3D
 
         for (int i = 0; i < count; i++)
         {
+            // azimuth = the angle around a vertical axis
             float azimuth = azimuthStep * i
                             + _structureRng.RandfRange(-azimuthStep * 0.4f, azimuthStep * 0.4f) * Randomness;
 
