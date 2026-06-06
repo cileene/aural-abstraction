@@ -146,7 +146,7 @@ public partial class TreeGenerator3D : Node3D
         float t = (float)depth / MaxDepth;
         float r = _structureRng.Randf();
         int count;
-        if (depth == 0)
+        if (depth == 0) // the trunk
         {
             count = 1;
         }
