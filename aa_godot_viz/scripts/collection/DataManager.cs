@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Godot;
 
-namespace aa_godot_viz.scripts;
+namespace aa_godot_viz.scripts.collection;
 
 public partial class DataManager : Node
 {

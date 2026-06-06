@@ -1,7 +1,7 @@
-using Godot;
 using System;
+using Godot;
 
-namespace aa_godot_viz.scripts;
+namespace aa_godot_viz.scripts.demo;
 
 public partial class TcpServer : Node
 {

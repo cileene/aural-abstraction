@@ -1,6 +1,6 @@
 using Godot;
 
-namespace aa_godot_viz.scripts;
+namespace aa_godot_viz.scripts.demo;
 
 public partial class TreeRotator : Node3D
 {

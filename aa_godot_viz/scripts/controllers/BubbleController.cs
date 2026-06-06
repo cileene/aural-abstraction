@@ -1,6 +1,6 @@
 using Godot;
 
-namespace aa_godot_viz.scripts;
+namespace aa_godot_viz.scripts.controllers;
 
 public partial class BubbleController : Node3D
 {
@@ -26,7 +26,7 @@ public partial class BubbleController : Node3D
 
     public override void _Process(double delta)
     {
-        if (_demoMode)
+        if (_demoMode) 
             Rotation = Rotation.Lerp(DemoTargetRotation, DemoLerpSpeed * (float)delta);
     }
 

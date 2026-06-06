@@ -8,20 +8,17 @@ namespace aa_godot_viz.scripts;
 /// </summary>
 public static class EventSystem
 {
-    public static event Action<Parameters> SetParameters;
-    public static void RaiseSetParameters(Parameters parameters)
+    // THIS is our main event, all other are related to tests, data collection or ui events
+    public static event Action<Parameters> SetParameters; // The event
+    public static void RaiseSetParameters(Parameters parameters) // The static helper method to raise the event
     {
         SetParameters?.Invoke(parameters);
         GD.Print($"EventSystem: Raised SetParameters | Color:{parameters.Param1:F3} Spatiality:{parameters.Param2:F3} Composition:{parameters.Param3:F3} Shape:{parameters.Param4:F3} Material:{parameters.Param5:F3}");
     }
+    
 
-    public static event Action ImpulseSent;
-    public static void RaiseImpulseSent()
-    {
-        ImpulseSent?.Invoke();
-        GD.Print("EventSystem: Raised ImpulseSent");
-    }
-
+    
+    // BELOW THIS POINT NOT IMPORTANT for the system
     public static event Action PlaySound;
     public static void RaisePlaySound()
     {
@@ -96,5 +93,12 @@ public static class EventSystem
     {
         ToggleMesh?.Invoke();
         GD.Print("EventSystem: Raised ToggleMesh");
+    }
+    
+    public static event Action ToggleLight;
+    public static void RaiseToggleLight()
+    {
+        ToggleLight?.Invoke();
+        GD.Print("EventSystem: Raised ToggleLight");
     }
 }

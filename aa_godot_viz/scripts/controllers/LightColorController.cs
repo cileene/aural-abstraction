@@ -1,6 +1,6 @@
 using Godot;
 
-namespace aa_godot_viz.scripts;
+namespace aa_godot_viz.scripts.controllers;
 
 public partial class LightColorController : OmniLight3D
 {

@@ -1,21 +1,22 @@
 [gd_scene format=3 uid="uid://f3cedgdj3cjk"]
 
 [ext_resource type="Script" uid="uid://brhni1ol7hu5t" path="res://scripts/SceneController.cs" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://cdej8ofkuxdxg" path="res://scripts/EnvironmentController.cs" id="3_trceg"]
-[ext_resource type="Script" uid="uid://dpdybjep3xt3i" path="res://scripts/CameraController.cs" id="4_choun"]
+[ext_resource type="Script" uid="uid://cdej8ofkuxdxg" path="res://scripts/controllers/EnvironmentController.cs" id="3_trceg"]
+[ext_resource type="Script" uid="uid://dpdybjep3xt3i" path="res://scripts/controllers/CameraController.cs" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://bjt2kybnpqv5v" path="res://prefabs/tree.tscn" id="4_jyhfs"]
 [ext_resource type="Material" uid="uid://bmcatn0ugxjj" path="res://materials/point_mat.tres" id="6_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dkbjslvsnnok6" path="res://prefabs/ui.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://c71r6l64npe8q" path="res://prefabs/bubble.tscn" id="7_o6xl0"]
-[ext_resource type="Script" uid="uid://ogsx650bu3kj" path="res://scripts/TreeRotator.cs" id="9_od4ux"]
-[ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/BubbleController.cs" id="10_a8y0u"]
-[ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/SpotLightController.cs" id="10_eb6dy"]
-[ext_resource type="Script" uid="uid://dg2gme35kokte" path="res://scripts/SoundController.cs" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://ogsx650bu3kj" path="res://scripts/demo/TreeRotator.cs" id="9_od4ux"]
+[ext_resource type="Script" uid="uid://csumphfjshi70" path="res://scripts/controllers/BubbleController.cs" id="10_a8y0u"]
+[ext_resource type="Script" uid="uid://dhe5voyar4uq" path="res://scripts/controllers/SpotLightController.cs" id="10_eb6dy"]
+[ext_resource type="Script" uid="uid://dg2gme35kokte" path="res://scripts/collection/SoundController.cs" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://cw0sldrn01vkb" path="res://scripts/demo/LightToggle.cs" id="12_1epgm"]
 [ext_resource type="AudioStream" uid="uid://dm437gtluusaf" path="res://sounds/main/20260429_aa 0.mp3" id="12_ro3en"]
 [ext_resource type="AudioStream" uid="uid://da2xyjxs2ta8b" path="res://sounds/main/20260429_aa 1.mp3" id="13_od4ux"]
 [ext_resource type="AudioStream" uid="uid://bi7d11c70k3uu" path="res://sounds/main/20260429_aa 2.mp3" id="14_xhfw6"]
 [ext_resource type="AudioStream" uid="uid://s0r0umtiosb1" path="res://sounds/main/20260429_aa 3.mp3" id="15_1epgm"]
-[ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/LightColorController.cs" id="15_muem4"]
+[ext_resource type="Script" uid="uid://b0gdcwposw1rk" path="res://scripts/controllers/LightColorController.cs" id="15_muem4"]
 [ext_resource type="AudioStream" uid="uid://d1twcstu1wj4p" path="res://sounds/main/20260429_aa 4.mp3" id="16_152kg"]
 [ext_resource type="AudioStream" uid="uid://cn8i8t08kxq6w" path="res://sounds/main/20260429_aa 5.mp3" id="17_r4e17"]
 [ext_resource type="AudioStream" uid="uid://8f4epmqamu8j" path="res://sounds/main/20260429_aa 6.mp3" id="18_y57op"]
@@ -23,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bvxv3hts353mj" path="res://sounds/main/20260429_aa 8.mp3" id="20_a82wo"]
 [ext_resource type="Script" uid="uid://cj40f7c0rgijd" path="res://scripts/AudioAnalyzer.cs" id="20_gqmmt"]
 [ext_resource type="AudioStream" uid="uid://bhi4hjx3svebj" path="res://sounds/main/20260429_aa 9.mp3" id="21_gdvew"]
-[ext_resource type="Script" uid="uid://dyiubcpscgqi8" path="res://scripts/DataManager.cs" id="21_yc10j"]
+[ext_resource type="Script" uid="uid://dyiubcpscgqi8" path="res://scripts/collection/DataManager.cs" id="21_yc10j"]
 [ext_resource type="AudioStream" uid="uid://bhnlqx6j3axje" path="res://sounds/main/20260429_aa 10.mp3" id="22_kjtvk"]
 [ext_resource type="AudioStream" uid="uid://5rdch745md38" path="res://sounds/main/20260429_aa 11.mp3" id="23_xrs0c"]
 [ext_resource type="AudioStream" uid="uid://cvdsfwr5ocg2u" path="res://sounds/main/20260429_aa 12.mp3" id="24_xljpf"]
@@ -64,7 +65,7 @@
 [ext_resource type="AudioStream" uid="uid://tbqurcho1usi" path="res://sounds/main/20260429_aa 47.mp3" id="59_gm02q"]
 [ext_resource type="AudioStream" uid="uid://c431sanaxi6wx" path="res://sounds/main/20260429_aa 48.mp3" id="60_07pt3"]
 [ext_resource type="AudioStream" uid="uid://clhlict1git62" path="res://sounds/main/20260429_aa 49.mp3" id="61_37xlc"]
-[ext_resource type="Script" uid="uid://dxfmmsl1n7uua" path="res://scripts/TcpServer.cs" id="65_xhfw6"]
+[ext_resource type="Script" uid="uid://dxfmmsl1n7uua" path="res://scripts/demo/TcpServer.cs" id="65_xhfw6"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 1
@@ -154,7 +155,7 @@ script = ExtResource("10_eb6dy")
 
 [node name="TreeRotator" type="Node3D" parent="Bubble" unique_id=693590191]
 script = ExtResource("9_od4ux")
-RotationSpeed = 0.09999999999999999
+RotationSpeed = 0.1
 
 [node name="Tree" parent="Bubble/TreeRotator" unique_id=8670340 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, -1.7484555e-07, 0, 1.7484555e-07, 1, 0, 0, 0, 1, -0.03075695, -4.940004, 0.056655407)
@@ -169,6 +170,12 @@ TrunkRadius = 0.722
 PointDensity = 160.0
 PointRadius = 0.015
 PointMaterial = ExtResource("6_gqmmt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Bubble" unique_id=1515455273]
+visible = false
+light_volumetric_fog_energy = 0.3
+shadow_enabled = true
+script = ExtResource("12_1epgm")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1268301196]
 

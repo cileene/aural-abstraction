@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkbjslvsnnok6"]
 
-[ext_resource type="Script" uid="uid://cvypjxy1u8uc5" path="res://scripts/UIController.cs" id="1_8bix8"]
+[ext_resource type="Script" uid="uid://cvypjxy1u8uc5" path="res://scripts/controllers/UIController.cs" id="1_8bix8"]
 
 [sub_resource type="Theme" id="Theme_tbgi4"]
 default_font_size = 20
